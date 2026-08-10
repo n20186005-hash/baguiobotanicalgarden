@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-cold-50 text-cold-800;
+  }
+
+  ::selection {
+    @apply bg-pine-200 text-pine-950;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .section-padding {
+    @apply py-14 sm:py-20 lg:py-24;
+  }
+
+  .section-heading {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold text-pine-950 tracking-tight;
+  }
+
+  .section-subheading {
+    @apply mt-3 text-base sm:text-lg text-cold-500 max-w-2xl;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white border border-cold-100 shadow-sm;
+  }
+
+  .card-hover {
+    @apply hover:shadow-md hover:border-cold-200 transition-all duration-300;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  /* Smooth gradient overlay for hero */
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(14, 32, 23, 0.35) 0%,
+      rgba(14, 32, 23, 0.15) 50%,
+      rgba(14, 32, 23, 0.55) 100%
+    );
+  }
+
+  /* Gallery aspect ratio */
+  .gallery-image {
+    @apply aspect-[4/3] object-cover w-full h-full rounded-xl;
+  }
+
+  /* Timeline connector */
+  .timeline-dot::before {
+    content: '';
+    @apply absolute left-[11px] top-0 w-0.5 bg-pine-200;
+    height: calc(100% + 2rem);
+    top: 2rem;
+  }
+  .timeline-dot:last-child::before {
+    display: none;
+  }
+}
+
+/* Animation utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

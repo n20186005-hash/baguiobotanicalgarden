@@ -1,0 +1,37 @@
+---
+import { SITE } from '../consts';
+import { getLangFromUrl } from '../i18n/ui';
+
+const lang = (() => {
+  try { return getLangFromUrl(new URL(Astro.url)); }
+  catch { return 'tl'; }
+})();
+
+const title = lang === 'en'
+  ? `Baguio Botanical Garden — Complete Visitor Guide`
+  : `Baguio Botanical Garden — Kumpletong Gabay sa Bisita`;
+const description = lang === 'en' ? SITE.descriptionEn : SITE.descriptionFil;
+const ogImage = `${SITE.siteUrl}/og-default.svg`;
+const siteUrl = SITE.siteUrl;
+---
+
+<!DOCTYPE html>
+<html lang={lang === 'tl' ? 'tl' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={siteUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <h1>Redirecting...</h1>
+    <meta http-equiv="refresh" content={`0;url=/${lang}/`} />
+    <script>location.href="/{lang}/";</script>
+  </body>
+</html>

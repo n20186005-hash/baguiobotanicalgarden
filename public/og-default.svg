@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8d4c4" />
+      <stop offset="50%" stop-color="#d6bfa6" />
+      <stop offset="100%" stop-color="#a9c2b4" />
+    </linearGradient>
+    <linearGradient id="mt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d4f3e" />
+      <stop offset="100%" stop-color="#183226" />
+    </linearGradient>
+    <linearGradient id="mt2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3e6b55" />
+      <stop offset="100%" stop-color="#2a4d3d" />
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5fa8d3" />
+      <stop offset="100%" stop-color="#2a6f9a" />
+    </linearGradient>
+    <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4d7a58" />
+      <stop offset="100%" stop-color="#2f5740" />
+    </linearGradient>
+    <radialGradient id="sun" cx="76%" cy="18%" r="16%">
+      <stop offset="0%" stop-color="#fff3de" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#fff3de" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)" />
+  <rect width="1200" height="630" fill="url(#sun)" />
+
+  <path d="M0 360 L140 250 L260 310 L380 210 L520 280 L680 200 L820 260 L980 190 L1200 290 L1200 420 L0 420 Z" fill="url(#mt2)" opacity="0.75" />
+  <path d="M0 410 L120 340 L280 390 L420 310 L580 370 L740 320 L900 370 L1060 320 L1200 370 L1200 470 L0 470 Z" fill="url(#mt)" />
+
+  <path d="M0 470 L1200 470 L1200 560 Q900 520 600 540 Q300 560 0 560 Z" fill="url(#ground)" />
+  <path d="M180 500 Q600 470 1020 500 L1020 540 Q600 520 180 540 Z" fill="url(#water)" opacity="0.88" />
+
+  <g fill="#0e2419">
+    <rect x="90" y="400" width="6" height="80" rx="2" />
+    <path d="M93 380 C108 388 108 408 93 416 C78 408 78 388 93 380 Z" fill="#7ea873" />
+    <path d="M93 405 C106 412 106 428 93 434 C80 428 80 412 93 405 Z" fill="#7ea873" />
+
+    <rect x="1080" y="390" width="6" height="90" rx="2" />
+    <path d="M1083 366 C1102 376 1102 400 1083 410 C1064 400 1064 376 1083 366 Z" fill="#7ea873" />
+    <path d="M1083 394 C1098 402 1098 422 1083 432 C1068 422 1068 402 1083 394 Z" fill="#7ea873" />
+
+    <rect x="580" y="380" width="6" height="100" rx="2" />
+    <path d="M583 352 C608 364 608 396 583 408 C558 396 558 364 583 352 Z" fill="#9bc48e" />
+    <path d="M583 384 C604 396 604 424 583 436 C562 424 562 396 583 384 Z" fill="#9bc48e" />
+  </g>
+
+  <g font-family="Segoe UI, Roboto, Helvetica, Arial, system-ui, sans-serif">
+    <rect x="60" y="60" width="400" height="36" rx="18" fill="#0e2419" opacity="0.78" />
+    <text x="82" y="84" fill="#f9f5f0" font-size="15" font-weight="700" letter-spacing="3">BAGUIO · CORDILLERA · PILIPINAS</text>
+
+    <text x="60" y="170" fill="#0e2419" font-size="76" font-weight="800" letter-spacing="-1.5">Burnham Park</text>
+    <text x="62" y="222" fill="#3d2a1e" font-size="32" font-weight="600">Ang luntiang puso ng Summer Capital</text>
+
+    <g>
+      <rect x="60" y="254" width="780" height="4" rx="2" fill="#2d4f3e" opacity="0.6" />
+    </g>
+
+    <g font-size="20" fill="#1a3326" font-weight="600">
+      <rect x="60" y="276" width="194" height="38" rx="19" fill="#fff" opacity="0.78" />
+      <text x="82" y="301">🎟️ Walang bayad</text>
+
+      <rect x="268" y="276" width="202" height="38" rx="19" fill="#fff" opacity="0.78" />
+      <text x="290" y="301">🕐 Bukas 24 oras</text>
+
+      <rect x="484" y="276" width="268" height="38" rx="19" fill="#fff" opacity="0.78" />
+      <text x="506" y="301">📍 Malapit sa Session Road</text>
+    </g>
+  </g>
+
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#0e2419" stroke-width="10" rx="0" opacity="0.2" />
+</svg>

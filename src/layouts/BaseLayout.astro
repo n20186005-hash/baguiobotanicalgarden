@@ -1,0 +1,98 @@
+---
+import { SITE } from '../consts';
+import { getLangFromUrl, languages, defaultLang } from '../i18n/ui';
+import BaseHead from '../components/BaseHead.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  lang?: string;
+  canonical?: string;
+}
+
+const { title, description, ogImage, lang: propLang, canonical: propCanonical } = Astro.props;
+
+const currentUrl = new URL(Astro.url);
+const currentLang = propLang ?? getLangFromUrl(currentUrl);
+const pathname = currentUrl.pathname;
+
+const altLinks = Object.entries(languages).map(([code]) => {
+  let altPath = pathname;
+  for (const lc of [defaultLang, ...Object.keys(languages)]) {
+    if (pathname.startsWith(`/${lc}/`)) {
+      altPath = pathname.replace(`/${lc}/`, `/${code}/`);
+    } else if (pathname === `/${lc}`) {
+      altPath = `/${code}`;
+    } else if (pathname === '' || pathname === '/') {
+      altPath = `/${code}`;
+    }
+  }
+  return { code, href: altPath };
+});
+
+const resolvedDescription = description ?? (currentLang === 'en' ? SITE.descriptionEn : SITE.descriptionFil);
+const resolvedTitle = title ?? (currentLang === 'en' ? SITE.titleEn : SITE.titleFil);
+const siteUrl = SITE.siteUrl;
+const canonicalUrl = propCanonical ?? (siteUrl + (pathname.endsWith('/') ? pathname : pathname + '/'));
+const ogImageUrl = ogImage ?? `${siteUrl}/og-default.svg`;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: SITE.name,
+  description: resolvedDescription,
+  url: canonicalUrl,
+  sameAs: SITE.mapsUrl,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Baguio',
+    addressRegion: 'Benguet',
+    addressCountry: 'PH',
+    streetAddress: currentLang === 'en' ? SITE.addressEn : SITE.addressFil,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.coordinates.lat,
+    longitude: SITE.coordinates.lng,
+  },
+  telephone: SITE.phone,
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '06:00',
+    closes: '18:00',
+  },
+  touristType: ['Nature Lovers', 'Culture Enthusiasts', 'Families', 'Photographers'],
+};
+---
+
+<!DOCTYPE html>
+<html lang={currentLang === 'tl' ? 'tl' : 'en'}>
+  <head>
+    <BaseHead
+      title={resolvedTitle}
+      description={resolvedDescription}
+      ogImage={ogImageUrl}
+      canonical={canonicalUrl}
+      lang={currentLang}
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+    <!-- Alternate hreflang tags -->
+    {altLinks.map(({ code, href }) => (
+      <link rel="alternate" hreflang={code === 'tl' ? 'tl' : 'en'} href={`${siteUrl}${href}`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${altLinks.find(a => a.code === defaultLang)?.href ?? '/tl'}`} />
+  </head>
+  <body class="font-sans text-cold-800 bg-cold-50 antialiased">
+    <Navbar lang={currentLang} currentPath={pathname} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={currentLang} />
+  </body>
+</html>

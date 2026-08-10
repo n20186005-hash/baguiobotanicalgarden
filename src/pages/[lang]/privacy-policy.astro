@@ -1,0 +1,140 @@
+---
+import { SITE } from '../../consts';
+import { ui, getLangFromUrl, type Lang } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'tl' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: string };
+const currentLang = lang as Lang;
+const t = (key: string) => ui[currentLang]?.[key as keyof typeof ui.tl] ?? key;
+
+const lastUpdated = '2026-08-10';
+
+const titleFil = 'Patakaran sa Privacy — Baguio Botanical Garden Gabay';
+const titleEn = 'Privacy Policy — Baguio Botanical Garden Guide';
+
+const content = currentLang === 'en' ? {
+  title: 'Privacy Policy',
+  lastUpdated: `Last updated: ${lastUpdated}`,
+  intro: 'This Privacy Policy explains how Baguio Botanical Garden Guide ("we," "our," or "us") collects, uses, and protects your information when you visit our website.',
+  sections: [
+    {
+      heading: '1. Information We Collect',
+      body: 'We use Google Analytics 4 (GA4) to collect anonymous, aggregated data about website usage. This includes page views, time spent on pages, geographic region (country/city level only), browser type, device type, and referral sources. GA4 does not collect personally identifiable information (PII) such as your name, email address, or precise location. We do not use cookies for tracking, advertising, or profiling purposes.',
+    },
+    {
+      heading: '2. How We Use Your Information',
+      body: 'The anonymous analytics data is used solely to understand how visitors interact with our website so we can improve content, fix issues, and provide a better user experience. We do not sell, rent, trade, or share your data with third parties for commercial purposes.',
+    },
+    {
+      heading: '3. Cookies',
+      body: 'GA4 uses first-party cookies to distinguish unique users and sessions. These cookies do not contain personally identifiable information. You can manage cookie preferences through our Cookie Settings page or disable cookies in your browser settings. For more details, see our Cookie Settings page.',
+    },
+    {
+      heading: '4. Third-Party Services',
+      body: 'Our website embeds Google Maps to show the location of Baguio Botanical Garden. When you interact with the embedded map, Google may collect data according to its own privacy policy. We do not have access to or control over data collected by Google through embedded maps. Our website also links to external websites such as Google Maps. We are not responsible for the privacy practices of those external sites.',
+    },
+    {
+      heading: '5. Data Retention',
+      body: 'Google Analytics data is retained for a period determined by Google (typically 14-26 months). We do not maintain independent copies of analytics data.',
+    },
+    {
+      heading: '6. Your Rights',
+      body: 'You have the right to access, correct, or delete any personal data we may hold. Since we do not collect any personally identifiable information through this website, there is typically no personal data to access. You can opt out of Google Analytics by using the Google Analytics Opt-out Browser Add-on or by managing your cookie preferences.',
+    },
+    {
+      heading: '7. Children\'s Privacy',
+      body: 'This website is a general-audience tourist information site. We do not knowingly collect personal information from children under the age of 13.',
+    },
+    {
+      heading: '8. Changes to This Policy',
+      body: 'We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. We encourage you to review this page periodically.',
+    },
+    {
+      heading: '9. Contact',
+      body: 'If you have any questions about this Privacy Policy, you may contact us through the website. As an independent, non-commercial project, we do not maintain a dedicated support channel, but we strive to address any concerns promptly.',
+    },
+  ],
+} : {
+  title: 'Patakaran sa Privacy',
+  lastUpdated: `Huling na-update: ${lastUpdated}`,
+  intro: 'Ipinapaliwanag ng Patakaran sa Privacy na ito kung paano kinokolekta, ginagamit, at pinoprotektahan ng Baguio Botanical Garden Gabay ("kami," "aming," o "tayo") ang iyong impormasyon kapag binisita mo ang aming website.',
+  sections: [
+    {
+      heading: '1. Impormasyon na Aming Kinokolekta',
+      body: 'Gumagamit kami ng Google Analytics 4 (GA4) upang mangolekta ng anonymous at aggregated na data tungkol sa paggamit ng website. Kasama rito ang page views, oras na ginugol sa mga pahina, heyograpikong rehiyon (bansa/lungsod lamang), uri ng browser, uri ng device, at referral sources. Hindi kinokolekta ng GA4 ang personally identifiable information (PII) tulad ng iyong pangalan, email address, o eksaktong lokasyon. Hindi kami gumagamit ng cookies para sa tracking, advertising, o profiling.',
+    },
+    {
+      heading: '2. Paano Namin Ginagamit ang Iyong Impormasyon',
+      body: 'Ang anonymous analytics data ay ginagamit lamang upang maunawaan kung paano nakikipag-ugnayan ang mga bisita sa aming website upang mapabuti namin ang nilalaman, ayusin ang mga isyu, at magbigay ng mas mahusay na karanasan. Hindi namin ibinebenta, inuupahan, ipinagpapalit, o ibinabahagi ang iyong data sa mga third party para sa komersyal na layunin.',
+    },
+    {
+      heading: '3. Cookies',
+      body: 'Gumagamit ang GA4 ng first-party cookies upang makilala ang mga natatanging user at session. Ang mga cookies na ito ay hindi naglalaman ng personally identifiable information. Maaari mong pamahalaan ang mga kagustuhan sa cookie sa pamamagitan ng aming pahina ng Cookie Settings o i-disable ang cookies sa iyong mga setting ng browser. Para sa higit pang detalye, tingnan ang aming pahina ng Cookie Settings.',
+    },
+    {
+      heading: '4. Mga Serbisyo ng Third-Party',
+      body: 'Ang aming website ay nag-e-embed ng Google Maps upang ipakita ang lokasyon ng Baguio Botanical Garden. Kapag nakipag-ugnayan ka sa embedded map, maaaring mangolekta ang Google ng data ayon sa sarili nitong patakaran sa privacy. Wala kaming access o kontrol sa data na kinokolekta ng Google sa pamamagitan ng embedded maps. Nagli-link din ang aming website sa mga panlabas na website tulad ng Google Maps. Hindi kami responsable para sa mga kasanayan sa privacy ng mga panlabas na site na iyon.',
+    },
+    {
+      heading: '5. Pagpapanatili ng Data',
+      body: 'Ang data ng Google Analytics ay pinapanatili para sa isang panahong tinutukoy ng Google (karaniwang 14-26 na buwan). Hindi kami nagpapanatili ng mga independiyenteng kopya ng analytics data.',
+    },
+    {
+      heading: '6. Iyong Mga Karapatan',
+      body: 'May karapatan kang i-access, itama, o tanggalin ang anumang personal na data na maaaring hawak namin. Dahil hindi kami nangongolekta ng personally identifiable information sa pamamagitan ng website na ito, karaniwang walang personal na data na maa-access. Maaari kang mag-opt out sa Google Analytics sa pamamagitan ng Google Analytics Opt-out Browser Add-on o sa pamamagitan ng pamamahala ng iyong mga kagustuhan sa cookie.',
+    },
+    {
+      heading: '7. Privacy ng mga Bata',
+      body: 'Ang website na ito ay isang pangkalahatang-awdyens na site ng impormasyon sa turista. Hindi namin sinasadyang mangolekta ng personal na impormasyon mula sa mga batang wala pang 13 taong gulang.',
+    },
+    {
+      heading: '8. Mga Pagbabago sa Patakarang Ito',
+      body: 'Maaari naming i-update ang Patakaran sa Privacy na ito paminsan-minsan. Ang mga pagbabago ay ipo-post sa pahinang ito na may na-update na petsa. Hinihikayat ka naming suriin ang pahinang ito nang pana-panahon.',
+    },
+    {
+      heading: '9. Pakikipag-ugnayan',
+      body: 'Kung mayroon kang anumang mga katanungan tungkol sa Patakaran sa Privacy na ito, maaari kang makipag-ugnayan sa amin sa pamamagitan ng website. Bilang isang independiyenteng at hindi pangkomersyal na proyekto, wala kaming nakatalagang channel ng suporta, ngunit sinisikap naming tugunan ang anumang mga alalahanin nang mabilis.',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={currentLang === 'en' ? titleEn : titleFil}
+  description={currentLang === 'en' ? 'Privacy Policy for Baguio Botanical Garden Guide — an independent, non-commercial tourist information project.' : 'Patakaran sa Privacy para sa Baguio Botanical Garden Gabay — isang independiyenteng, hindi pangkomersyal na proyektong pang-impormasyon para sa mga turista.'}
+  lang={currentLang}
+>
+  <div class="section-padding">
+    <div class="container-page max-w-3xl">
+      <div class="mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-pine-950 tracking-tight">{content.title}</h1>
+        <p class="text-sm text-cold-500 mt-3">{content.lastUpdated}</p>
+      </div>
+
+      <p class="text-cold-600 leading-relaxed mb-8">{content.intro}</p>
+
+      <div class="space-y-6">
+        {content.sections.map((section) => (
+          <div>
+            <h2 class="text-lg font-bold text-pine-900 mb-2">{section.heading}</h2>
+            <p class="text-sm text-cold-600 leading-relaxed">{section.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-cold-200">
+        <a href={`/${currentLang}/`} class="inline-flex items-center gap-2 text-sm font-semibold text-pine-700 hover:text-pine-900 transition-colors">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
+          {currentLang === 'en' ? 'Back to Home' : 'Bumalik sa Home'}
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

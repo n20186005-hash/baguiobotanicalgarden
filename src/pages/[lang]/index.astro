@@ -1,0 +1,574 @@
+---
+import {
+  SITE, KEY_INFO, ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_METHODS,
+  FAQS, TIPS, GALLERY_IMAGES, NEARBY, HISTORY_TIMELINE, LEGENDS,
+  DISCLAIMER_FIL, DISCLAIMER_EN,
+} from '../../consts';
+import { ui, getLangFromUrl, type Lang } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'tl' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: string };
+const currentLang = lang as Lang;
+
+const currentUrl = new URL(Astro.url);
+const t = (key: string) => ui[currentLang]?.[key as keyof typeof ui.tl] ?? key;
+
+const title = currentLang === 'en' ? SITE.titleEn : SITE.titleFil;
+const description = currentLang === 'en' ? SITE.descriptionEn : SITE.descriptionFil;
+const ogImage = `${SITE.siteUrl}/og-default.svg`;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage} lang={currentLang}>
+  <!-- ======= HERO SECTION ======= -->
+  <section class="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background with gradient overlay -->
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/gallery/baguio-botanical-garden-1.jpg');"
+    ></div>
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 container-page text-center text-white py-20">
+      <div class="animate-fade-in space-y-5 max-w-3xl mx-auto">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-sm px-4 py-1.5 text-xs sm:text-sm font-medium text-white/90 border border-white/20">
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          {currentLang === 'en' ? 'Baguio City, Philippines' : 'Lungsod ng Baguio, Pilipinas'}
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1] drop-shadow-lg">
+          {currentLang === 'en' ? 'Baguio Botanical Garden' : 'Baguio Botanical Garden'}
+        </h1>
+        <p class="text-lg sm:text-xl lg:text-2xl text-white/85 max-w-2xl mx-auto font-normal drop-shadow">
+          {currentLang === 'en'
+            ? 'Explore themed gardens from around the world, discover Igorot culture, and immerse yourself in Cordillera\'s rich biodiversity.'
+            : 'Tuklasin ang mga themed garden mula sa iba\'t ibang bansa, alamin ang kultura ng Igorot, at namnamin ang mayamang biodiversity ng Cordillera.'}
+        </p>
+
+        <!-- Stats micro row -->
+        <div class="flex flex-wrap items-center justify-center gap-6 pt-2 text-sm text-white/80">
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-rose-sand-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            {currentLang === 'en' ? '4.3' : '4.3'} ({currentLang === 'en' ? '8,500+ reviews' : '8,500+ reviews'})
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-rose-sand-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            {currentLang === 'en' ? '6:00 AM – 6:00 PM' : '6:00 AM – 6:00 PM'}
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-rose-sand-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 00-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            {currentLang === 'en' ? 'Baguio, Benguet' : 'Baguio, Benguet'}
+          </span>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-4">
+          <a href="#about" class="inline-flex items-center gap-2 rounded-xl bg-rose-sand-500 hover:bg-rose-sand-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-lg shadow-rose-sand-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-rose-sand-500/40 hover:-translate-y-0.5">
+            {currentLang === 'en' ? 'Explore the Garden' : 'Tuklasin ang Hardin'}
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <a
+            href={SITE.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-xl bg-white/15 backdrop-blur-sm hover:bg-white/25 border border-white/25 px-6 py-3 text-sm sm:text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a8 8 0 00-8 8c0 4.5 8 12 8 12s8-7.5 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            {currentLang === 'en' ? 'View on Google Maps' : 'Tingnan sa Google Maps'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= KEY INFO CARDS ======= -->
+  <section id="key-info" class="section-padding bg-white">
+    <div class="container-page">
+      <h2 class="section-heading text-center">{currentLang === 'en' ? 'Quick Information' : 'Mabilis na Impormasyon'}</h2>
+      <p class="section-subheading text-center mx-auto mb-10">
+        {currentLang === 'en' ? 'Everything you need to know before your visit.' : 'Lahat ng kailangan mong malaman bago bumisita.'}
+      </p>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {KEY_INFO.map((item) => (
+          <div class="card card-hover p-5 sm:p-6 flex flex-col items-center text-center space-y-3">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-pine-50 text-2xl">
+              {item.icon === 'ticket' ? '🎫' : item.icon === 'clock' ? '🕐' : item.icon === 'stopwatch' ? '⏱️' : '💚'}
+            </span>
+            <div class="space-y-1">
+              <p class="text-xs sm:text-sm font-medium text-cold-400 uppercase tracking-wider">
+                {currentLang === 'en' ? item.labelEn : item.labelFil}
+              </p>
+              <p class="text-base sm:text-lg font-bold text-pine-950">
+                {currentLang === 'en' ? item.valueEn : item.valueFil}
+              </p>
+              <p class="text-xs text-cold-500 leading-relaxed">
+                {currentLang === 'en' ? item.subEn : item.subFil}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= ABOUT SECTION ======= -->
+  <section id="about" class="section-padding bg-cold-50">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="space-y-5">
+          <span class="badge bg-pine-50 text-pine-700 border border-pine-200">
+            {currentLang === 'en' ? '🌿 About' : '🌿 Tungkol'}
+          </span>
+          <h2 class="section-heading">{currentLang === 'en' ? 'About Baguio Botanical Garden' : 'Tungkol sa Baguio Botanical Garden'}</h2>
+          <div class="space-y-4 text-cold-600 leading-relaxed">
+            <p>{currentLang === 'en'
+              ? 'The Baguio Botanical Garden is a 5-hectare public garden located on Leonard Wood Road, Baguio City, Philippines. It is a living showcase of the rich botanical biodiversity of the Cordillera region, international friendship, and indigenous Igorot culture.'
+              : 'Ang Baguio Botanical Garden ay isang 5-ektaryang pampublikong hardin na matatagpuan sa Leonard Wood Road, Baguio City, Pilipinas. Ito ay isang living showcase ng mayamang botanikal na biodiversity ng Cordillera region, internasyonal na pagkakaibigan, at katutubong kultura ng Igorot.'}
+            </p>
+            <p>{currentLang === 'en'
+              ? 'The garden features themed gardens representing Chinese, Japanese, Korean, and Philippine native flora, an International Friendship Garden, a Cordillera Village with traditional Igorot huts, and a Sculpture Garden with bronze artworks by Ben Hur Villanueva and local artists.'
+              : 'Ang hardin ay nagtatampok ng mga themed garden na kumakatawan sa Chinese, Japanese, Korean, at Philippine native flora, International Friendship Garden, Cordillera Village na may tradisyonal na Igorot huts, at Sculpture Garden na may mga bronze artwork ni Ben Hur Villanueva at iba pang lokal na artist.'}
+            </p>
+            <p>{currentLang === 'en'
+              ? 'Situated at 1,540 meters above sea level, the garden enjoys a cool mountain climate year-round — a perfect escape from the tropical heat. The surrounding pine forests provide crisp mountain air and a serene natural backdrop.'
+              : 'Dahil sa mataas na lokasyon nito sa 1,540 metro sa ibabaw ng dagat, ang hardin ay may malamig na klima ng bundok sa buong taon — isang perpektong takas mula sa init ng tropiko. Ang mga pine forest sa paligid ay nagbibigay ng sariwang hanging bundok at tahimik na natural na tanawin.'}
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <span class="badge bg-rose-sand-50 text-rose-sand-700">
+              {currentLang === 'en' ? '🌲 Pine Forest' : '🌲 Pine Forest'}
+            </span>
+            <span class="badge bg-rose-sand-50 text-rose-sand-700">
+              {currentLang === 'en' ? '🏔️ 1,540m Altitude' : '🏔️ 1,540m Altitude'}
+            </span>
+            <span class="badge bg-rose-sand-50 text-rose-sand-700">
+              {currentLang === 'en' ? '🌺 5 Hectares' : '🌺 5 Ektarya'}
+            </span>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="/gallery/baguio-botanical-garden-2.jpg"
+              alt={currentLang === 'en' ? 'Baguio Botanical Garden — Pine trees and gardens' : 'Baguio Botanical Garden — Pine trees at hardin'}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative element -->
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-pine-100 rounded-2xl -z-10 hidden sm:block"></div>
+          <div class="absolute -top-4 -right-4 w-20 h-20 bg-rose-sand-200 rounded-2xl -z-10 hidden sm:block"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= HISTORY & LEGENDS SECTION ======= -->
+  <section id="history" class="section-padding bg-white">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
+          {currentLang === 'en' ? '📜 History' : '📜 Kasaysayan'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'History & Legends' : 'Kasaysayan at Alamat'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'From American colonial nursery to world-class botanical garden — and the folk tales that give meaning to every corner.'
+            : 'Mula sa American colonial nursery hanggang sa world-class botanical garden — at ang mga kuwentong bayan na nagbibigay-kahulugan sa bawat sulok.'}
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="max-w-3xl mx-auto mb-16">
+        <div class="space-y-8">
+          {HISTORY_TIMELINE.map((period, i) => (
+            <div class="relative pl-10 timeline-dot">
+              <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-pine-500 border-4 border-pine-100 flex items-center justify-center">
+                <span class="text-white text-[10px] font-bold">{i + 1}</span>
+              </div>
+              <div class="card card-hover p-5">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                  <span class="badge bg-pine-100 text-pine-700 text-xs">
+                    {currentLang === 'en' ? period.yearEn : period.yearFil}
+                  </span>
+                  <h3 class="text-lg font-bold text-pine-950">{currentLang === 'en' ? period.titleEn : period.titleFil}</h3>
+                </div>
+                <p class="text-cold-600 text-sm leading-relaxed">
+                  {currentLang === 'en' ? period.bodyEn : period.bodyFil}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Legends -->
+      <div class="max-w-4xl mx-auto">
+        <h3 class="text-xl sm:text-2xl font-bold text-pine-950 mb-6 text-center flex items-center justify-center gap-2">
+          <span>📖</span>
+          {currentLang === 'en' ? 'Legends & Folk Tales' : 'Mga Alamat at Kuwentong Bayan'}
+        </h3>
+        <p class="section-subheading mx-auto text-center mb-10">
+          {currentLang === 'en'
+            ? 'The Cordillera region is rich in oral tradition. These stories have been passed down through generations.'
+            : 'Ang Cordillera region ay mayaman sa oral tradition. Ang mga kuwentong ito ay naipasa sa maraming henerasyon.'}
+        </p>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {LEGENDS.map((story) => (
+            <div class="card card-hover p-6 flex flex-col gap-4">
+              <span class="text-4xl">{story.icon}</span>
+              <h4 class="text-lg font-bold text-pine-900">
+                {currentLang === 'en' ? story.titleEn : story.titleFil}
+              </h4>
+              <p class="text-sm text-cold-600 leading-relaxed flex-1">
+                {currentLang === 'en' ? story.bodyEn : story.bodyFil}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= ATTRACTIONS SECTION ======= -->
+  <section id="attractions" class="section-padding bg-cold-50">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">
+          {currentLang === 'en' ? '🏯 Attractions' : '🏯 Mga Atraksyon'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Themed Gardens & Attractions' : 'Mga Themed Garden at Atraksyon'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'Eight themed gardens showcasing international friendship, biodiversity, and Cordillera culture.'
+            : 'Walong themed garden na nagpapakita ng internasyonal na pagkakaibigan, biodiversity, at kultura ng Cordillera.'}
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {ATTRACTIONS.map((attr) => (
+          <div id={attr.id} class="card card-hover flex flex-col h-full overflow-hidden">
+            <div class="bg-pine-50 p-6 py-8 flex items-center justify-center">
+              <span class="text-5xl">{attr.icon}</span>
+            </div>
+            <div class="p-5 flex flex-col flex-1 gap-3">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-lg font-bold text-pine-950">
+                  {currentLang === 'en' ? attr.titleEn : attr.titleFil}
+                </h3>
+                <span class="badge bg-rose-sand-50 text-rose-sand-700 text-[10px] shrink-0 mt-0.5">
+                  {currentLang === 'en' ? attr.tagEn : attr.tagFil}
+                </span>
+              </div>
+              <p class="text-sm text-cold-600 leading-relaxed">
+                {currentLang === 'en' ? attr.descriptionEn : attr.descriptionFil}
+              </p>
+              <div class="mt-auto pt-3 border-t border-cold-100">
+                <p class="text-xs font-semibold text-cold-400 uppercase tracking-wider mb-2">
+                  {currentLang === 'en' ? 'Highlights' : 'Mga Dapat Makita'}
+                </p>
+                <ul class="space-y-1.5">
+                  {(currentLang === 'en' ? attr.highlightsEn : attr.highlightsFil).map((h, i) => (
+                    <li class="flex items-start gap-2 text-xs text-cold-600">
+                      <svg class="h-3.5 w-3.5 text-pine-500 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PRACTICAL INFO SECTION ======= -->
+  <section id="practical" class="section-padding bg-white">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
+          {currentLang === 'en' ? 'ℹ️ Practical Info' : 'ℹ️ Praktikal na Impormasyon'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Practical Information & Facilities' : 'Praktikal na Impormasyon at Pasilidad'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'Everything you need for a comfortable visit — restrooms, parking, dining, accommodation, shopping, fuel, and medical services. This is a neutral, non-commercial guide.'
+            : 'Lahat ng kailangan para sa komportableng pagbisita — palikuran, paradahan, kainan, matutuluyan, pamimili, gasolina, at serbisyong medikal. Ito ay isang neutral at hindi pangkomersyal na gabay.'}
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {PRACTICAL_INFO.map((info, idx) => (
+          <div class="card card-hover p-6 flex flex-col gap-4">
+            <div class="flex items-start gap-3">
+              <span class="text-3xl shrink-0">{info.icon}</span>
+              <h3 class="text-lg font-bold text-pine-950">
+                {currentLang === 'en' ? info.titleEn : info.titleFil}
+              </h3>
+            </div>
+            <p class="text-sm text-cold-600 leading-relaxed">
+              {currentLang === 'en' ? info.descriptionEn : info.descriptionFil}
+            </p>
+            <ul class="space-y-2 mt-auto">
+              {(currentLang === 'en' ? info.tipsEn : info.tipsFil).map((tip, i) => (
+                <li class="flex items-start gap-2 text-xs text-cold-500">
+                  <svg class="h-3.5 w-3.5 text-rose-sand-500 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/></svg>
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= TRANSPORTATION SECTION ======= -->
+  <section id="transport" class="section-padding bg-cold-50">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">
+          {currentLang === 'en' ? '🚗 How to Get Here' : '🚗 Paano Pumunta'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Transportation Guide' : 'Gabay sa Transportasyon'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'Detailed step-by-step directions from airports, bus terminals, and nearby attractions.'
+            : 'Detalyadong hakbang-hakbang na direksyon mula sa mga airport, bus terminal, at kalapit na atraksyon.'}
+        </p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        {TRANSPORT_METHODS.map((method) => (
+          <div class="card card-hover p-6 flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">{method.icon}</span>
+              <div>
+                <h3 class="font-bold text-pine-950 text-base">
+                  {currentLang === 'en' ? method.titleEn : method.titleFil}
+                </h3>
+                <p class="text-xs text-cold-500 mt-0.5">
+                  {currentLang === 'en' ? method.descriptionEn : method.descriptionFil}
+                </p>
+              </div>
+            </div>
+            <ol class="space-y-2 mt-1">
+              {(currentLang === 'en' ? method.stepsEn : method.stepsFil).map((step, i) => (
+                <li class="flex items-start gap-2 text-xs text-cold-600 leading-relaxed">
+                  <span class="w-5 h-5 rounded-full bg-pine-100 text-pine-700 font-bold text-[10px] inline-flex items-center justify-center shrink-0 mt-0.5">
+                    {i + 1}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= NEARBY ATTRACTIONS ======= -->
+  <section class="section-padding bg-white">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <h2 class="section-heading">{currentLang === 'en' ? 'Nearby Attractions' : 'Mga Kalapit na Atraksyon'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'The Botanical Garden is perfectly located near many other Baguio destinations. Combine them in a day tour.'
+            : 'Ang Botanical Garden ay nasa magandang lokasyon — malapit sa maraming iba pang destinasyon sa Baguio. Pagsamahin ang mga ito sa isang araw ng paglilibot.'}
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        {NEARBY.map((place) => (
+          <a
+            href={SITE.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card card-hover p-5 flex items-center gap-4 group"
+          >
+            <span class="text-3xl shrink-0">{place.icon}</span>
+            <div class="min-w-0">
+              <h4 class="text-sm font-bold text-pine-950 group-hover:text-pine-700 transition-colors">
+                {currentLang === 'en' ? place.nameEn : place.nameFil}
+              </h4>
+              <p class="text-[11px] text-rose-sand-600 font-medium">
+                {currentLang === 'en' ? place.distanceEn : place.distanceFil}
+              </p>
+              <p class="text-xs text-cold-500 mt-1 line-clamp-2">
+                {currentLang === 'en' ? place.descriptionEn : place.descriptionFil}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= GALLERY SECTION ======= -->
+  <section id="gallery" class="section-padding bg-cold-50">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">
+          {currentLang === 'en' ? '📸 Gallery' : '📸 Galeriya'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Photo Gallery' : 'Galeriya ng Larawan'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'Explore the beauty of the Botanical Garden through these images.'
+            : 'Tuklasin ang ganda ng Botanical Garden sa pamamagitan ng mga larawang ito.'}
+        </p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        {GALLERY_IMAGES.map((img, i) => (
+          <a
+            href={img.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block relative overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3]"
+          >
+            <img
+              src={img.src}
+              alt={currentLang === 'en' ? img.altEn : img.altFil}
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= MAP SECTION ======= -->
+  <section id="map" class="section-padding bg-white">
+    <div class="container-page">
+      <div class="text-center mb-10">
+        <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
+          {currentLang === 'en' ? '📍 Map' : '📍 Mapa'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Location Map' : 'Mapa ng Lokasyon'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en'
+            ? 'Find us on Leonard Wood Road, Baguio City. Use the interactive map below or open in Google Maps.'
+            : 'Hanapin kami sa Leonard Wood Road, Lungsod ng Baguio. Gamitin ang interactive na mapa sa ibaba o buksan sa Google Maps.'}
+        </p>
+      </div>
+      <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
+        <iframe
+          src={SITE.mapsEmbedSrc}
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title={currentLang === 'en' ? 'Baguio Botanical Garden on Google Maps' : 'Baguio Botanical Garden sa Google Maps'}
+        ></iframe>
+      </div>
+      <div class="text-center mt-6">
+        <a
+          href={SITE.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-semibold text-pine-700 hover:text-pine-900 transition-colors"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a8 8 0 00-8 8c0 4.5 8 12 8 12s8-7.5 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+          {currentLang === 'en' ? 'Open in Google Maps' : 'Buksan sa Google Maps'}
+          <svg class="h-3.5 w-3.5 ml-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= TIPS SECTION ======= -->
+  <section id="tips" class="section-padding bg-cold-50">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">
+          {currentLang === 'en' ? '💡 Tips' : '💡 Mga Tip'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Visitor Tips' : 'Mga Tip ng Bisita'}</h2>
+        <p class="section-subheading mx-auto">
+          {currentLang === 'en' ? 'Practical advice from experienced visitors for a better experience.' : 'Praktikal na payo mula sa mga karanasang bisita para sa mas magandang karanasan.'}
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        {TIPS.map((tip) => (
+          <div class="card card-hover p-5 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">{tip.icon}</span>
+              <h3 class="font-bold text-pine-950 text-base">
+                {currentLang === 'en' ? tip.titleEn : tip.titleFil}
+              </h3>
+            </div>
+            <p class="text-sm text-cold-600 leading-relaxed">
+              {currentLang === 'en' ? tip.bodyEn : tip.bodyFil}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FAQ SECTION ======= -->
+  <section id="faq" class="section-padding bg-white">
+    <div class="container-page">
+      <div class="text-center mb-12">
+        <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
+          {currentLang === 'en' ? '❓ FAQ' : '❓ FAQ'}
+        </span>
+        <h2 class="section-heading">{currentLang === 'en' ? 'Frequently Asked Questions' : 'Mga Madalas Itanong'}</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-3">
+        {FAQS.map((faq, i) => (
+          <details class="card overflow-hidden group" id={`faq-${i}`}>
+            <summary class="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-cold-50/50 transition-colors list-none">
+              <span class="text-sm sm:text-base font-semibold text-pine-950 pr-4">
+                {currentLang === 'en' ? faq.qEn : faq.qFil}
+              </span>
+              <svg class="h-5 w-5 text-cold-400 shrink-0 group-open:rotate-180 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-cold-600 leading-relaxed border-t border-cold-100 pt-4">
+              {currentLang === 'en' ? faq.aEn : faq.aFil}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= DISCLAIMER SECTION ======= -->
+  <section id="disclaimer" class="section-padding bg-cold-50">
+    <div class="container-page max-w-3xl">
+      <div class="card p-6 sm:p-8 border-rose-sand-200">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-2xl">📋</span>
+          <h2 class="text-xl font-bold text-pine-950">
+            {currentLang === 'en' ? 'Disclaimer' : 'Patalastas'}
+          </h2>
+        </div>
+        <div class="space-y-3 text-sm text-cold-600 leading-relaxed">
+          {(currentLang === 'en' ? DISCLAIMER_EN : DISCLAIMER_FIL).map((line, i) => (
+            <p>{line}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to top -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <a
+      href="#"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-pine-600 text-white shadow-lg hover:bg-pine-700 transition-all hover:-translate-y-0.5"
+      aria-label={currentLang === 'en' ? 'Back to top' : 'Bumalik sa itaas'}
+    >
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </a>
+  </div>
+</BaseLayout>

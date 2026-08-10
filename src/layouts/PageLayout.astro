@@ -1,0 +1,17 @@
+---
+import { SITE } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../i18n/ui';
+
+const lang = (() => {
+  try { return getLangFromUrl(new URL(Astro.url)); }
+  catch { return 'tl'; }
+})();
+
+const title = lang === 'en' ? SITE.titleEn : SITE.titleFil;
+const description = lang === 'en' ? SITE.descriptionEn : SITE.descriptionFil;
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <slot />
+</BaseLayout>

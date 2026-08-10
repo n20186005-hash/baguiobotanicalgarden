@@ -1,0 +1,140 @@
+---
+import { SITE } from '../../consts';
+import { ui, getLangFromUrl, type Lang } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'tl' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: string };
+const currentLang = lang as Lang;
+
+const lastUpdated = '2026-08-10';
+
+const enContent = {
+  title: 'Terms of Service',
+  lastUpdated: `Last updated: ${lastUpdated}`,
+  intro: 'By accessing and using the Baguio Botanical Garden Guide website ("the Website"), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please discontinue use of the Website.',
+  sections: [
+    {
+      heading: '1. Purpose of the Website',
+      body: 'This Website is an independent, non-commercial tourist information project. It is not affiliated with, endorsed by, or connected to any government agency, official tourism organization, or commercial entity. The content is provided for informational and educational purposes only.',
+    },
+    {
+      heading: '2. Accuracy of Information',
+      body: 'We strive to provide accurate and up-to-date information by cross-referencing public sources from the Baguio City Tourism Office, the Department of Tourism (DOT) — Cordillera Administrative Region, and the official Baguio City website. However, we make no warranties or representations about the completeness, accuracy, or reliability of the information. Visiting hours, fees, and other practical details may change without notice. We recommend verifying critical information directly with the attraction before your visit.',
+    },
+    {
+      heading: '3. No Commercial Recommendations',
+      body: 'This Website does not endorse, recommend, or promote any specific business, service, product, or commercial entity. References to types of services (e.g., "restaurants," "hotels," "taxi services") are neutral and non-commercial descriptions of available amenities in the area. We do not accept payment, sponsorship, or advertising from businesses.',
+    },
+    {
+      heading: '4. Image Copyright',
+      body: 'All images displayed on this Website are the property of their respective original photographers. Copyright remains with the image creators. Images are used for illustrative, educational, and informational purposes. If you are the copyright owner of any image and object to its use, please contact us for immediate removal.',
+    },
+    {
+      heading: '5. External Links',
+      body: 'This Website may contain links to external websites, including Google Maps, government websites, and other third-party resources. We are not responsible for the content, accuracy, or practices of these external sites. Use of external links is at your own risk.',
+    },
+    {
+      heading: '6. Limitation of Liability',
+      body: 'To the fullest extent permitted by applicable law, the Website and its operators shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from the use of or inability to use the Website or its content. This includes, but is not limited to, any losses or damages resulting from reliance on information provided on the Website.',
+    },
+    {
+      heading: '7. Intellectual Property',
+      body: 'The written content, design, and overall presentation of this Website are protected by copyright and intellectual property laws. You may use the information for personal, non-commercial purposes with proper attribution. Reproduction, distribution, or commercial use of the content requires prior written permission.',
+    },
+    {
+      heading: '8. Changes to Terms',
+      body: 'We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting on this page. Your continued use of the Website after changes are posted constitutes acceptance of the updated terms.',
+    },
+    {
+      heading: '9. Governing Law',
+      body: 'These Terms of Service shall be governed by and construed in accordance with the laws of the Republic of the Philippines.',
+    },
+  ],
+};
+
+const filContent = {
+  title: 'Mga Tuntunin ng Serbisyo',
+  lastUpdated: `Huling na-update: ${lastUpdated}`,
+  intro: 'Sa pamamagitan ng pag-access at paggamit ng website ng Baguio Botanical Garden Gabay ("ang Website"), sumasang-ayon kang matali sa Mga Tuntunin ng Serbisyo na ito. Kung hindi ka sumasang-ayon sa anumang bahagi ng mga tuntuning ito, mangyaring itigil ang paggamit ng Website.',
+  sections: [
+    {
+      heading: '1. Layunin ng Website',
+      body: 'Ang Website na ito ay isang independiyenteng at hindi pangkomersyal na proyektong pang-impormasyon para sa mga turista. Hindi ito kaakibat, ineendorso, o konektado sa anumang ahensya ng gobyerno, opisyal na organisasyon ng turismo, o komersyal na entidad. Ang nilalaman ay ibinibigay para sa impormasyonal at pang-edukasyon na layunin lamang.',
+    },
+    {
+      heading: '2. Katumpakan ng Impormasyon',
+      body: 'Sinisikap naming magbigay ng tumpak at napapanahong impormasyon sa pamamagitan ng paghahambing ng mga pampublikong sanggunian mula sa Baguio City Tourism Office, Department of Tourism (DOT) — Cordillera Administrative Region, at opisyal na website ng Lungsod ng Baguio. Gayunpaman, hindi kami nagbibigay ng garantiya o representasyon tungkol sa pagkakumpleto, katumpakan, o pagiging maaasahan ng impormasyon. Ang mga oras ng pagbisita, bayad, at iba pang praktikal na detalye ay maaaring magbago nang walang abiso. Inirerekomenda naming i-verify ang kritikal na impormasyon nang direkta sa atraksyon bago ang iyong pagbisita.',
+    },
+    {
+      heading: '3. Walang Komersyal na Rekomendasyon',
+      body: 'Ang Website na ito ay hindi nag-eendorso, nagrerekomenda, o nagpo-promote ng anumang partikular na negosyo, serbisyo, produkto, o komersyal na entidad. Ang mga sanggunian sa mga uri ng serbisyo (hal., "restawran," "otel," "serbisyo ng taxi") ay neutral at hindi pangkomersyal na paglalarawan ng mga available na amenidad sa lugar. Hindi kami tumatanggap ng bayad, sponsorship, o advertising mula sa mga negosyo.',
+    },
+    {
+      heading: '4. Copyright ng Larawan',
+      body: 'Ang lahat ng mga larawang ipinapakita sa Website na ito ay pag-aari ng kani-kanilang orihinal na photographer. Ang copyright ay nananatili sa mga lumikha ng larawan. Ang mga larawan ay ginagamit para sa ilustratibo, pang-edukasyon, at impormasyonal na layunin. Kung ikaw ang may-ari ng copyright ng anumang larawan at tumututol sa paggamit nito, mangyaring makipag-ugnayan sa amin para sa agarang pagtanggal.',
+    },
+    {
+      heading: '5. Mga Panlabas na Link',
+      body: 'Ang Website na ito ay maaaring maglaman ng mga link sa panlabas na website, kabilang ang Google Maps, mga website ng gobyerno, at iba pang third-party na mapagkukunan. Hindi kami responsable para sa nilalaman, katumpakan, o mga kasanayan ng mga panlabas na site na ito. Ang paggamit ng mga panlabas na link ay nasa iyong sariling panganib.',
+    },
+    {
+      heading: '6. Limitasyon ng Pananagutan',
+      body: 'Sa pinakamalawak na saklaw na pinapayagan ng naaangkop na batas, ang Website at ang mga tagapagpatakbo nito ay hindi mananagot para sa anumang direkta, hindi direkta, incidental, consequential, o espesyal na pinsala na nagmumula sa paggamit o kawalan ng kakayahang gamitin ang Website o ang nilalaman nito. Kasama rito, ngunit hindi limitado sa, anumang pagkalugi o pinsala na nagreresulta mula sa pag-asa sa impormasyong ibinigay sa Website.',
+    },
+    {
+      heading: '7. Intelektwal na Ari-arian',
+      body: 'Ang nakasulat na nilalaman, disenyo, at pangkalahatang presentasyon ng Website na ito ay protektado ng copyright at mga batas sa intelektwal na ari-arian. Maaari mong gamitin ang impormasyon para sa personal at hindi pangkomersyal na layunin na may wastong atribusyon. Ang reproduksyon, pamamahagi, o komersyal na paggamit ng nilalaman ay nangangailangan ng paunang nakasulat na pahintulot.',
+    },
+    {
+      heading: '8. Mga Pagbabago sa Tuntunin',
+      body: 'Inilalaan namin ang karapatang baguhin ang Mga Tuntunin ng Serbisyo na ito anumang oras. Ang mga pagbabago ay magkakabisa kaagad sa pag-post sa pahinang ito. Ang iyong patuloy na paggamit ng Website pagkatapos ma-post ang mga pagbabago ay bumubuo ng pagtanggap sa mga na-update na tuntunin.',
+    },
+    {
+      heading: '9. Namamahalang Batas',
+      body: 'Ang Mga Tuntunin ng Serbisyo na ito ay pamamahalaan at bibigyang-kahulugan alinsunod sa mga batas ng Republika ng Pilipinas.',
+    },
+  ],
+};
+
+const content = currentLang === 'en' ? enContent : filContent;
+---
+
+<BaseLayout
+  title={currentLang === 'en' ? 'Terms of Service — Baguio Botanical Garden Guide' : 'Mga Tuntunin ng Serbisyo — Baguio Botanical Garden Gabay'}
+  description={currentLang === 'en' ? 'Terms of Service for Baguio Botanical Garden Guide — an independent, non-commercial tourist information project.' : 'Mga Tuntunin ng Serbisyo para sa Baguio Botanical Garden Gabay — isang independiyenteng, hindi pangkomersyal na proyektong pang-impormasyon para sa mga turista.'}
+  lang={currentLang}
+>
+  <div class="section-padding">
+    <div class="container-page max-w-3xl">
+      <div class="mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-pine-950 tracking-tight">{content.title}</h1>
+        <p class="text-sm text-cold-500 mt-3">{content.lastUpdated}</p>
+      </div>
+
+      <p class="text-cold-600 leading-relaxed mb-8">{content.intro}</p>
+
+      <div class="space-y-6">
+        {content.sections.map((section) => (
+          <div>
+            <h2 class="text-lg font-bold text-pine-900 mb-2">{section.heading}</h2>
+            <p class="text-sm text-cold-600 leading-relaxed">{section.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-cold-200">
+        <a href={`/${currentLang}/`} class="inline-flex items-center gap-2 text-sm font-semibold text-pine-700 hover:text-pine-900 transition-colors">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
+          {currentLang === 'en' ? 'Back to Home' : 'Bumalik sa Home'}
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

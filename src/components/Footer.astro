@@ -1,0 +1,110 @@
+---
+import { SITE } from '../consts';
+import { ui, type Lang } from '../i18n/ui';
+
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = (key: string) => ui[lang]?.[key as keyof typeof ui.tl] ?? key;
+const year = new Date().getFullYear();
+const copyrightText = (t('footer_copyright') as string).replace('{year}', String(year));
+---
+
+<footer class="bg-pine-950 text-cold-100 border-t border-pine-800" aria-labelledby="footer-heading">
+  <div class="container-page py-12 sm:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Column 1: About -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-2.5">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-pine-700 text-white text-lg">🌿</span>
+          <span class="text-base font-bold text-white">{t('siteName')}</span>
+        </div>
+        <p class="text-sm text-cold-300 leading-relaxed">
+          {t('footer_disclaimer_line1')}
+        </p>
+        <p class="text-sm text-cold-400 leading-relaxed">
+          {t('footer_disclaimer_line2')}
+        </p>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-rose-sand-300">
+          {lang === 'en' ? 'Quick Links' : 'Mabilis na Link'}
+        </h3>
+        <ul class="space-y-2.5">
+          <li>
+            <a href={lang === 'en' ? '/en/#about' : '/tl/#about'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('nav_about')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/#attractions' : '/tl/#attractions'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('nav_attractions')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/#practical' : '/tl/#practical'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('nav_practical')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/#transport' : '/tl/#transport'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('nav_transport')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/#faq' : '/tl/#faq'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('nav_faq')}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Legal & Contact -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-rose-sand-300">
+          {lang === 'en' ? 'Legal' : 'Legal'}
+        </h3>
+        <ul class="space-y-2.5">
+          <li>
+            <a href={lang === 'en' ? '/en/privacy-policy' : '/tl/privacy-policy'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('footer_privacy')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/terms-of-service' : '/tl/terms-of-service'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('footer_terms')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/cookie-settings' : '/tl/cookie-settings'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('footer_cookie')}
+            </a>
+          </li>
+        </ul>
+        {SITE.mapsUrl && (
+          <a
+            href={SITE.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 text-sm text-rose-sand-300 hover:text-rose-sand-100 transition-colors mt-2"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 00-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>{lang === 'en' ? 'View on Google Maps' : 'Tingnan sa Google Maps'}</span>
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-10 pt-6 border-t border-pine-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-cold-500">{copyrightText}</p>
+      <p class="text-xs text-cold-600 flex items-center gap-1">
+        {lang === 'en' ? 'All photos © their respective owners' : 'Lahat ng larawan © kani-kanilang may-ari'}
+      </p>
+    </div>
+  </div>
+</footer>

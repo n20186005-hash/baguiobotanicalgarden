@@ -1,0 +1,160 @@
+---
+import { SITE } from '../../consts';
+import { ui, getLangFromUrl, type Lang } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'tl' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: string };
+const currentLang = lang as Lang;
+
+const en = {
+  title: 'Cookie Settings',
+  description: 'Manage your cookie preferences for Baguio Botanical Garden Guide.',
+  intro: 'This website uses minimal cookies through Google Analytics 4 to understand site traffic and improve your experience. We do not use cookies for advertising, tracking, or profiling.',
+  ga4: {
+    title: 'Google Analytics 4 (GA4)',
+    description: 'GA4 collects anonymous, aggregated data about website visits — page views, approximate geographic region, browser and device type, and referral sources. No personally identifiable information is collected.',
+    cookies: 'Cookies used: _ga, _ga_<container-id> (first-party, up to 24 months)',
+    purpose: 'Purpose: Basic site analytics to improve content and fix issues',
+  },
+  essential: {
+    title: 'Essential (Required)',
+    description: 'These cookies are necessary for basic website functionality and cannot be disabled. They include cookies set by GA4 for basic measurement.',
+  },
+  howTo: {
+    title: 'How to Manage Cookies',
+    body: 'You can control cookies through your browser settings. Most browsers allow you to block or delete cookies. You can also install the Google Analytics Opt-out Browser Add-on to prevent GA4 data collection.',
+  },
+  browserSettings: [
+    { name: 'Google Chrome', url: 'https://support.google.com/chrome/answer/95647' },
+    { name: 'Mozilla Firefox', url: 'https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop' },
+    { name: 'Safari', url: 'https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac' },
+    { name: 'Microsoft Edge', url: 'https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' },
+  ],
+  optOut: 'Install Google Analytics Opt-out Add-on',
+  optOutUrl: 'https://tools.google.com/dlpage/gaoptout',
+  back: 'Back to Home',
+};
+
+const tl = {
+  title: 'Mga Setting ng Cookie',
+  description: 'Pamahalaan ang iyong mga kagustuhan sa cookie para sa Baguio Botanical Garden Gabay.',
+  intro: 'Ang website na ito ay gumagamit ng kaunting cookies sa pamamagitan ng Google Analytics 4 upang maunawaan ang trapiko ng site at mapabuti ang iyong karanasan. Hindi kami gumagamit ng cookies para sa advertising, tracking, o profiling.',
+  ga4: {
+    title: 'Google Analytics 4 (GA4)',
+    description: 'Ang GA4 ay nangongolekta ng anonymous at aggregated na data tungkol sa mga pagbisita sa website — page views, tinatayang heyograpikong rehiyon, uri ng browser at device, at referral sources. Walang personally identifiable information ang kinokolekta.',
+    cookies: 'Mga cookies na ginagamit: _ga, _ga_<container-id> (first-party, hanggang 24 na buwan)',
+    purpose: 'Layunin: Basic site analytics upang mapabuti ang nilalaman at ayusin ang mga isyu',
+  },
+  essential: {
+    title: 'Mahalaga (Kinakailangan)',
+    description: 'Ang mga cookies na ito ay kinakailangan para sa pangunahing paggana ng website at hindi maaaring i-disable. Kasama rito ang mga cookies na itinakda ng GA4 para sa basic measurement.',
+  },
+  howTo: {
+    title: 'Paano Pamahalaan ang Cookies',
+    body: 'Maaari mong kontrolin ang cookies sa pamamagitan ng mga setting ng iyong browser. Karamihan sa mga browser ay nagpapahintulot sa iyo na i-block o tanggalin ang cookies. Maaari ka ring mag-install ng Google Analytics Opt-out Browser Add-on upang maiwasan ang pagkolekta ng data ng GA4.',
+  },
+  browserSettings: [
+    { name: 'Google Chrome', url: 'https://support.google.com/chrome/answer/95647' },
+    { name: 'Mozilla Firefox', url: 'https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop' },
+    { name: 'Safari', url: 'https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac' },
+    { name: 'Microsoft Edge', url: 'https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' },
+  ],
+  optOut: 'I-install ang Google Analytics Opt-out Add-on',
+  optOutUrl: 'https://tools.google.com/dlpage/gaoptout',
+  back: 'Bumalik sa Home',
+};
+
+const t = currentLang === 'en' ? en : tl;
+---
+
+<BaseLayout
+  title={currentLang === 'en' ? 'Cookie Settings — Baguio Botanical Garden Guide' : 'Mga Setting ng Cookie — Baguio Botanical Garden Gabay'}
+  description={currentLang === 'en' ? en.description : tl.description}
+  lang={currentLang}
+>
+  <div class="section-padding">
+    <div class="container-page max-w-3xl">
+      <div class="mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-pine-950 tracking-tight">{t.title}</h1>
+        <p class="text-sm text-cold-500 mt-3">{t.intro}</p>
+      </div>
+
+      <div class="space-y-8">
+        <!-- GA4 -->
+        <div class="card p-6">
+          <div class="flex items-start gap-3 mb-3">
+            <span class="text-2xl">📊</span>
+            <div>
+              <h2 class="text-lg font-bold text-pine-950">{t.ga4.title}</h2>
+              <p class="text-sm text-cold-600 leading-relaxed mt-1">{t.ga4.description}</p>
+            </div>
+          </div>
+          <div class="pl-10 space-y-1 text-xs text-cold-500">
+            <p>🔹 {t.ga4.cookies}</p>
+            <p>🔹 {t.ga4.purpose}</p>
+          </div>
+        </div>
+
+        <!-- Essential -->
+        <div class="card p-6">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">🔒</span>
+            <div>
+              <h2 class="text-lg font-bold text-pine-950">{t.essential.title}</h2>
+              <p class="text-sm text-cold-600 leading-relaxed mt-1">{t.essential.description}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- How to manage -->
+        <div class="card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <span class="text-2xl">⚙️</span>
+            <div>
+              <h2 class="text-lg font-bold text-pine-950">{t.howTo.title}</h2>
+              <p class="text-sm text-cold-600 leading-relaxed mt-1">{t.howTo.body}</p>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-2 pl-10">
+            {t.browserSettings.map((b) => (
+              <a
+                href={b.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-pine-700 hover:text-pine-900 underline underline-offset-2"
+              >
+                {b.name} →
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Opt-out -->
+        <div class="card p-6">
+          <a
+            href={t.optOutUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-pine-700 hover:text-pine-900 transition-colors"
+          >
+            🔗 {t.optOut} →
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-cold-200">
+        <a href={`/${currentLang}/`} class="inline-flex items-center gap-2 text-sm font-semibold text-pine-700 hover:text-pine-900 transition-colors">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
+          {t.back}
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
