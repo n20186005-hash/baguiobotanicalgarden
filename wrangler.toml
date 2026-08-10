@@ -1,0 +1,8 @@
+name = "baguio-botanical-garden"
+compatibility_date = "2026-08-09"
+
+assets = { directory = "./dist/client" }
+
+# [[kv_namespaces]]
+# binding = "SESSION"
+# id = "YOUR_KV_NAMESPACE_ID"

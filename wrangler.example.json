@@ -1,0 +1,17 @@
+{
+  "_comment": "EXAMPLE Cloudflare Pages configuration — for reference only. The adapter will auto-generate the build directory when deploying via Cloudflare Pages dashboard. DO NOT place this file as 'wrangler.json' in Pages mode as it conflicts with Astro's adapter.",
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "baguio-botanical-garden",
+  "compatibility_date": "2026-08-10",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "dist",
+  "env": {
+    "production": {
+      "vars": {
+        "PUBLIC_SITE_NAME": "Baguio Botanical Garden",
+        "PUBLIC_SITE_URL": "https://baguiobotanicalgarden.com",
+        "PUBLIC_GA4_ID": "G-YJTNXGWZNY"
+      }
+    }
+  }
+}
