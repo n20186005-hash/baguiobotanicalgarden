@@ -814,7 +814,7 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
       'Taxis and ride-hailing services are the most comfortable ways to reach the Botanical Garden. They operate in the city, but vehicle supply is limited during peak hours and rainy days.',
     icon: '🚕',
     stepsFil: [
-      '1. Mag-book sa Grab app: Ilagay ang "Baguio Botanical Garden" bilang destinasyon',
+      '1. Mag-book sa ride-hailing app: Ilagay ang "Baguio Botanical Garden" bilang destinasyon',
       '2. O kaya, sumakay ng regular na taxi — lahat ng taxi sa Baguio ay naka-meter',
       '3. Sabihin: "Botanical Garden sa Leonard Wood Road"',
       '4. Pamasahe: humigit-kumulang ₱80–150 mula sa sentro ng Baguio',
@@ -822,7 +822,7 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
       '6. Lahat ng taxi driver sa Baguio ay pamilyar sa Botanical Garden — isa ito sa pinakasikat na destinasyon',
     ],
     stepsEn: [
-      '1. Book on Grab app: Enter "Baguio Botanical Garden" as destination',
+      '1. Book via a ride-hailing app: Enter "Baguio Botanical Garden" as destination',
       '2. Or hail a regular taxi — all Baguio taxis are metered',
       '3. Say: "Botanical Garden on Leonard Wood Road"',
       '4. Fare: approximately ₱80–150 from central Baguio',
@@ -949,9 +949,9 @@ export const FAQS: FaqItem[] = [
     qFil: 'Paano pumunta sa Botanical Garden mula sa Maynila?',
     qEn: 'How to get to the Botanical Garden from Manila?',
     aFil:
-      'Sumakay ng bus (Victory Liner, JoyBus, o Genesis) mula Cubao o Pasay papuntang Baguio (₱450–1,000, 4–6 oras). Pagdating sa Baguio terminal, sumakay ng taxi (₱100–150) o jeepney (₱13–15) papuntang Botanical Garden sa Leonard Wood Road. Para sa pinakamadaling ruta: JoyBus Deluxe mula PITX papuntang Baguio.',
+      'Sumakay ng intercity bus mula Cubao o Pasay papuntang Baguio (₱450–1,000, 4–6 oras). Pagdating sa Baguio terminal, sumakay ng taxi (₱100–150) o jeepney (₱13–15) papuntang Botanical Garden sa Leonard Wood Road. Ang pinakamadaling ruta ay ang mga deluxe na biyahe mula sa mga pangunahing terminal patungong Baguio.',
     aEn:
-      'Take a bus (Victory Liner, JoyBus, or Genesis) from Cubao or Pasay to Baguio (₱450–1,000, 4–6 hours). Upon arrival at the Baguio terminal, take a taxi (₱100–150) or jeepney (₱13–15) to the Botanical Garden on Leonard Wood Road. Easiest route: JoyBus Deluxe from PITX to Baguio.',
+      'Take an intercity coach from Cubao or Pasay to Baguio (₱450–1,000, 4–6 hours). Upon arrival at the Baguio terminal, take a taxi (₱100–150) or jeepney (₱13–15) to the Botanical Garden on Leonard Wood Road. Deluxe services departing from the main terminals are the easiest option.',
   },
 ];
 
