@@ -11,7 +11,7 @@ export const languagesList = ['tl', 'en'] as const;
 export const ui = {
   tl: {
     siteName: 'Baguio Botanical Garden',
-    siteTitle: 'Baguio Botanical Garden — Kumpletong Gabay sa Bisita',
+    siteTitle: 'Baguio Botanical Garden (Baguio) — Kumpletong Gabay sa Bisita at Lokasyon',
     siteDescription:
       'Ang komprehensibong gabay sa Baguio Botanical Garden: kasaysayan, mga themed garden, kultura ng Igorot, oras ng pagbisita, transportasyon, paradahan, at praktikal na impormasyon.',
     nav_home: 'Home',
@@ -30,8 +30,20 @@ export const ui = {
     hero_subtitle: 'Tuklasin ang yaman ng kultura at kalikasan ng Cordillera',
     hero_cta_explore: 'Simulan ang Paglilibot',
     hero_cta_map: 'Tingnan sa Mapa',
-    hero_rating: '4.3 (8,500+ reviews)',
+    hero_rating: '4.5 (8,354 na review)',
     hero_location: 'Leonard Wood Road, Baguio City',
+    // Reviews & sources
+    reviews_section: 'Mga Review mula sa Google Maps',
+    reviews_source_line:
+      'Rating at bilang ng review na nakasabay sa mga review ng gumagamit ng Google Maps (Google Maps) · Setyembre 2026 · Tingnan ang lahat ng review sa Google Maps↗',
+    reviews_note:
+      'Nakasabay sa mga review ng gumagamit ng Google Maps, petsa ng pag-sync: Setyembre 2026; ang karapatang-ari ay nananatili sa orihinal na may-akda at sa Google Maps.',
+    reviews_cta: 'Tingnan ang lahat ng review sa Google Maps',
+    reviews_from: 'Mula sa Google Maps',
+    sources_section: 'Mga Pinagmumulan ng Impormasyon',
+    sources_p1:
+      'Ang nilalaman ng pahinang ito ay nagmula sa mga pampubliko at opisyal na sanggunian. Nasa ibaba ang kumpletong listahan ng mga pinagmumulan, petsa ng pag-sync, at mga paunawa sa karapatang-ari.',
+    breadcrumb_root: 'Home',
     // Key Info
     keyinfo_section: 'Mabilis na Impormasyon',
     // About
@@ -89,7 +101,7 @@ export const ui = {
   },
   en: {
     siteName: 'Baguio Botanical Garden',
-    siteTitle: 'Baguio Botanical Garden — Complete Visitor Guide',
+    siteTitle: 'Baguio Botanical Garden (Baguio) - Visitor Guide & Location',
     siteDescription:
       'The comprehensive guide to Baguio Botanical Garden: history, themed gardens, Igorot culture, visiting hours, transportation, parking, and practical information.',
     nav_home: 'Home',
@@ -108,8 +120,20 @@ export const ui = {
     hero_subtitle: 'Discover the cultural and natural wealth of the Cordillera',
     hero_cta_explore: 'Start Exploring',
     hero_cta_map: 'View on Map',
-    hero_rating: '4.3 (8,500+ reviews)',
+    hero_rating: '4.5 (8,354 reviews)',
     hero_location: 'Leonard Wood Road, Baguio City',
+    // Reviews & sources
+    reviews_section: 'Google Maps Reviews',
+    reviews_source_line:
+      'Rating and review count synced from Google Maps (Google Maps) user reviews · September 2026 · View all Google Maps reviews↗',
+    reviews_note:
+      'Synced from Google Maps user reviews, synced September 2026; copyright belongs to the original authors and Google Maps.',
+    reviews_cta: 'View all reviews on Google Maps',
+    reviews_from: 'From Google Maps',
+    sources_section: 'Sources & References',
+    sources_p1:
+      'The content of this page is drawn from public and official references. Below is the full list of sources, sync dates, and copyright notices.',
+    breadcrumb_root: 'Home',
     // Key Info
     keyinfo_section: 'Quick Information',
     // About

@@ -1,6 +1,7 @@
 ---
 import {
-  SITE, KEY_INFO, ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_METHODS,
+  SITE, ENTITY, REVIEW_META, REVIEWS, SOURCES,
+  KEY_INFO, ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_METHODS,
   FAQS, TIPS, GALLERY_IMAGES, NEARBY, HISTORY_TIMELINE, LEGENDS,
   DISCLAIMER_FIL, DISCLAIMER_EN,
 } from '../../consts';
@@ -20,12 +21,50 @@ const currentLang = lang as Lang;
 const currentUrl = new URL(Astro.url);
 const t = (key: string) => ui[currentLang]?.[key as keyof typeof ui.tl] ?? key;
 
-const title = currentLang === 'en' ? SITE.titleEn : SITE.titleFil;
-const description = currentLang === 'en' ? SITE.descriptionEn : SITE.descriptionFil;
-const ogImage = `${SITE.siteUrl}/og-default.svg`;
+const isEn = currentLang === 'en';
+const title = isEn ? SITE.titleEn : SITE.titleFil;
+const description = isEn ? SITE.descriptionEn : SITE.descriptionFil;
+const ogTitle = isEn ? SITE.ogTitleEn : SITE.ogTitleFil;
+const ogDescription = isEn ? SITE.ogDescriptionEn : SITE.ogDescriptionFil;
+const ogImage = `${SITE.siteUrl}${SITE.heroImage}`;
+
+const countryName = isEn ? ENTITY.country : ENTITY.countryFil;
+const cityName = ENTITY.city;
+const shortName = ENTITY.shortName;
+const fullName = ENTITY.fullName;
+
+const reviewsTitle = isEn ? 'Google Maps Reviews' : 'Mga Review mula sa Google Maps';
+const reviewsSourceText = isEn
+  ? 'Rating and review count synced from Google Maps (Google Maps) user reviews · September 2026 · View all Google Maps reviews↗'
+  : 'Rating at bilang ng review na nakasabay sa mga review ng gumagamit ng Google Maps (Google Maps) · Setyembre 2026 · Tingnan ang lahat ng review sa Google Maps↗';
+const reviewsNote = isEn
+  ? 'Synced from Google Maps user reviews, synced September 2026; copyright belongs to the original authors and Google Maps.'
+  : 'Nakasabay sa mga review ng gumagamit ng Google Maps, petsa ng pag-sync: Setyembre 2026; ang karapatang-ari ay nananatili sa orihinal na may-akda at sa Google Maps.';
+const reviewsCta = isEn ? 'View all reviews on Google Maps' : 'Tingnan ang lahat ng review sa Google Maps';
+const reviewsFromLabel = isEn ? 'Google Maps user review' : 'Review ng gumagamit ng Google Maps';
+const sourcesTitle = isEn ? 'Sources & References' : 'Mga Pinagmumulan ng Impormasyon';
+const sourcesIntro = isEn
+  ? 'The content of this page is drawn from public and official references. Below is the full list of sources, sync dates, and copyright notices.'
+  : 'Ang nilalaman ng pahinang ito ay nagmula sa mga pampubliko at opisyal na sanggunian. Nasa ibaba ang kumpletong listahan ng mga pinagmumulan, petsa ng pag-sync, at mga paunawa sa karapatang-ari.';
+
+const breadcrumbItems = [
+  { label: isEn ? 'Home' : 'Home', href: `/${currentLang}/` },
+  { label: countryName, href: null },
+  { label: ENTITY.province, href: null },
+  { label: ENTITY.cityLong, href: null },
+  { label: fullName, href: null },
+];
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} lang={currentLang}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogTitle={ogTitle}
+  ogDescription={ogDescription}
+  ogImage={ogImage}
+  lang={currentLang}
+  faqs={FAQS}
+>
   <!-- ======= HERO SECTION ======= -->
   <section class="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background with gradient overlay -->
@@ -43,7 +82,7 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
           {currentLang === 'en' ? 'Baguio City, Philippines' : 'Lungsod ng Baguio, Pilipinas'}
         </span>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.1] drop-shadow-lg">
-          {currentLang === 'en' ? 'Baguio Botanical Garden' : 'Baguio Botanical Garden'}
+          {`${fullName} (${cityName})`}
         </h1>
         <p class="text-lg sm:text-xl lg:text-2xl text-white/85 max-w-2xl mx-auto font-normal drop-shadow">
           {currentLang === 'en'
@@ -55,7 +94,9 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
         <div class="flex flex-wrap items-center justify-center gap-6 pt-2 text-sm text-white/80">
           <span class="inline-flex items-center gap-1.5">
             <svg class="h-4 w-4 text-rose-sand-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            {currentLang === 'en' ? '4.3' : '4.3'} ({currentLang === 'en' ? '8,500+ reviews' : '8,500+ reviews'})
+            {REVIEW_META.rating} ({isEn
+              ? `${REVIEW_META.reviewCountLabel} reviews`
+              : `${REVIEW_META.reviewCountLabel} na review`})
           </span>
           <span class="inline-flex items-center gap-1.5">
             <svg class="h-4 w-4 text-rose-sand-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -63,9 +104,21 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
           </span>
           <span class="inline-flex items-center gap-1.5">
             <svg class="h-4 w-4 text-rose-sand-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 00-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            {currentLang === 'en' ? 'Baguio, Benguet' : 'Baguio, Benguet'}
+            {isEn ? 'Baguio, Benguet' : 'Baguio, Benguet'}
           </span>
         </div>
+
+        <!-- Rating & review source attribution -->
+        <p class="pt-1 text-[11px] sm:text-xs text-white/75">
+          <a
+            href={REVIEW_META.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-white/40 underline-offset-2 hover:text-white transition-colors"
+          >
+            {reviewsSourceText}
+          </a>
+        </p>
 
         <!-- CTA Buttons -->
         <div class="flex flex-wrap items-center justify-center gap-3 pt-4">
@@ -86,6 +139,27 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
       </div>
     </div>
   </section>
+
+  <!-- ======= BREADCRUMB / ENTITY HIERARCHY ======= -->
+  <nav aria-label="Breadcrumb" class="bg-cold-50 border-b border-cold-100">
+    <div class="container-page py-3">
+      <ol class="flex flex-wrap items-center gap-1.5 text-xs text-cold-500">
+        {breadcrumbItems.map((item, i) => (
+          <li class="flex items-center gap-1.5">
+            {i > 0 && <span aria-hidden="true" class="text-cold-300">/</span>}
+            {item.href ? (
+              <a href={item.href} class="hover:text-pine-700 transition-colors">{item.label}</a>
+            ) : (
+              <span class={i === breadcrumbItems.length - 1 ? 'font-semibold text-pine-800' : ''}>{item.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+      <p class="mt-2 text-[11px] text-cold-400">
+        {`${fullName} → ${ENTITY.cityLong} → ${ENTITY.province} → ${countryName}`}
+      </p>
+    </div>
+  </nav>
 
   <!-- ======= KEY INFO CARDS ======= -->
   <section id="key-info" class="section-padding bg-white">
@@ -127,7 +201,25 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
           </span>
           <h2 class="section-heading">{currentLang === 'en' ? 'About Baguio Botanical Garden' : 'Tungkol sa Baguio Botanical Garden'}</h2>
           <div class="space-y-4 text-cold-600 leading-relaxed">
-            <p>{currentLang === 'en'
+            {isEn && (
+              <p>
+                Welcome to <strong class="text-pine-800">{fullName}</strong>, widely recognized as the
+                central <strong class="text-pine-800">{shortName}</strong> of {cityName}. Located in
+                the heart of <strong>{ENTITY.cityLong}</strong>, <strong>{ENTITY.province}</strong>,
+                <strong>{countryName}</strong>, this destination serves as a primary hub for travelers
+                visiting the region.
+              </p>
+            )}
+            {!isEn && (
+              <p>
+                Maligayang pagdating sa <strong class="text-pine-800">{fullName}</strong>, na kilala
+                bilang pangunahing <strong class="text-pine-800">{shortName}</strong> ng {cityName}.
+                Matatagpuan sa puso ng <strong>{ENTITY.cityLong}</strong>, <strong>{ENTITY.province}</strong>,
+                <strong>{countryName}</strong>, ang destinasyong ito ay isa sa mga pangunahing sentro
+                ng mga biyahero sa rehiyon.
+              </p>
+            )}
+            <p>{isEn
               ? 'The Baguio Botanical Garden is a 5-hectare public garden located on Leonard Wood Road, Baguio City, Philippines. It is a living showcase of the rich botanical biodiversity of the Cordillera region, international friendship, and indigenous Igorot culture.'
               : 'Ang Baguio Botanical Garden ay isang 5-ektaryang pampublikong hardin na matatagpuan sa Leonard Wood Road, Baguio City, Pilipinas. Ito ay isang living showcase ng mayamang botanikal na biodiversity ng Cordillera region, internasyonal na pagkakaibigan, at katutubong kultura ng Igorot.'}
             </p>
@@ -156,7 +248,7 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
           <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
             <img
               src="/gallery/baguio-botanical-garden-2.jpg"
-              alt={currentLang === 'en' ? 'Baguio Botanical Garden — Pine trees and gardens' : 'Baguio Botanical Garden — Pine trees at hardin'}
+              alt={`${fullName} - Main view in ${ENTITY.cityLong}, ${countryName}`}
               class="w-full h-full object-cover"
               loading="lazy"
             />
@@ -176,7 +268,7 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
         <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
           {currentLang === 'en' ? '📜 History' : '📜 Kasaysayan'}
         </span>
-        <h2 class="section-heading">{currentLang === 'en' ? 'History & Legends' : 'Kasaysayan at Alamat'}</h2>
+        <h2 class="section-heading">{isEn ? `History & Significance of ${fullName}` : `Kasaysayan at Kahalagahan ng ${fullName}`}</h2>
         <p class="section-subheading mx-auto">
           {currentLang === 'en'
             ? 'From American colonial nursery to world-class botanical garden — and the folk tales that give meaning to every corner.'
@@ -288,6 +380,101 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
     </div>
   </section>
 
+  <!-- ======= GOOGLE MAPS REVIEWS SECTION ======= -->
+  <section id="reviews" class="section-padding bg-white">
+    <div class="container-page">
+      <div class="text-center mb-10">
+        <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
+          {isEn ? '⭐ Reviews' : '⭐ Mga Review'}
+        </span>
+        <h2 class="section-heading">{reviewsTitle}</h2>
+        <p class="section-subheading mx-auto">
+          {isEn
+            ? `Ratings and reviews quoted from ${fullName} on Google Maps — shown here for reference only, with the source credited.`
+            : `Rating at mga review na sipi mula sa ${fullName} sa Google Maps — ipinapakita dito bilang sanggunian lamang, na may nakalagay na pinagmulan.`}
+        </p>
+      </div>
+
+      <!-- Rating summary -->
+      <div class="max-w-3xl mx-auto card p-6 sm:p-8 mb-10">
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <div class="text-center shrink-0">
+            <p class="text-5xl sm:text-6xl font-extrabold text-pine-950 leading-none">
+              {REVIEW_META.rating}
+            </p>
+            <div class="mt-2 flex items-center justify-center gap-0.5 text-rose-sand-500" aria-hidden="true">
+              {Array.from({ length: 5 }).map(() => (
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              ))}
+            </div>
+            <p class="mt-2 text-sm text-cold-500">
+              {isEn
+                ? `${REVIEW_META.reviewCountLabel} Google Maps reviews`
+                : `${REVIEW_META.reviewCountLabel} na review sa Google Maps`}
+            </p>
+          </div>
+          <div class="flex-1 space-y-3 text-center sm:text-left">
+            <p class="text-sm text-cold-600 leading-relaxed">
+              {isEn
+                ? `${fullName} (${cityName}) is rated ${REVIEW_META.rating} out of 5 by Google Maps users. The rating and review count below were synced in ${REVIEW_META.syncMonthEn} and may change over time — always check Google Maps for the latest figure.`
+                : `Ang ${fullName} (${cityName}) ay may rating na ${REVIEW_META.rating} sa 5 mula sa mga gumagamit ng Google Maps. Ang rating at bilang ng review ay na-sync noong ${REVIEW_META.syncMonthFil} at maaaring magbago — tingnan ang Google Maps para sa pinakabagong datos.`}
+            </p>
+            <p class="text-xs text-cold-500 leading-relaxed">
+              {isEn ? 'Source note: ' : 'Paunawa sa pinagmulan: '}
+              {reviewsNote}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+        {REVIEWS.map((r) => (
+          <figure class="card card-hover p-5 flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-3">
+              <figcaption class="text-sm font-semibold text-pine-950">{r.authorEn}</figcaption>
+              <span class="flex items-center gap-0.5 text-rose-sand-500" aria-label={`${r.rating} / 5`}>
+                {Array.from({ length: r.rating }).map(() => (
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                ))}
+              </span>
+            </div>
+            <p class="text-xs text-cold-400">
+              {isEn ? r.dateEn : r.dateFil} · {reviewsFromLabel}
+            </p>
+            <blockquote class="text-sm text-cold-600 leading-relaxed flex-1">
+              {isEn ? r.textEn : r.textFil}
+            </blockquote>
+          </figure>
+        ))}
+      </div>
+
+      <!-- Source line + CTA -->
+      <div class="mt-8 text-center space-y-3">
+        <p class="text-xs text-cold-500">
+          <a
+            href={REVIEW_META.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-cold-300 underline-offset-2 hover:text-pine-700 transition-colors"
+          >
+            {reviewsSourceText}
+          </a>
+        </p>
+        <a
+          href={REVIEW_META.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-xl bg-pine-600 hover:bg-pine-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-pine-600/20 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a8 8 0 00-8 8c0 4.5 8 12 8 12s8-7.5 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+          {reviewsCta}
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ======= PRACTICAL INFO SECTION ======= -->
   <section id="practical" class="section-padding bg-white">
     <div class="container-page">
@@ -372,13 +559,18 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
     </div>
   </section>
 
-  <!-- ======= NEARBY ATTRACTIONS ======= -->
-  <section class="section-padding bg-white">
+  <!-- ======= NEARBY LANDMARKS ======= -->
+  <section id="nearby" class="section-padding bg-white">
     <div class="container-page">
       <div class="text-center mb-12">
-        <h2 class="section-heading">{currentLang === 'en' ? 'Nearby Attractions' : 'Mga Kalapit na Atraksyon'}</h2>
+        <h2 class="section-heading">{isEn ? `Landmarks & Attractions Around ${shortName}` : `Mga Landmark at Atraksyon sa Paligid ng ${shortName}`}</h2>
         <p class="section-subheading mx-auto">
-          {currentLang === 'en'
+          {isEn
+            ? `When visiting ${fullName}, visitors can easily explore surrounding historical landmarks and points of interest, including ${ENTITY.nearbyLandmark1} and ${ENTITY.nearbyLandmark2}.`
+            : `Kapag bumibisita sa ${fullName}, madaling matuklasan ng mga bisita ang mga kalapit na makasaysayang landmark at pasyalan, kabilang ang ${ENTITY.nearbyLandmark1} at ${ENTITY.nearbyLandmark2}.`}
+        </p>
+        <p class="section-subheading mx-auto">
+          {isEn
             ? 'The Botanical Garden is perfectly located near many other Baguio destinations. Combine them in a day tour.'
             : 'Ang Botanical Garden ay nasa magandang lokasyon — malapit sa maraming iba pang destinasyon sa Baguio. Pagsamahin ang mga ito sa isang araw ng paglilibot.'}
         </p>
@@ -451,11 +643,11 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
         <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">
           {currentLang === 'en' ? '📍 Map' : '📍 Mapa'}
         </span>
-        <h2 class="section-heading">{currentLang === 'en' ? 'Location Map' : 'Mapa ng Lokasyon'}</h2>
+        <h2 class="section-heading">{isEn ? `Location & How to Visit ${shortName} in ${cityName}` : `Lokasyon at Paano Bisitahin ang ${shortName} sa ${cityName}`}</h2>
         <p class="section-subheading mx-auto">
-          {currentLang === 'en'
-            ? 'Find us on Leonard Wood Road, Baguio City. Use the interactive map below or open in Google Maps.'
-            : 'Hanapin kami sa Leonard Wood Road, Lungsod ng Baguio. Gamitin ang interactive na mapa sa ibaba o buksan sa Google Maps.'}
+          {isEn
+            ? `Find ${fullName} on ${ENTITY.streetAddress}, ${ENTITY.cityLong}, ${ENTITY.province} ${ENTITY.postalCode}, ${ENTITY.country}. Use the interactive map below or open in Google Maps.`
+            : `Hanapin ang ${fullName} sa ${ENTITY.streetAddress}, ${ENTITY.cityLong}, ${ENTITY.province} ${ENTITY.postalCode}, ${countryName}. Gamitin ang interactive na mapa sa ibaba o buksan sa Google Maps.`}
         </p>
       </div>
       <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
@@ -478,9 +670,59 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
           class="inline-flex items-center gap-2 text-sm font-semibold text-pine-700 hover:text-pine-900 transition-colors"
         >
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a8 8 0 00-8 8c0 4.5 8 12 8 12s8-7.5 8-12a8 8 0 00-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-          {currentLang === 'en' ? 'Open in Google Maps' : 'Buksan sa Google Maps'}
+          {isEn ? 'Open in Google Maps' : 'Buksan sa Google Maps'}
           <svg class="h-3.5 w-3.5 ml-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
         </a>
+      </div>
+
+      <!-- Structured address + authoritative outbound reference -->
+      <div class="max-w-4xl mx-auto mt-8 grid sm:grid-cols-2 gap-4">
+        <div class="card p-5">
+          <h3 class="text-sm font-bold text-pine-950 mb-3">
+            {isEn ? 'Address & Coordinates' : 'Address at Coordinates'}
+          </h3>
+          <ul class="space-y-1.5 text-xs text-cold-600">
+            <li>{isEn ? SITE.addressEn : SITE.addressFil}</li>
+            <li>{`${ENTITY.cityLong}, ${ENTITY.province} ${ENTITY.postalCode}, ${countryName}`}</li>
+            <li>{`${ENTITY.latitude.toFixed(6)}, ${ENTITY.longitude.toFixed(6)}`}</li>
+            <li>{`Plus Code: ${SITE.plusCode}`}</li>
+            <li>{`${isEn ? 'Phone' : 'Telepono'}: ${SITE.phone}`}</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <h3 class="text-sm font-bold text-pine-950 mb-3">
+            {isEn ? 'Official Tourism References' : 'Mga Opisyal na Sangguniang Panturismo'}
+          </h3>
+          <p class="text-xs text-cold-600 leading-relaxed mb-3">
+            {isEn
+              ? 'For official updates and regional tourism information, visit the offices below.'
+              : 'Para sa mga opisyal na update at impormasyong panturismo ng rehiyon, bisitahin ang mga opisina sa ibaba.'}
+          </p>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href={ENTITY.govtTourismUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-pine-700 hover:text-pine-900 transition-colors"
+              >
+                {isEn ? ENTITY.govtTourismNameEn : ENTITY.govtTourismNameFil}
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href={ENTITY.dotUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-pine-700 hover:text-pine-900 transition-colors"
+              >
+                {isEn ? ENTITY.dotNameEn : ENTITY.dotNameFil}
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -539,6 +781,45 @@ const ogImage = `${SITE.siteUrl}/og-default.svg`;
           </details>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- ======= SOURCES SECTION ======= -->
+  <section id="sources" class="section-padding bg-cold-50">
+    <div class="container-page max-w-4xl">
+      <div class="text-center mb-10">
+        <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">
+          {isEn ? '📚 Sources' : '📚 Mga Sanggunian'}
+        </span>
+        <h2 class="section-heading">{sourcesTitle}</h2>
+        <p class="section-subheading mx-auto">{sourcesIntro}</p>
+      </div>
+      <ul class="space-y-4">
+        {SOURCES.map((source) => (
+          <li class="card card-hover p-5">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="badge bg-pine-50 text-pine-700 text-[10px]">
+                {isEn ? source.tagEn : source.tagFil}
+              </span>
+              <h3 class="text-sm font-bold text-pine-950">
+                {isEn ? source.titleEn : source.titleFil}
+              </h3>
+            </div>
+            <p class="text-xs text-cold-600 leading-relaxed">
+              {isEn ? source.noteEn : source.noteFil}
+            </p>
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-pine-700 hover:text-pine-900 transition-colors"
+            >
+              {isEn ? source.linkLabelEn : source.linkLabelFil}
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

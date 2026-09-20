@@ -1,17 +1,25 @@
 ---
-import { GA4 } from '../consts';
+import { GA4, ENTITY } from '../consts';
 
 export interface Props {
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   canonical?: string;
   lang?: string;
+  noindex?: boolean;
 }
 
-const { title, description, ogImage, canonical, lang = 'tl' } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage, ogImageAlt, canonical, lang = 'tl', noindex = false } = Astro.props;
 
 const langAttr = lang === 'tl' ? 'tl' : 'en';
+const resolvedOgTitle = ogTitle ?? title;
+const resolvedOgDescription = ogDescription ?? description;
+const resolvedOgImage = ogImage ?? `${ENTITY.siteUrl}/gallery/baguio-botanical-garden-1.jpg`;
+const resolvedOgImageAlt = ogImageAlt ?? `${ENTITY.fullName} in ${ENTITY.city}, ${ENTITY.country}`;
 ---
 
 <meta charset="UTF-8" />
@@ -20,18 +28,42 @@ const langAttr = lang === 'tl' ? 'tl' : 'en';
 <meta name="description" content={description} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:type" content="website" />
-<meta property="og:locale" content={langAttr === 'tl' ? 'tl_PH' : 'en_US'} />
-{canonical && <meta property="og:url" content={canonical} />}
-{ogImage && <meta property="og:image" content={ogImage} />}
-{ogImage && <meta property="og:image:width" content="1200" />}
-{ogImage && <meta property="og:image:height" content="630" />}
-
-<meta name="twitter:card" content="summary_large_image" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 {canonical && <link rel="canonical" href={canonical} />}
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<meta name="author" content={ENTITY.fullName} />
+<meta name="geo.region" content="PH-BEN" />
+<meta name="geo.placename" content={`${ENTITY.city}, ${ENTITY.province}, ${ENTITY.country}`} />
+<meta name="geo.position" content={`${ENTITY.latitude};${ENTITY.longitude}`} />
+<meta name="ICBM" content={`${ENTITY.latitude}, ${ENTITY.longitude}`} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={resolvedOgTitle} />
+<meta property="og:description" content={resolvedOgDescription} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={ENTITY.fullName} />
+<meta property="og:locale" content={langAttr === 'tl' ? 'tl_PH' : 'en_US'} />
+<meta property="og:locale:alternate" content={langAttr === 'tl' ? 'en_US' : 'tl_PH'} />
+{canonical && <meta property="og:url" content={canonical} />}
+<meta property="og:image" content={resolvedOgImage} />
+<meta property="og:image:alt" content={resolvedOgImageAlt} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={resolvedOgTitle} />
+<meta name="twitter:description" content={resolvedOgDescription} />
+<meta name="twitter:image" content={resolvedOgImage} />
+<meta name="twitter:image:alt" content={resolvedOgImageAlt} />
+
+<!-- PWA -->
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#0e2017" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content={ENTITY.shortName} />
+<meta name="application-name" content={ENTITY.shortName} />
 
 <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4}`}></script>
 <script define:vars={{ GA4 }}>

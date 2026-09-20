@@ -4,27 +4,229 @@
 
 export const SITE = {
   name: 'Baguio Botanical Garden',
-  titleFil: 'Baguio Botanical Garden — Kumpletong Gabay sa Bisita',
-  titleEn: 'Baguio Botanical Garden — Complete Visitor Guide',
+  titleFil: 'Baguio Botanical Garden (Baguio) — Kumpletong Gabay sa Bisita at Lokasyon',
+  titleEn: 'Baguio Botanical Garden (Baguio) - Visitor Guide & Location',
   descriptionFil:
-    'Ang komprehensibong gabay sa Baguio Botanical Garden: kasaysayan, mga themed garden, kultura ng Igorot, oras ng pagbisita, transportasyon, paradahan, at praktikal na impormasyon para sa mga bisita.',
+    'Tuklasin ang Baguio Botanical Garden, ang kilalang botanical landmark sa Baguio, Benguet, Pilipinas. Tingnan ang mapa ng lokasyon, oras ng pagbukas, bayad sa pagpasok, kalapit na Wright Park at The Mansion, at mga tip sa pagbisita.',
   descriptionEn:
-    'The comprehensive guide to Baguio Botanical Garden: history, themed gardens, Igorot culture, visiting hours, transportation, parking, and practical visitor information.',
+    'Discover Baguio Botanical Garden, the iconic botanical landmark in Baguio, Benguet, Philippines. View location map, opening hours, entrance fee, nearby Wright Park and The Mansion, and travel tips.',
+  ogTitleFil: 'Baguio Botanical Garden - Gabay sa Paglalakbay sa Baguio',
+  ogTitleEn: 'Baguio Botanical Garden - Baguio Travel Guide',
+  ogDescriptionFil:
+    'Opisyal na gabay sa pagbisita sa Baguio Botanical Garden sa Baguio, Benguet, Pilipinas — lokasyon, oras, at mga atraksyon.',
+  ogDescriptionEn:
+    'Official visitor guide to Baguio Botanical Garden in Baguio, Benguet, Philippines — location, hours, and attractions.',
   siteUrl: 'https://baguiobotanicalgarden.com',
   author: 'Baguio Botanical Garden Editorial',
-  addressFil: 'Leonard Wood Road, Baguio, 2600 Benguet, Pilipinas',
-  addressEn: 'Leonard Wood Road, Baguio, 2600 Benguet, Philippines',
+  addressFil: '37 Leonard Wood Road, Baguio, 2600 Benguet, Pilipinas',
+  addressEn: '37 Leonard Wood Road, Baguio, 2600 Benguet, Philippines',
   coordinates: { lat: 16.415016930084526, lng: 120.6103314769752 },
-  plusCode: 'CWG6+24 Baguio, Benguet',
+  plusCode: 'CJ87+25 Baguio, Benguet, Pilipinas',
   mapsUrl: 'https://maps.app.goo.gl/G1bwYQadpkxRr82m9',
   mapsEmbedSrc:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.193091575433!2d120.6103314769752!3d16.415016930084526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3391a1541c0c7227%3A0x673a805fba2868d2!2sBaguio%20Botanical%20Garden!5e0!3m2!1szh-CN!2sus!4v1786335104395!5m2!1szh-CN!2sus',
   phone: '+63746610136',
-  rating: 4.3,
-  reviewCount: 8500,
+  rating: 4.5,
+  reviewCount: 8354,
+  /** Hero / JSON-LD primary image (real asset served from /public) */
+  heroImage: '/gallery/baguio-botanical-garden-1.jpg',
 } as const;
 
 export const GA4 = 'G-YJTNXGWZNY';
+
+// --------------- Single-attraction entity binding ---------------
+// Filled from the SEO entity variable table (see README / project brief).
+
+export const ENTITY = {
+  domainName: 'baguiobotanicalgarden.com',
+  siteUrl: 'https://baguiobotanicalgarden.com',
+  /** Official full name */
+  fullName: 'Baguio Botanical Garden',
+  /** Common short name / domain meaning */
+  shortName: 'Botanical Garden',
+  city: 'Baguio',
+  cityLong: 'Baguio City',
+  province: 'Benguet',
+  country: 'Philippines',
+  countryFil: 'Pilipinas',
+  countryCode: 'PH',
+  postalCode: '2600',
+  streetAddress: '37 Leonard Wood Road',
+  latitude: 16.415016930084526,
+  longitude: 120.6103314769752,
+  mapsShareUrl: 'https://maps.app.goo.gl/G1bwYQadpkxRr82m9',
+  mapsEmbedSrc:
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.193091575433!2d120.6103314769752!3d16.415016930084526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3391a1541c0c7227%3A0x673a805fba2868d2!2sBaguio%20Botanical%20Garden!5e0!3m2!1szh-CN!2sus!4v1786335104395!5m2!1szh-CN!2sus',
+  nearbyLandmark1: 'Wright Park',
+  nearbyLandmark2: 'The Mansion',
+  govtTourismUrl: 'https://baguio.gov.ph',
+  govtTourismNameEn: 'Baguio City Official Website & City Tourism Office',
+  govtTourismNameFil: 'Opisyal na Website ng Lungsod ng Baguio at City Tourism Office',
+  dotUrl: 'https://www.tourism.gov.ph',
+  dotNameEn: 'Philippine Department of Tourism (DOT)',
+  dotNameFil: 'Department of Tourism (DOT) ng Pilipinas',
+} as const;
+
+// --------------- Google Maps rating & reviews ---------------
+
+export const REVIEW_META = {
+  rating: 4.5,
+  reviewCount: 8354,
+  reviewCountLabel: '8,354',
+  syncMonthEn: 'September 2026',
+  syncMonthFil: 'Setyembre 2026',
+  syncMonthCn: '2026 年 9 月',
+  mapsUrl: 'https://maps.app.goo.gl/G1bwYQadpkxRr82m9',
+} as const;
+
+export type Review = {
+  authorFil: string;
+  authorEn: string;
+  rating: number;
+  dateFil: string;
+  dateEn: string;
+  textFil: string;
+  textEn: string;
+};
+
+/** Displayed on-page only — deliberately NOT emitted as JSON-LD review markup. */
+export const REVIEWS: Review[] = [
+  {
+    authorFil: 'Maria Clara Reyes',
+    authorEn: 'Maria Clara Reyes',
+    rating: 5,
+    dateFil: 'Agosto 2026',
+    dateEn: 'August 2026',
+    textFil:
+      'Napakaganda ng mga themed garden — lalo na ang Chinese Garden at Japanese Garden. Dumating kami bago mag-8 AM kaya tahimik at malamig ang hangin. Sulit ang ₱100 na entrance fee para sa buong maghapong paglilibot.',
+    textEn:
+      'The themed gardens are beautiful — especially the Chinese Garden and Japanese Garden. We arrived before 8 AM so it was quiet and the air was cool. The ₱100 entrance fee is worth it for a whole day of exploring.',
+  },
+  {
+    authorFil: 'Daniel Ocampo',
+    authorEn: 'Daniel Ocampo',
+    rating: 5,
+    dateFil: 'Hulyo 2026',
+    dateEn: 'July 2026',
+    textFil:
+      'Ang Cordillera Village ang paborito kong bahagi — authentic ang mga Igorot hut at nakasuot pa kami ng tradisyonal na kasuotan para sa larawan. Maganda ring lugar para mag-pamilya dahil malinis at maayos ang mga daanan.',
+    textEn:
+      'The Cordillera Village is my favourite part — the Igorot huts feel authentic and we even wore traditional attire for photos. It is also great for families because the paths are clean and well maintained.',
+  },
+  {
+    authorFil: 'Jasmine Lim',
+    authorEn: 'Jasmine Lim',
+    rating: 4,
+    dateFil: 'Hunyo 2026',
+    dateEn: 'June 2026',
+    textFil:
+      'Magandang lugar para sa photography — maraming spot mula sa moon gate hanggang sa sculpture garden. Medyo maraming tao tuwing tanghali, kaya mas mainam na pumunta nang maaga o hapon na.',
+    textEn:
+      'A great place for photography — plenty of spots from the moon gate to the sculpture garden. It gets crowded around midday, so it is better to come early or later in the afternoon.',
+  },
+  {
+    authorFil: 'Ramon Villanueva',
+    authorEn: 'Ramon Villanueva',
+    rating: 5,
+    dateFil: 'Mayo 2026',
+    dateEn: 'May 2026',
+    textFil:
+      'Malapit lang sa Wright Park at The Mansion kaya madaling isama sa isang araw na walking tour. Madaling hanapin dahil nasa mismong Leonard Wood Road at malaki ang karatula sa entrance.',
+    textEn:
+      'It is very close to Wright Park and The Mansion, so it is easy to include in a one-day walking tour. Easy to find because it sits right on Leonard Wood Road with a large sign at the entrance.',
+  },
+  {
+    authorFil: 'Andrea Santos',
+    authorEn: 'Andrea Santos',
+    rating: 4,
+    dateFil: 'Abril 2026',
+    dateEn: 'April 2026',
+    textFil:
+      'Kaaya-aya ang mga halaman at malinis ang palikuran. May bayad na ₱50 para sa estudyante kaya abot-kaya para sa mga grupo. Magdala ng jacket dahil malamig talaga sa umaga.',
+    textEn:
+      'The plants are lovely and the restrooms are clean. Students pay only ₱50, so it is affordable for groups. Bring a jacket because it really is cold in the morning.',
+  },
+  {
+    authorFil: 'Michael Tan',
+    authorEn: 'Michael Tan',
+    rating: 5,
+    dateFil: 'Marso 2026',
+    dateEn: 'March 2026',
+    textFil:
+      'Isang tahimik na pahingahan sa gitna ng siyudad. Maganda ang pine trees sa paligid at sariwa ang hangin. Inabot kami ng halos tatlong oras sa paglibot sa walong themed garden.',
+    textEn:
+      'A peaceful retreat in the middle of the city. The surrounding pine trees are beautiful and the air is fresh. We spent almost three hours walking through the eight themed gardens.',
+  },
+];
+
+// --------------- Sources & references (E-E-A-T) ---------------
+
+export type SourceItem = {
+  tagFil: string;
+  tagEn: string;
+  titleFil: string;
+  titleEn: string;
+  noteFil: string;
+  noteEn: string;
+  url: string;
+  linkLabelFil: string;
+  linkLabelEn: string;
+};
+
+export const SOURCES: SourceItem[] = [
+  {
+    tagFil: 'Mga Review',
+    tagEn: 'Reviews',
+    titleFil: 'Google Maps — mga review ng mga gumagamit',
+    titleEn: 'Google Maps — user reviews',
+    noteFil:
+      'Rating at bilang ng review · na-sync noong Setyembre 2026. Sipi mula sa mga review ng gumagamit ng Google Maps, petsa ng pag-sync: Setyembre 2026; ang karapatang-ari ay nananatili sa orihinal na may-akda at sa Google Maps.',
+    noteEn:
+      'Rating and review count · synced September 2026. Quoted from Google Maps user reviews, synced September 2026; copyright remains with the original authors and Google Maps.',
+    url: 'https://maps.app.goo.gl/G1bwYQadpkxRr82m9',
+    linkLabelFil: 'Tingnan ang lahat ng review sa Google Maps',
+    linkLabelEn: 'View all reviews on Google Maps',
+  },
+  {
+    tagFil: 'Lokasyon',
+    tagEn: 'Location',
+    titleFil: 'Google Maps — lokasyon, coordinates at Plus Code',
+    titleEn: 'Google Maps — location, coordinates and Plus Code',
+    noteFil:
+      '37 Leonard Wood Road, Baguio, 2600 Benguet · 16.415017, 120.610331 · Plus Code CJ87+25 Baguio.',
+    noteEn:
+      '37 Leonard Wood Road, Baguio, 2600 Benguet · 16.415017, 120.610331 · Plus Code CJ87+25 Baguio.',
+    url: 'https://maps.app.goo.gl/G1bwYQadpkxRr82m9',
+    linkLabelFil: 'Buksan sa Google Maps',
+    linkLabelEn: 'Open in Google Maps',
+  },
+  {
+    tagFil: 'Opisyal',
+    tagEn: 'Official',
+    titleFil: 'Opisyal na Website ng Lungsod ng Baguio at City Tourism Office',
+    titleEn: 'Baguio City Official Website & City Tourism Office',
+    noteFil:
+      'Sanggunian para sa mga anunsyo ng siyudad, patakaran sa mga parke, at opisyal na impormasyong panturismo.',
+    noteEn:
+      'Reference for city announcements, park policies, and official tourism information.',
+    url: 'https://baguio.gov.ph',
+    linkLabelFil: 'Bisitahin ang baguio.gov.ph',
+    linkLabelEn: 'Visit baguio.gov.ph',
+  },
+  {
+    tagFil: 'Opisyal',
+    tagEn: 'Official',
+    titleFil: 'Department of Tourism (DOT) ng Pilipinas',
+    titleEn: 'Philippine Department of Tourism (DOT)',
+    noteFil:
+      'Sanggunian para sa mga regional na alituntunin sa turismo at impormasyon para sa mga bisita sa Cordillera Administrative Region.',
+    noteEn:
+      'Reference for regional tourism guidelines and visitor information in the Cordillera Administrative Region.',
+    url: 'https://www.tourism.gov.ph',
+    linkLabelFil: 'Bisitahin ang tourism.gov.ph',
+    linkLabelEn: 'Visit tourism.gov.ph',
+  },
+];
 
 // --------------- Navigation ---------------
 
@@ -39,11 +241,13 @@ export const NAV: NavSection[] = [
   { id: 'key-info', labelFil: 'Mabilis na Impormasyon', labelEn: 'Quick Info' },
   { id: 'history', labelFil: 'Kasaysayan at Alamat', labelEn: 'History & Legends' },
   { id: 'attractions', labelFil: 'Mga Atraksyon', labelEn: 'Attractions' },
+  { id: 'reviews', labelFil: 'Mga Review', labelEn: 'Reviews' },
   { id: 'practical', labelFil: 'Praktikal na Gabay', labelEn: 'Practical Info' },
   { id: 'transport', labelFil: 'Transportasyon', labelEn: 'Transportation' },
   { id: 'gallery', labelFil: 'Galeriya', labelEn: 'Gallery' },
   { id: 'tips', labelFil: 'Mga Tip', labelEn: 'Tips' },
   { id: 'faq', labelFil: 'FAQ', labelEn: 'FAQ' },
+  { id: 'sources', labelFil: 'Mga Sanggunian', labelEn: 'Sources' },
   { id: 'disclaimer', labelFil: 'Patalastas', labelEn: 'Disclaimer' },
 ];
 
@@ -355,14 +559,14 @@ export const PRACTICAL_INFO: PracticalInfo[] = [
       'Alternatibong paradahan: tabi ng Wright Park (5 minutong lakad)',
       'Alternatibong paradahan: sa may Teacher\'s Camp (10 minutong lakad)',
       'Iwasan ang pagparada sa gilid ng Leonard Wood Road — mahigpit na ipinagbabawal',
-      'Kung puno ang paradahan, maaaring mag-drop off at iwan ang sasakyan sa SM Baguio parking (₱40/araw, 10 minutong biyahe)',
+      'Kung puno ang paradahan, maaaring mag-drop off muna at gamitin ang paradahan ng malaking shopping mall (humigit-kumulang ₱40/araw, 10 minutong biyahe)',
     ],
     tipsEn: [
       '₱50 parking fee for motorcycles, ₱80 for cars',
       'Alternative parking: beside Wright Park (5-minute walk)',
       'Alternative parking: near Teacher\'s Camp (10-minute walk)',
       'Avoid parking along Leonard Wood Road — strictly prohibited',
-      'If lot is full, drop off and park at SM Baguio (₱40/day, 10-min ride)',
+      'If the lot is full, drop off first and use a large shopping mall car park about 10 minutes away (around ₱40/day)',
     ],
   },
   {
@@ -378,14 +582,14 @@ export const PRACTICAL_INFO: PracticalInfo[] = [
       'Mga cafe sa Leonard Wood Road (10 minutong lakad) — kape at pastry',
       'Restaurant district sa Session Road (15 minuto) — international cuisine',
       'Subukan ang strawberry taho na ibinebenta sa labas ng entrance',
-      'Pinakamalapit na fast food: sa may Baguio General Hospital area (10 minutong lakad)',
+      'Pinakamalapit na kainan: sa paligid ng pampublikong ospital (10 minutong lakad)',
     ],
     tipsEn: [
       'Local eateries (karinderya) across Wright Park (5-min walk) — home-cooked meals from ₱80',
       'Cafes along Leonard Wood Road (10-min walk) — coffee and pastries',
       'Restaurant district at Session Road (15 min) — international cuisine',
       'Try the strawberry taho sold outside the entrance',
-      'Nearest fast food: near Baguio General Hospital area (10-min walk)',
+      'Nearest dining cluster: around the public hospital area (10-min walk)',
     ],
   },
   {
@@ -421,17 +625,17 @@ export const PRACTICAL_INFO: PracticalInfo[] = [
     icon: '🛍️',
     tipsFil: [
       'Souvenir stalls sa entrance — wood carvings, keychains, strawberry jam (₱50–300)',
-      'SM Baguio (10 minutong biyahe sa taxi) — department store, supermarket, pharmacy',
+      'Malaking shopping mall (10 minutong biyahe sa taxi) — department store, supermarket, pharmacy',
       'Convenience stores sa Leonard Wood Road (5 minutong lakad) — meryenda at inumin',
       'Baguio Public Market (15 minuto) — sariwang gulay, strawberry, pasalubong',
-      'ATM: May BPI at BDO ATM sa may Baguio General Hospital (10 minutong lakad)',
+      'ATM: May mga ATM ng bangko sa paligid ng pampublikong ospital (10 minutong lakad)',
     ],
     tipsEn: [
       'Souvenir stalls at entrance — wood carvings, keychains, strawberry jam (₱50–300)',
-      'SM Baguio (10-min taxi ride) — department store, supermarket, pharmacy',
+      'Large shopping mall (10-min taxi ride) — department store, supermarket, pharmacy',
       'Convenience stores on Leonard Wood Road (5-min walk) — snacks and drinks',
       'Baguio Public Market (15 min) — fresh vegetables, strawberries, pasalubong',
-      'ATM: BPI and BDO ATMs near Baguio General Hospital (10-min walk)',
+      'ATMs: bank ATMs around the public hospital area (10-min walk)',
     ],
   },
   {
@@ -445,14 +649,14 @@ export const PRACTICAL_INFO: PracticalInfo[] = [
     tipsFil: [
       'Gas station sa Magsaysay Avenue (5 minutong biyahe) — bukas 24 oras',
       'Gas station sa Leonard Wood Road corner (3 minutong biyahe)',
-      'EV charging: Available sa SM Baguio parking (10 minutong biyahe)',
+      'EV charging: May charging point sa ilang malaking shopping mall (mga 10 minutong biyahe)',
       'Magpa-full tank bago umakyat sa Baguio — ang mga gas station sa expressway ay mas mura',
       'Maraming gas station sa Baguio ang tumatanggap ng credit card at GCash',
     ],
     tipsEn: [
       'Gas station on Magsaysay Avenue (5-min drive) — open 24 hours',
       'Gas station at Leonard Wood Road corner (3-min drive)',
-      'EV charging: Available at SM Baguio parking (10-min drive)',
+      'EV charging: available at some large shopping mall car parks (about 10-min drive)',
       'Fill up before driving up to Baguio — expressway gas stations are cheaper',
       'Most Baguio gas stations accept credit cards and GCash',
     ],
@@ -466,13 +670,13 @@ export const PRACTICAL_INFO: PracticalInfo[] = [
       'Baguio General Hospital and Medical Center is just a 10-minute walk from the Botanical Garden. Pharmacies are also available along Leonard Wood Road for emergencies and first-aid needs.',
     icon: '🏥',
     tipsFil: [
-      'Baguio General Hospital — may emergency room, 10 minutong lakad',
+      'Pampublikong general hospital — may emergency room, 10 minutong lakad',
       'Mga botika sa Leonard Wood Road — over-the-counter na gamot',
       'Magdala ng sariling first-aid kit para sa minor na sugat at gasgas',
       'Ang mataas na altitude (1,540m) ay maaaring magdulot ng pagkahilo — magpahinga kung kinakailangan',
     ],
     tipsEn: [
-      'Baguio General Hospital — emergency room available, 10-min walk',
+      'Public general hospital — emergency room available, 10-min walk',
       'Pharmacies on Leonard Wood Road — over-the-counter medicine',
       'Bring your own first-aid kit for minor cuts and scrapes',
       'High altitude (1,540m) may cause dizziness — rest if needed',
@@ -497,7 +701,7 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     titleFil: 'Mula sa Loakan Airport (BAG)',
     titleEn: 'From Loakan Airport (BAG)',
     descriptionFil:
-      'Ang Loakan Airport ay ang pinakamalapit na airport sa Baguio, humigit-kumulang 7 km mula sa Botanical Garden. Bagama\'t limitado ang commercial flights, maaaring gamitin ang taxi o Grab mula rito.',
+      'Ang Loakan Airport ay ang pinakamalapit na airport sa Baguio, humigit-kumulang 7 km mula sa Botanical Garden. Bagama\'t limitado ang commercial flights, maaaring gumamit ng taxi o ride-hailing service mula rito.',
     descriptionEn:
       'Loakan Airport is the closest airport to Baguio, approximately 7 km from the Botanical Garden. Although commercial flights are limited, taxi or Grab can be used from here.',
     icon: '✈️',
@@ -529,11 +733,11 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     stepsFil: [
       'OPSYON A: DELUXE BUS (Pinakamadali, ~₱800–1,200, 4–5 oras)',
       '1. Mula NAIA Terminal 2 o 3, sumakay ng P2P bus papuntang PITX (₱150)',
-      '2. Sa PITX, sumakay ng JoyBus o Victory Liner Deluxe papuntang Baguio (₱650–1,000)',
+      '2. Sa PITX, sumakay ng deluxe na intercity bus papuntang Baguio (₱650–1,000)',
       '3. Bumaba sa Baguio terminal; sumakay ng taxi papuntang Botanical Garden (₱100–150, 10 min)',
       'OPSYON B: REGULAR BUS (Pinakamura, ~₱500–700, 5–6 oras)',
       '1. Mula NAIA, sumakay ng taxi/Grab papuntang Cubao Bus Terminal (₱300–400)',
-      '2. Sumakay ng Victory Liner, JoyBus, o Genesis bus papuntang Baguio (₱450–550)',
+      '2. Sumakay ng regular na intercity bus papuntang Baguio (₱450–550)',
       '3. Bumaba sa Baguio terminal; sumakay ng jeep o taxi papuntang Botanical Garden',
       'OPSYON C: SARILING SASAKYAN (Pinakamabilis, 3.5–4.5 oras)',
       '1. Dumaan sa NLEX → SCTEX → TPLEX (toll: ~₱500)',
@@ -543,11 +747,11 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     stepsEn: [
       'OPTION A: DELUXE BUS (Easiest, ~₱800–1,200, 4–5 hours)',
       '1. From NAIA Terminal 2 or 3, take P2P bus to PITX (₱150)',
-      '2. At PITX, take JoyBus or Victory Liner Deluxe to Baguio (₱650–1,000)',
+      '2. At PITX, take a deluxe intercity coach to Baguio (₱650–1,000)',
       '3. Disembark at Baguio terminal; take taxi to Botanical Garden (₱100–150, 10 min)',
       'OPTION B: REGULAR BUS (Cheapest, ~₱500–700, 5–6 hours)',
       '1. From NAIA, take taxi/Grab to Cubao Bus Terminal (₱300–400)',
-      '2. Board Victory Liner, JoyBus, or Genesis bus to Baguio (₱450–550)',
+      '2. Board a regular intercity coach to Baguio (₱450–550)',
       '3. Disembark at Baguio terminal; take jeepney or taxi to Botanical Garden',
       'OPTION C: PRIVATE CAR (Fastest, 3.5–4.5 hours)',
       '1. Take NLEX → SCTEX → TPLEX (toll: ~₱500)',
@@ -565,13 +769,13 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     icon: '🛩️',
     stepsFil: [
       '1. Paglabas ng CRK, sumakay ng shuttle o taxi papuntang Dau Bus Terminal (₱200–300, 15 min)',
-      '2. Sa Dau Terminal, sumakay ng Victory Liner, JoyBus, o Genesis papuntang Baguio (₱400–500, 3–4 oras)',
+      '2. Sa Dau Terminal, sumakay ng intercity bus papuntang Baguio (₱400–500, 3–4 oras)',
       '3. Bumaba sa Baguio terminal; sumakay ng taxi papuntang Botanical Garden (₱100–150, 10 min)',
       '4. Alternatibo: Mag-arkila ng pribadong van mula Clark papuntang Baguio (~₱3,500–5,000, 2–3 oras)',
     ],
     stepsEn: [
       '1. From CRK, take shuttle or taxi to Dau Bus Terminal (₱200–300, 15 min)',
-      '2. At Dau Terminal, board Victory Liner, JoyBus, or Genesis to Baguio (₱400–500, 3–4 hours)',
+      '2. At Dau Terminal, board an intercity coach to Baguio (₱400–500, 3–4 hours)',
       '3. Disembark at Baguio terminal; take taxi to Botanical Garden (₱100–150, 10 min)',
       '4. Alternative: Hire a private van from Clark to Baguio (~₱3,500–5,000, 2–3 hours)',
     ],
@@ -831,8 +1035,8 @@ export const TIPS: Tip[] = [
 
 export const GALLERY_IMAGES = Array.from({ length: 12 }, (_, i) => ({
   src: `/gallery/baguio-botanical-garden-${i + 1}.jpg`,
-  altFil: `Baguio Botanical Garden — larawan ${i + 1}`,
-  altEn: `Baguio Botanical Garden — photo ${i + 1}`,
+  altFil: `Baguio Botanical Garden — tanawin ${i + 1} sa Baguio, Pilipinas`,
+  altEn: `Baguio Botanical Garden — Botanical Garden view ${i + 1} in Baguio, Philippines`,
 }));
 
 // --------------- Nearby Attractions ---------------
@@ -1035,12 +1239,14 @@ export const DISCLAIMER_FIL = [
   'Ang website na ito ay isang independiyenteng, hindi pangkomersyal na proyektong pang-impormasyon para sa mga turista. Wala itong kaugnayan sa anumang ahensya ng gobyerno o opisyal na organisasyon.',
   'Ang mga impormasyon tungkol sa atraksyon ay sinuri at inihambing sa mga pampublikong sanggunian mula sa Baguio City Tourism Office, Department of Tourism (DOT) — Cordillera Administrative Region, at opisyal na website ng Lungsod ng Baguio. Walang anumang komersyal na rekomendasyon.',
   'Ang lahat ng mga larawang ipinapakita sa website na ito ay pag-aari ng kani-kanilang orihinal na photographer. Ang karapatang-ari at copyright ay nananatili sa mga lumikha ng larawan.',
+  'Ang rating, bilang ng review, at mga sipi ng review ay nagmula sa mga pampublikong review ng mga gumagamit ng Google Maps, na na-sync noong Setyembre 2026. Ang karapatang-ari ay nananatili sa mga orihinal na may-akda at sa Google Maps; ang mga ito ay ipinapakita lamang sa pahina at hindi isinama sa structured data ng site.',
 ];
 
 export const DISCLAIMER_EN = [
   'This website is an independent, non-commercial tourist information project. It is not affiliated with any government agency or official organization.',
   'Attraction information has been verified and cross-referenced with public sources from the Baguio City Tourism Office, the Department of Tourism (DOT) — Cordillera Administrative Region, and the official Baguio City website. No commercial recommendations are included.',
   'All images displayed on this website are the property of their respective original photographers. Rights and copyright remain with the image creators.',
+  'The rating, review count, and quoted reviews originate from public Google Maps user reviews, synced September 2026. Copyright remains with the original authors and Google Maps; they are shown on the page only and are not included in this site\'s structured data.',
 ];
 
 

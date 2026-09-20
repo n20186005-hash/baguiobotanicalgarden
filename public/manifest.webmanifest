@@ -1,0 +1,62 @@
+{
+  "id": "/",
+  "name": "Baguio Botanical Garden (Baguio) — Visitor Guide",
+  "short_name": "Botanical Garden",
+  "description": "Independent visitor guide to Baguio Botanical Garden in Baguio, Benguet, Philippines — location map, opening hours, themed gardens, Igorot culture, transportation and travel tips.",
+  "lang": "tl",
+  "dir": "ltr",
+  "start_url": "/tl/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#f7f8f7",
+  "theme_color": "#0e2017",
+  "categories": ["travel", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Location Map",
+      "short_name": "Map",
+      "url": "/tl/#map",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Google Maps Reviews",
+      "short_name": "Reviews",
+      "url": "/tl/#reviews",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "FAQ",
+      "short_name": "FAQ",
+      "url": "/tl/#faq",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

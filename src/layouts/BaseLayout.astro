@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../consts';
+import { SITE, ENTITY, type FaqItem } from '../consts';
 import { getLangFromUrl, languages, defaultLang } from '../i18n/ui';
 import BaseHead from '../components/BaseHead.astro';
 import Navbar from '../components/Navbar.astro';
@@ -9,16 +9,30 @@ import '../styles/global.css';
 export interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
   ogImage?: string;
   lang?: string;
   canonical?: string;
+  /** When provided, a FAQPage JSON-LD graph is emitted. Reviews are never emitted. */
+  faqs?: FaqItem[];
 }
 
-const { title, description, ogImage, lang: propLang, canonical: propCanonical } = Astro.props;
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  lang: propLang,
+  canonical: propCanonical,
+  faqs,
+} = Astro.props;
 
 const currentUrl = new URL(Astro.url);
 const currentLang = propLang ?? getLangFromUrl(currentUrl);
 const pathname = currentUrl.pathname;
+const isEn = currentLang === 'en';
 
 const altLinks = Object.entries(languages).map(([code]) => {
   let altPath = pathname;
@@ -34,32 +48,53 @@ const altLinks = Object.entries(languages).map(([code]) => {
   return { code, href: altPath };
 });
 
-const resolvedDescription = description ?? (currentLang === 'en' ? SITE.descriptionEn : SITE.descriptionFil);
-const resolvedTitle = title ?? (currentLang === 'en' ? SITE.titleEn : SITE.titleFil);
+const resolvedDescription = description ?? (isEn ? SITE.descriptionEn : SITE.descriptionFil);
+const resolvedTitle = title ?? (isEn ? SITE.titleEn : SITE.titleFil);
+const resolvedOgTitle = ogTitle ?? resolvedTitle;
+const resolvedOgDescription = ogDescription ?? resolvedDescription;
 const siteUrl = SITE.siteUrl;
 const canonicalUrl = propCanonical ?? (siteUrl + (pathname.endsWith('/') ? pathname : pathname + '/'));
-const ogImageUrl = ogImage ?? `${siteUrl}/og-default.svg`;
+const ogImageUrl = ogImage ?? `${siteUrl}${SITE.heroImage}`;
 
-const structuredData = {
+const countryName = isEn ? ENTITY.country : ENTITY.countryFil;
+const shortNameEn = ENTITY.shortName;
+
+const attractionSchema = {
   '@context': 'https://schema.org',
   '@type': 'TouristAttraction',
-  name: SITE.name,
-  description: resolvedDescription,
+  '@id': `${siteUrl}/#attraction`,
+  name: ENTITY.fullName,
+  alternateName: [
+    shortNameEn,
+    `${shortNameEn} ${ENTITY.city}`,
+    `${ENTITY.fullName}, ${ENTITY.cityLong}, ${ENTITY.province}`,
+  ],
+  description: isEn
+    ? `Comprehensive visitor guide to ${ENTITY.fullName} in ${ENTITY.cityLong}, ${ENTITY.province}, ${ENTITY.country}.`
+    : `Komprehensibong gabay sa pagbisita sa ${ENTITY.fullName} sa ${ENTITY.cityLong}, ${ENTITY.province}, ${countryName}.`,
   url: canonicalUrl,
-  sameAs: SITE.mapsUrl,
+  image: [
+    `${siteUrl}/gallery/baguio-botanical-garden-1.jpg`,
+    `${siteUrl}/gallery/baguio-botanical-garden-2.jpg`,
+    `${siteUrl}/gallery/baguio-botanical-garden-3.jpg`,
+  ],
+  isAccessibleForFree: true,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Baguio',
-    addressRegion: 'Benguet',
-    addressCountry: 'PH',
-    streetAddress: currentLang === 'en' ? SITE.addressEn : SITE.addressFil,
+    streetAddress: isEn ? SITE.addressEn : SITE.addressFil,
+    addressLocality: ENTITY.cityLong,
+    addressRegion: ENTITY.province,
+    postalCode: ENTITY.postalCode,
+    addressCountry: ENTITY.countryCode,
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: SITE.coordinates.lat,
-    longitude: SITE.coordinates.lng,
+    latitude: ENTITY.latitude,
+    longitude: ENTITY.longitude,
   },
+  hasMap: ENTITY.mapsShareUrl,
   telephone: SITE.phone,
+  sameAs: [ENTITY.mapsShareUrl, ENTITY.govtTourismUrl, ENTITY.dotUrl],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -67,20 +102,65 @@ const structuredData = {
     closes: '18:00',
   },
   touristType: ['Nature Lovers', 'Culture Enthusiasts', 'Families', 'Photographers'],
+  containedInPlace: {
+    '@type': 'City',
+    name: ENTITY.cityLong,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: ENTITY.cityLong,
+      addressRegion: ENTITY.province,
+      postalCode: ENTITY.postalCode,
+      addressCountry: ENTITY.countryCode,
+    },
+  },
 };
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${siteUrl}/#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: isEn ? 'Home' : 'Home', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: countryName },
+    { '@type': 'ListItem', position: 3, name: ENTITY.province },
+    { '@type': 'ListItem', position: 4, name: ENTITY.cityLong },
+    { '@type': 'ListItem', position: 5, name: ENTITY.fullName, item: canonicalUrl },
+  ],
+};
+
+const faqSchema = faqs?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/#faq`,
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: isEn ? faq.qEn : faq.qFil,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: isEn ? faq.aEn : faq.aFil,
+        },
+      })),
+    }
+  : null;
+
+const graph = [attractionSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
 ---
 
 <!DOCTYPE html>
-<html lang={currentLang === 'tl' ? 'tl' : 'en'}>
+<html lang={isEn ? 'en' : 'tl'}>
   <head>
     <BaseHead
       title={resolvedTitle}
       description={resolvedDescription}
+      ogTitle={resolvedOgTitle}
+      ogDescription={resolvedOgDescription}
       ogImage={ogImageUrl}
+      ogImageAlt={`${ENTITY.fullName} in ${ENTITY.city}, ${countryName}`}
       canonical={canonicalUrl}
       lang={currentLang}
     />
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}></script>
 
     <!-- Alternate hreflang tags -->
     {altLinks.map(({ code, href }) => (
@@ -94,5 +174,12 @@ const structuredData = {
       <slot />
     </main>
     <Footer lang={currentLang} />
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

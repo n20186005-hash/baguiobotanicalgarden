@@ -60,6 +60,16 @@ const copyrightText = (t('footer_copyright') as string).replace('{year}', String
               {t('nav_faq')}
             </a>
           </li>
+          <li>
+            <a href={lang === 'en' ? '/en/#reviews' : '/tl/#reviews'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('reviews_section')}
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/en/#sources' : '/tl/#sources'} class="text-sm text-cold-300 hover:text-white transition-colors">
+              {t('sources_section')}
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -104,6 +114,16 @@ const copyrightText = (t('footer_copyright') as string).replace('{year}', String
       <p class="text-xs text-cold-500">{copyrightText}</p>
       <p class="text-xs text-cold-600 flex items-center gap-1">
         {lang === 'en' ? 'All photos © their respective owners' : 'Lahat ng larawan © kani-kanilang may-ari'}
+      </p>
+      <p class="text-xs text-cold-600 flex items-center gap-1">
+        <a
+          href={SITE.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-cold-600 underline-offset-2 hover:text-cold-300 transition-colors"
+        >
+          {t('reviews_note')}
+        </a>
       </p>
     </div>
   </div>

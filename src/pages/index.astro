@@ -27,11 +27,14 @@ const siteUrl = SITE.siteUrl;
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={siteUrl} />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={`${siteUrl}/`} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0e2017" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <h1>Redirecting...</h1>
     <meta http-equiv="refresh" content={`0;url=/${lang}/`} />
-    <script>location.href="/{lang}/";</script>
+    <script define:vars={{ lang }}>location.href = "/" + lang + "/";</script>
   </body>
 </html>
