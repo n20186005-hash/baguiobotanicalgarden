@@ -703,11 +703,11 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     descriptionFil:
       'Ang Loakan Airport ay ang pinakamalapit na airport sa Baguio, humigit-kumulang 7 km mula sa Botanical Garden. Bagama\'t limitado ang commercial flights, maaaring gumamit ng taxi o ride-hailing service mula rito.',
     descriptionEn:
-      'Loakan Airport is the closest airport to Baguio, approximately 7 km from the Botanical Garden. Although commercial flights are limited, taxi or Grab can be used from here.',
+      'Loakan Airport is the closest airport to Baguio, approximately 7 km from the Botanical Garden. Although commercial flights are limited, taxis and ride-hailing services can be used from here.',
     icon: '✈️',
     stepsFil: [
       '1. Paglabas ng terminal, pumunta sa designated taxi stand',
-      '2. Sumakay ng taxi o mag-book ng Grab papuntang "Botanical Garden, Leonard Wood Road"',
+      '2. Sumakay ng taxi o mag-book ng ride-hailing service papuntang "Botanical Garden, Leonard Wood Road"',
       '3. Ang biyahe ay 15–20 minuto, depende sa trapiko',
       '4. Sabihin sa driver: "Sa Botanical Garden po, sa tapat ng Teacher\'s Camp"',
       '5. Pamasahe: humigit-kumulang ₱120–180 (taxi meter)',
@@ -715,7 +715,7 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     ],
     stepsEn: [
       '1. Upon exiting the terminal, proceed to the designated taxi stand',
-      '2. Take a taxi or book a Grab to "Botanical Garden, Leonard Wood Road"',
+      '2. Take a taxi or book a ride-hailing car to "Botanical Garden, Leonard Wood Road"',
       '3. The ride takes 15–20 minutes, depending on traffic',
       '4. Tell the driver: "Botanical Garden, across from Teacher\'s Camp"',
       '5. Fare: approximately ₱120–180 (taxi meter)',
@@ -736,7 +736,7 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
       '2. Sa PITX, sumakay ng deluxe na intercity bus papuntang Baguio (₱650–1,000)',
       '3. Bumaba sa Baguio terminal; sumakay ng taxi papuntang Botanical Garden (₱100–150, 10 min)',
       'OPSYON B: REGULAR BUS (Pinakamura, ~₱500–700, 5–6 oras)',
-      '1. Mula NAIA, sumakay ng taxi/Grab papuntang Cubao Bus Terminal (₱300–400)',
+      '1. Mula NAIA, sumakay ng taxi o ride-hailing service papuntang Cubao Bus Terminal (₱300–400)',
       '2. Sumakay ng regular na intercity bus papuntang Baguio (₱450–550)',
       '3. Bumaba sa Baguio terminal; sumakay ng jeep o taxi papuntang Botanical Garden',
       'OPSYON C: SARILING SASAKYAN (Pinakamabilis, 3.5–4.5 oras)',
@@ -750,7 +750,7 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
       '2. At PITX, take a deluxe intercity coach to Baguio (₱650–1,000)',
       '3. Disembark at Baguio terminal; take taxi to Botanical Garden (₱100–150, 10 min)',
       'OPTION B: REGULAR BUS (Cheapest, ~₱500–700, 5–6 hours)',
-      '1. From NAIA, take taxi/Grab to Cubao Bus Terminal (₱300–400)',
+      '1. From NAIA, take a taxi or ride-hailing car to Cubao Bus Terminal (₱300–400)',
       '2. Board a regular intercity coach to Baguio (₱450–550)',
       '3. Disembark at Baguio terminal; take jeepney or taxi to Botanical Garden',
       'OPTION C: PRIVATE CAR (Fastest, 3.5–4.5 hours)',
@@ -806,12 +806,12 @@ export const TRANSPORT_METHODS: TransportMethod[] = [
     ],
   },
   {
-    titleFil: 'Taxi at Grab',
-    titleEn: 'Taxi & Grab',
+    titleFil: 'Taxi at Ride-hailing',
+    titleEn: 'Taxi & Ride-Hailing',
     descriptionFil:
-      'Ang taxi at Grab ay ang pinakakomportableng paraan upang marating ang Botanical Garden. Available ang Grab sa Baguio mula 2023.',
+      'Ang taxi at ride-hailing service ay ang pinakakomportableng paraan upang marating ang Botanical Garden. Available ang mga ito sa lungsod, ngunit limitado ang mga sasakyan tuwing peak hours at maulan na araw.',
     descriptionEn:
-      'Taxi and Grab are the most comfortable ways to reach the Botanical Garden. Grab has been available in Baguio since 2023.',
+      'Taxis and ride-hailing services are the most comfortable ways to reach the Botanical Garden. They operate in the city, but vehicle supply is limited during peak hours and rainy days.',
     icon: '🚕',
     stepsFil: [
       '1. Mag-book sa Grab app: Ilagay ang "Baguio Botanical Garden" bilang destinasyon',
