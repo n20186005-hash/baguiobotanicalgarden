@@ -1,6 +1,6 @@
 ---
 import { SITE, ENTITY, type FaqItem } from '../consts';
-import { getLangFromUrl, languages, defaultLang } from '../i18n/ui';
+import { getLangFromUrl, languages, defaultLang, type Lang } from '../i18n/ui';
 import BaseHead from '../components/BaseHead.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -14,6 +14,8 @@ export interface Props {
   ogImage?: string;
   lang?: string;
   canonical?: string;
+  /** Low-value utility pages (legal, cookie) should stay out of the index. */
+  noindex?: boolean;
   /** When provided, a FAQPage JSON-LD graph is emitted. Reviews are never emitted. */
   faqs?: FaqItem[];
 }
@@ -26,6 +28,7 @@ const {
   ogImage,
   lang: propLang,
   canonical: propCanonical,
+  noindex = false,
   faqs,
 } = Astro.props;
 
@@ -78,7 +81,25 @@ const attractionSchema = {
     `${siteUrl}/gallery/baguio-botanical-garden-2.jpg`,
     `${siteUrl}/gallery/baguio-botanical-garden-3.jpg`,
   ],
-  isAccessibleForFree: true,
+  publicAccess: true,
+  isAccessibleForFree: false,
+  additionalProperty: [
+    {
+      '@type': 'PropertyValue',
+      name: isEn ? 'Adult entrance fee' : 'Bayad sa pagpasok (matanda)',
+      value: 'PHP 100',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: isEn ? 'Child, student & senior citizen entrance fee' : 'Bayad sa pagpasok (bata, estudyante, senior)',
+      value: 'PHP 50',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: isEn ? 'Entrance fee for children 3 years old and below' : 'Bayad sa pagpasok (3 taong gulang pababa)',
+      value: 'PHP 0',
+    },
+  ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: isEn ? SITE.addressEn : SITE.addressFil,
@@ -158,7 +179,8 @@ const graph = [attractionSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] :
       ogImage={ogImageUrl}
       ogImageAlt={`${ENTITY.fullName} in ${ENTITY.city}, ${countryName}`}
       canonical={canonicalUrl}
-      lang={currentLang}
+      lang={currentLang as Lang}
+      noindex={noindex}
     />
     <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}></script>
 
@@ -169,11 +191,11 @@ const graph = [attractionSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] :
     <link rel="alternate" hreflang="x-default" href={`${siteUrl}${altLinks.find(a => a.code === defaultLang)?.href ?? '/tl'}`} />
   </head>
   <body class="font-sans text-cold-800 bg-cold-50 antialiased">
-    <Navbar lang={currentLang} currentPath={pathname} />
+    <Navbar lang={currentLang as Lang} currentPath={pathname} />
     <main>
       <slot />
     </main>
-    <Footer lang={currentLang} />
+    <Footer lang={currentLang as Lang} />
     <script>
       if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
         window.addEventListener('load', () => {

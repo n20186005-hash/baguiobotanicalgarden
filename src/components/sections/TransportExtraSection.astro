@@ -1,0 +1,52 @@
+---
+import { TRANSPORT_EXTRA, ENTITY } from '../../consts';
+
+export interface Props {
+  lang: 'tl' | 'en';
+}
+
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+
+const t = {
+  badge: isEn ? '🚦 Getting Around' : '🚦 Paglibot',
+  title: isEn ? 'Detailed Transport Guide' : 'Detalye ng Transportasyon',
+  subtitle: isEn
+    ? `Step-by-step options for reaching ${ENTITY.fullName} — from the bus terminal, by private car, as a group, with limited mobility, and how to plan your return trip.`
+    : `Hakbang-hakbang na opsyon para marating ang ${ENTITY.fullName} — mula sa bus terminal, gamit ang sariling sasakyan, bilang grupo, para sa mga may limitadong lakas, at kung paano planuhin ang pabalik na biyahe.`,
+  steps: isEn ? 'Steps' : 'Mga hakbang',
+};
+---
+
+<section id="transport-detail" class="section-padding bg-white">
+  <div class="container-page">
+    <div class="text-center mb-10">
+      <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">{t.badge}</span>
+      <h2 class="section-heading">{t.title}</h2>
+      <p class="section-subheading mx-auto">{t.subtitle}</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+      {TRANSPORT_EXTRA.map((method) => (
+        <article class="card card-hover p-5">
+          <div class="flex items-start gap-3 mb-3">
+            <span class="text-3xl" aria-hidden="true">{method.icon}</span>
+            <div>
+              <h3 class="text-base font-bold text-pine-950 leading-tight">
+                {isEn ? method.titleEn : method.titleFil}
+              </h3>
+              <p class="mt-1 text-xs text-cold-600 leading-relaxed">
+                {isEn ? method.descriptionEn : method.descriptionFil}
+              </p>
+            </div>
+          </div>
+          <ol class="space-y-2 pt-4 border-t border-cold-100">
+            {(isEn ? method.stepsEn : method.stepsFil).map((step) => (
+              <li class="text-xs text-cold-600 leading-relaxed">{step}</li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

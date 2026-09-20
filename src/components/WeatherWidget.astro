@@ -1,0 +1,411 @@
+---
+import { ENTITY } from '../consts';
+import {
+  weatherEndpoint,
+  wmoInfo,
+  beaufort,
+  buildWeatherAdvice,
+  renderAdviceHtml,
+  renderRiskHtml,
+  type WeatherLang,
+  type WeatherPayload,
+} from '../lib/weather';
+
+export interface Props {
+  lang: 'tl' | 'en';
+}
+
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+
+const t = {
+  badge: isEn ? '🌤️ Weather' : '🌤️ Panahon',
+  title: isEn ? 'Weather & 7-Day Forecast' : 'Panahon at 7-Araw na Forecast',
+  subtitle: isEn
+    ? 'Live conditions for the garden with plain-language advice: what to wear, how to plan the walk and what to pack — nothing you have to work out yourself.'
+    : 'Kasalukuyang kondisyon sa hardin na may simpleng payo: ano ang isusuot, paano planuhin ang lakad at ano ang dadalhin — wala nang kailangang isipin pa.',
+  current: isEn ? 'Now at the garden' : 'Ngayon sa hardin',
+  feelsLike: isEn ? 'Feels like' : 'Pakiramdam',
+  humidity: isEn ? 'Humidity' : 'Halumigmig',
+  wind: isEn ? 'Wind' : 'Hangin',
+  uv: isEn ? 'Sun strength' : 'Lakas ng araw',
+  rainChance: isEn ? 'Rain chance' : 'Tsansa ng ulan',
+  today: isEn ? 'Today' : 'Ngayon',
+  highLow: isEn ? 'High / Low' : 'Mataas / Mababa',
+  updated: isEn ? 'Updated' : 'Na-update',
+  forecastTitle: isEn ? 'Next 7 days' : 'Susunod na 7 araw',
+  note: isEn
+    ? 'Highland weather changes fast — this forecast updates automatically while the page is open.'
+    : 'Mabilis magbago ang panahon sa bundok — awtomatikong nag-a-update ang forecast habang bukas ang pahina.',
+  loading: isEn ? 'Loading the forecast…' : 'Nilo-load ang forecast…',
+  unavailable: isEn
+    ? 'The forecast could not be loaded right now. Please check the latest local weather report before travelling.'
+    : 'Hindi ma-load ang forecast sa ngayon. Tingnan ang pinakabagong lokal na ulat ng panahon bago magbiyahe.',
+  noAlert: isEn ? 'No weather alerts for today' : 'Walang babala sa panahon ngayon',
+};
+
+const uvWord = (value: number | null): string => {
+  if (value == null) return '—';
+  if (value < 3) return isEn ? 'Low' : 'Mababa';
+  if (value < 6) return isEn ? 'Moderate' : 'Katamtaman';
+  if (value < 8) return isEn ? 'High' : 'Malakas';
+  if (value < 11) return isEn ? 'Very high' : 'Napakalakas';
+  return isEn ? 'Extreme' : 'Matindi';
+};
+
+const humidityWord = (value: number | null): string => {
+  if (value == null) return '—';
+  if (value < 40) return isEn ? 'Dry' : 'Tuyo';
+  if (value < 70) return isEn ? 'Comfortable' : 'Komportable';
+  if (value < 85) return isEn ? 'Humid' : 'Mahalumigmig';
+  return isEn ? 'Very humid' : 'Sobrang mahalumigmig';
+};
+
+const windWord = (kmh: number | null): string => {
+  if (kmh == null) return '—';
+  const level = beaufort(kmh);
+  if (level <= 2) return isEn ? 'Calm' : 'Kalmado';
+  if (level <= 4) return isEn ? 'Light breeze' : 'Mahinang hangin';
+  if (level <= 6) return isEn ? `Strong (level ${level})` : `Malakas (level ${level})`;
+  return isEn ? `Gale (level ${level})` : `Napakalakas (level ${level})`;
+};
+
+const endpoint = weatherEndpoint(ENTITY.latitude, ENTITY.longitude);
+
+// Server-side fetch: the result is baked into the page, then refreshed in the browser.
+let weather: WeatherPayload | null = null;
+try {
+  const response = await fetch(endpoint, { signal: AbortSignal.timeout(9000) });
+  if (response.ok) weather = (await response.json()) as WeatherPayload;
+} catch {
+  weather = null;
+}
+
+const locale = isEn ? 'en-US' : 'fil-PH';
+const dayFormatter = new Intl.DateTimeFormat(locale, { weekday: 'short', month: 'short', day: 'numeric' });
+const timeFormatter = new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit' });
+
+const parseLocal = (iso: string): Date => new Date(/[zZ]|[+-]\d{2}:?\d{2}$/.test(iso) ? iso : `${iso}+08:00`);
+
+type Day = {
+  iso: string;
+  label: string;
+  icon: string;
+  desc: string;
+  max: string;
+  min: string;
+  pop: string;
+};
+
+const days: Day[] = [];
+const daily = weather?.daily;
+const dayCount = Math.max(daily?.time?.length ?? 0, 7);
+
+for (let index = 0; index < dayCount; index += 1) {
+  const iso = daily?.time?.[index] as string | undefined;
+  const code = (daily?.weather_code?.[index] as number | undefined) ?? null;
+  const info = wmoInfo(code);
+  const max = daily?.temperature_2m_max?.[index] as number | undefined;
+  const min = daily?.temperature_2m_min?.[index] as number | undefined;
+  const pop = daily?.precipitation_probability_max?.[index] as number | undefined;
+  days.push({
+    iso: iso ?? '',
+    label: index === 0 ? t.today : iso ? dayFormatter.format(parseLocal(`${iso}T00:00:00`)) : '—',
+    icon: iso ? info.icon : '·',
+    desc: iso ? (isEn ? info.en : info.tl) : '—',
+    max: typeof max === 'number' ? `${Math.round(max)}°` : '—',
+    min: typeof min === 'number' ? `${Math.round(min)}°` : '—',
+    pop: typeof pop === 'number' ? `${Math.round(pop)}%` : '—',
+  });
+}
+
+const current = weather?.current ?? null;
+const currentInfo = wmoInfo((current?.weather_code as number | undefined) ?? (daily?.weather_code?.[0] as number | undefined));
+const currentTemp = typeof current?.temperature_2m === 'number' ? Math.round(current.temperature_2m) : null;
+const feelsLike = typeof current?.apparent_temperature === 'number' ? Math.round(current.apparent_temperature) : null;
+const humidity = typeof current?.relative_humidity_2m === 'number' ? Math.round(current.relative_humidity_2m) : null;
+const wind = typeof current?.wind_speed_10m === 'number' ? Math.round(current.wind_speed_10m) : null;
+const uv: number | null =
+  typeof current?.uv_index === 'number'
+    ? Number(current.uv_index.toFixed(1))
+    : typeof daily?.uv_index_max?.[0] === 'number'
+      ? Number((daily.uv_index_max[0] as number).toFixed(1))
+      : null;
+const todayPop = typeof daily?.precipitation_probability_max?.[0] === 'number' ? Math.round(daily.precipitation_probability_max[0] as number) : null;
+const updatedAt = typeof current?.time === 'string' ? timeFormatter.format(parseLocal(current.time as string)) : '';
+
+const advice = buildWeatherAdvice(weather, lang as WeatherLang);
+const adviceHtml = renderAdviceHtml(advice, lang as WeatherLang);
+const riskHtml = renderRiskHtml(advice, lang as WeatherLang);
+---
+
+<section id="weather" class="section-padding bg-gradient-to-b from-cold-50 to-white">
+  <div class="container-page">
+    <div class="text-center mb-10">
+      <span class="badge bg-sky-50 text-sky-700 border border-sky-200 mb-4">{t.badge}</span>
+      <h2 class="section-heading">{t.title}</h2>
+      <p class="section-subheading mx-auto">{t.subtitle}</p>
+    </div>
+
+    <div
+      id="weather-widget"
+      class="max-w-6xl mx-auto space-y-5"
+      data-endpoint={endpoint}
+      data-lang={lang}
+      data-locale={locale}
+      data-today={t.today}
+      data-rain-chance={t.rainChance}
+    >
+      <!-- Risk alerts: only rendered when something applies -->
+      <div data-w="risk" set:html={riskHtml} />
+
+      <div class="grid lg:grid-cols-[320px_1fr] gap-5">
+        <!-- Current conditions -->
+        <div class="card p-6 bg-gradient-to-br from-pine-600 to-pine-800 text-white border-0">
+          <p class="text-xs uppercase tracking-wide text-white/70">{t.current}</p>
+          <div class="mt-3 flex items-start justify-between gap-4">
+            <div>
+              <p class="text-5xl font-extrabold leading-none" data-w="temp">
+                {currentTemp != null ? `${currentTemp}°C` : '—'}
+              </p>
+              <p class="mt-2 text-sm text-white/85" data-w="desc">{isEn ? currentInfo.en : currentInfo.tl}</p>
+            </div>
+            <span class="text-4xl" data-w="icon" aria-hidden="true">{weather ? currentInfo.icon : '·'}</span>
+          </div>
+
+          <p class="mt-4 rounded-lg bg-white/10 px-3 py-2 text-xs text-white/90">
+            {t.rainChance}
+            <span class="font-bold" data-w="pop">{todayPop != null ? `${todayPop}%` : '—'}</span>
+          </p>
+
+          <dl class="mt-4 space-y-2 text-xs text-white/85">
+            <div class="flex items-center justify-between gap-3">
+              <dt>{t.feelsLike}</dt>
+              <dd class="font-semibold" data-w="feels">{feelsLike != null ? `${feelsLike}°C` : '—'}</dd>
+            </div>
+            <div class="flex items-center justify-between gap-3">
+              <dt>{t.humidity}</dt>
+              <dd class="font-semibold">
+                <span data-w="humidity">{humidity != null ? `${humidity}%` : '—'}</span>
+                <span class="text-white/60" data-w="humidity-word">{humidityWord(humidity)}</span>
+              </dd>
+            </div>
+            <div class="flex items-center justify-between gap-3">
+              <dt>{t.wind}</dt>
+              <dd class="font-semibold">
+                <span data-w="wind">{wind != null ? `${wind} km/h` : '—'}</span>
+                <span class="text-white/60" data-w="wind-word">{windWord(wind)}</span>
+              </dd>
+            </div>
+            <div class="flex items-center justify-between gap-3">
+              <dt>{t.uv}</dt>
+              <dd class="font-semibold" data-w="uv-word">{uvWord(uv)}</dd>
+            </div>
+          </dl>
+
+          <p class="mt-4 text-[11px] text-white/70">
+            {t.updated}: <span data-w="updated">{updatedAt}</span>
+          </p>
+        </div>
+
+        <!-- Forecast + advice -->
+        <div class="space-y-5">
+          <div class="card p-5">
+            <h3 class="text-sm font-bold text-pine-950 mb-4">{t.forecastTitle}</h3>
+            <ul class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+              {days.map((day, index) => (
+                <li class="text-center rounded-xl bg-cold-50 px-2 py-3" data-w-day={index}>
+                  <p class="text-[11px] font-semibold text-cold-500" data-w-day-label>{day.label}</p>
+                  <p class="mt-1 text-2xl" aria-hidden="true" data-w-day-icon>{day.icon}</p>
+                  <p class="mt-1 text-[10px] leading-tight text-cold-500" data-w-day-desc>{day.desc}</p>
+                  <p class="mt-2 text-sm font-bold text-pine-950">
+                    <span data-w-day-max>{day.max}</span>
+                    <span class="text-cold-400 font-normal"> / </span>
+                    <span class="text-cold-500 font-normal" data-w-day-min>{day.min}</span>
+                  </p>
+                  <p class="mt-1 text-[10px] text-sky-700" title={t.rainChance}>
+                    <span aria-hidden="true">🌧️</span> <span data-w-day-pop>{day.pop}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Plain-language advice, generated from the forecast values -->
+          <div data-w="advice" set:html={adviceHtml} />
+
+          {!weather && (
+            <p class="text-xs text-amber-700" data-w="fallback">{t.loading}</p>
+          )}
+        </div>
+      </div>
+
+      <p class="text-[11px] text-cold-500 text-center">{t.note}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import {
+    wmoInfo,
+    beaufort,
+    buildWeatherAdvice,
+    renderAdviceHtml,
+    renderRiskHtml,
+    type WeatherLang,
+    type WeatherPayload,
+  } from '../lib/weather';
+
+  (() => {
+    const root = document.getElementById('weather-widget') as HTMLElement | null;
+    if (!root) return;
+
+    const endpoint = root.dataset.endpoint ?? '';
+    const lang = (root.dataset.lang === 'en' ? 'en' : 'tl') as WeatherLang;
+    const locale = root.dataset.locale ?? 'en-US';
+    const todayLabel = root.dataset.today ?? 'Today';
+    const isEn = lang === 'en';
+
+    const uvWord = (value: number | null): string => {
+      if (value == null) return '—';
+      if (value < 3) return isEn ? 'Low' : 'Mababa';
+      if (value < 6) return isEn ? 'Moderate' : 'Katamtaman';
+      if (value < 8) return isEn ? 'High' : 'Malakas';
+      if (value < 11) return isEn ? 'Very high' : 'Napakalakas';
+      return isEn ? 'Extreme' : 'Matindi';
+    };
+    const humidityWord = (value: number | null): string => {
+      if (value == null) return '—';
+      if (value < 40) return isEn ? 'Dry' : 'Tuyo';
+      if (value < 70) return isEn ? 'Comfortable' : 'Komportable';
+      if (value < 85) return isEn ? 'Humid' : 'Mahalumigmig';
+      return isEn ? 'Very humid' : 'Sobrang mahalumigmig';
+    };
+    const windWord = (kmh: number | null): string => {
+      if (kmh == null) return '—';
+      const level = beaufort(kmh);
+      if (level <= 2) return isEn ? 'Calm' : 'Kalmado';
+      if (level <= 4) return isEn ? 'Light breeze' : 'Mahinang hangin';
+      if (level <= 6) return isEn ? `Strong (level ${level})` : `Malakas (level ${level})`;
+      return isEn ? `Gale (level ${level})` : `Napakalakas (level ${level})`;
+    };
+    const parseLocal = (iso: string): Date =>
+      new Date(/[zZ]|[+-]\d{2}:?\d{2}$/.test(iso) ? iso : `${iso}+08:00`);
+    const fmtDay = (iso: string, index: number): string => {
+      if (index === 0) return todayLabel;
+      return new Intl.DateTimeFormat(locale, { weekday: 'short', month: 'short', day: 'numeric' }).format(
+        parseLocal(`${iso}T00:00:00`),
+      );
+    };
+    const fmtTime = (iso: string): string =>
+      new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit' }).format(parseLocal(iso));
+
+    const set = (key: string, value: string): void => {
+      const node = root.querySelector(`[data-w="${key}"]`);
+      if (node) node.textContent = value;
+    };
+
+    const apply = (data: WeatherPayload): void => {
+      const current = data.current;
+      const daily = data.daily;
+      if (!current || !daily || !Array.isArray(daily.time)) return;
+
+      const info = wmoInfo(current.weather_code as number);
+      const temp = current.temperature_2m as number;
+      const feels = current.apparent_temperature as number;
+      const humidity = current.relative_humidity_2m as number;
+      const wind = current.wind_speed_10m as number;
+      const uv =
+        typeof current.uv_index === 'number'
+          ? current.uv_index
+          : typeof daily.uv_index_max?.[0] === 'number'
+            ? (daily.uv_index_max[0] as number)
+            : null;
+
+      set('temp', `${Math.round(temp)}°C`);
+      set('desc', isEn ? info.en : info.tl);
+      set('icon', info.icon);
+      set('pop', `${Math.round((daily.precipitation_probability_max?.[0] as number) ?? 0)}%`);
+      set('feels', `${Math.round(feels)}°C`);
+      set('humidity', `${Math.round(humidity)}%`);
+      set('humidity-word', humidityWord(Math.round(humidity)));
+      set('wind', `${Math.round(wind)} km/h`);
+      set('wind-word', windWord(Math.round(wind)));
+      set('uv-word', uvWord(Number(uv.toFixed(1))));
+      set('updated', typeof current.time === 'string' ? fmtTime(current.time) : '');
+
+      (daily.time as string[]).forEach((iso, index) => {
+        const cell = root.querySelector(`[data-w-day="${index}"]`);
+        if (!cell) return;
+        const dayInfo = wmoInfo(daily.weather_code?.[index] as number);
+        const max = daily.temperature_2m_max?.[index] as number | undefined;
+        const min = daily.temperature_2m_min?.[index] as number | undefined;
+        const pop = daily.precipitation_probability_max?.[index] as number | undefined;
+        const pick = (attr: string): Element | null => cell.querySelector(`[data-w-day-${attr}]`);
+        const label = pick('label');
+        const icon = pick('icon');
+        const desc = pick('desc');
+        const maxNode = pick('max');
+        const minNode = pick('min');
+        const popNode = pick('pop');
+        if (label) label.textContent = fmtDay(iso, index);
+        if (icon) icon.textContent = dayInfo.icon;
+        if (desc) desc.textContent = isEn ? dayInfo.en : dayInfo.tl;
+        if (maxNode) maxNode.textContent = typeof max === 'number' ? `${Math.round(max)}°` : '—';
+        if (minNode) minNode.textContent = typeof min === 'number' ? `${Math.round(min)}°` : '—';
+        if (popNode) popNode.textContent = typeof pop === 'number' ? `${Math.round(pop)}%` : '—';
+      });
+
+      const advice = buildWeatherAdvice(data, lang);
+      const adviceBox = root.querySelector('[data-w="advice"]');
+      if (adviceBox) adviceBox.innerHTML = renderAdviceHtml(advice, lang);
+      const riskBox = root.querySelector('[data-w="risk"]');
+      if (riskBox) riskBox.innerHTML = renderRiskHtml(advice, lang);
+      const fallback = root.querySelector('[data-w="fallback"]');
+      if (fallback) fallback.remove();
+    };
+
+    const CACHE_KEY = 'bbg-weather-cache';
+    const MAX_AGE = 10 * 60 * 1000;
+
+    const readCache = (): WeatherPayload | null => {
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw) as { at: number; data: WeatherPayload };
+        if (!parsed?.data || Date.now() - parsed.at > MAX_AGE) return null;
+        return parsed.data;
+      } catch {
+        return null;
+      }
+    };
+    const writeCache = (data: WeatherPayload): void => {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), data }));
+      } catch {
+        /* storage unavailable — ignore */
+      }
+    };
+
+    const cached = readCache();
+    if (cached) apply(cached);
+
+    fetch(endpoint)
+      .then((response) => {
+        if (!response.ok) throw new Error('weather request failed');
+        return response.json();
+      })
+      .then((data: WeatherPayload) => {
+        writeCache(data);
+        apply(data);
+      })
+      .catch(() => {
+        const fallback = root.querySelector('[data-w="fallback"]');
+        if (fallback && root.querySelector('[data-w="temp"]')?.textContent === '—') {
+          fallback.textContent = isEn
+            ? 'The forecast could not be loaded right now. Please check the latest local weather report before travelling.'
+            : 'Hindi ma-load ang forecast sa ngayon. Tingnan ang pinakabagong lokal na ulat ng panahon bago magbiyahe.';
+        }
+      });
+  })();
+</script>

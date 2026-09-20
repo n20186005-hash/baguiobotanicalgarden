@@ -8,6 +8,12 @@ export default defineConfig({
   integrations: [
     tailwind(),
     sitemap({
+      // Keep redirect stubs and low-value legal pages out of the index/sitemap.
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        if (path === '' || path === '/') return false;
+        return !/(terms-of-service|privacy-policy|cookie-settings)/.test(path);
+      },
       i18n: {
         defaultLocale: 'tl',
         locales: {

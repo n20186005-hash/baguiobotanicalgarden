@@ -4,18 +4,18 @@
 
 export const SITE = {
   name: 'Baguio Botanical Garden',
-  titleFil: 'Baguio Botanical Garden (Baguio) — Kumpletong Gabay sa Bisita at Lokasyon',
-  titleEn: 'Baguio Botanical Garden (Baguio) - Visitor Guide & Location',
+  titleFil: 'Baguio Botanical Garden: Oras ng Pagbukas, Entrance Fee at Gabay',
+  titleEn: 'Baguio Botanical Garden: Opening Hours, Entrance Fee & Guide',
   descriptionFil:
-    'Tuklasin ang Baguio Botanical Garden, ang kilalang botanical landmark sa Baguio, Benguet, Pilipinas. Tingnan ang mapa ng lokasyon, oras ng pagbukas, bayad sa pagpasok, kalapit na Wright Park at The Mansion, at mga tip sa pagbisita.',
+    'Planuhin ang pagbisita sa Baguio Botanical Garden sa 37 Leonard Wood Rd: bukas 6:00 AM–6:00 PM araw-araw, ₱100 entrance fee, directory ng mga themed garden, mapa at tips sa transportasyon.',
   descriptionEn:
-    'Discover Baguio Botanical Garden, the iconic botanical landmark in Baguio, Benguet, Philippines. View location map, opening hours, entrance fee, nearby Wright Park and The Mansion, and travel tips.',
-  ogTitleFil: 'Baguio Botanical Garden - Gabay sa Paglalakbay sa Baguio',
-  ogTitleEn: 'Baguio Botanical Garden - Baguio Travel Guide',
+    'Plan your visit to Baguio Botanical Garden at 37 Leonard Wood Rd: open 6:00 AM–6:00 PM daily, ₱100 entrance fee, themed garden directory, map and transport tips.',
+  ogTitleFil: 'Baguio Botanical Garden — Oras, Entrance Fee at Gabay sa Pagbisita',
+  ogTitleEn: 'Baguio Botanical Garden — Opening Hours, Entrance Fee & Travel Guide',
   ogDescriptionFil:
-    'Opisyal na gabay sa pagbisita sa Baguio Botanical Garden sa Baguio, Benguet, Pilipinas — lokasyon, oras, at mga atraksyon.',
+    'Gabay sa pagbisita sa Baguio Botanical Garden, Baguio, Benguet, Pilipinas — oras ng pagbukas, bayad, lokasyon at mga atraksyon.',
   ogDescriptionEn:
-    'Official visitor guide to Baguio Botanical Garden in Baguio, Benguet, Philippines — location, hours, and attractions.',
+    'Visitor guide to Baguio Botanical Garden in Baguio, Benguet, Philippines — opening hours, entrance fee, location and attractions.',
   siteUrl: 'https://baguiobotanicalgarden.com',
   author: 'Baguio Botanical Garden Editorial',
   addressFil: '37 Leonard Wood Road, Baguio, 2600 Benguet, Pilipinas',
@@ -237,15 +237,21 @@ export type NavSection = {
 };
 
 export const NAV: NavSection[] = [
-  { id: 'about', labelFil: 'Tungkol', labelEn: 'About' },
   { id: 'key-info', labelFil: 'Mabilis na Impormasyon', labelEn: 'Quick Info' },
+  { id: 'about', labelFil: 'Tungkol', labelEn: 'About' },
+  { id: 'weather', labelFil: 'Panahon', labelEn: 'Weather' },
   { id: 'history', labelFil: 'Kasaysayan at Alamat', labelEn: 'History & Legends' },
   { id: 'attractions', labelFil: 'Mga Atraksyon', labelEn: 'Attractions' },
+  { id: 'season', labelFil: 'Strategy ayon sa Season', labelEn: 'Season Strategy' },
+  { id: 'routes', labelFil: 'Ruta ayon sa Bisita', labelEn: 'Routes by Visitor' },
+  { id: 'itineraries', labelFil: 'Mga Itinerary', labelEn: 'Itineraries' },
   { id: 'reviews', labelFil: 'Mga Review', labelEn: 'Reviews' },
   { id: 'practical', labelFil: 'Praktikal na Gabay', labelEn: 'Practical Info' },
+  { id: 'services', labelFil: 'Mga Pasilidad', labelEn: 'Visitor Services' },
   { id: 'transport', labelFil: 'Transportasyon', labelEn: 'Transportation' },
   { id: 'gallery', labelFil: 'Galeriya', labelEn: 'Gallery' },
   { id: 'tips', labelFil: 'Mga Tip', labelEn: 'Tips' },
+  { id: 'science', labelFil: 'Agham at Responsibilidad', labelEn: 'Science & Responsibility' },
   { id: 'faq', labelFil: 'FAQ', labelEn: 'FAQ' },
   { id: 'sources', labelFil: 'Mga Sanggunian', labelEn: 'Sources' },
   { id: 'disclaimer', labelFil: 'Patalastas', labelEn: 'Disclaimer' },
@@ -890,6 +896,46 @@ export const FAQS: FaqItem[] = [
       'The Botanical Garden is open daily from 6:00 AM to 6:00 PM, including holidays. It is recommended to arrive early (7–10 AM) to avoid crowds and enjoy the cool morning weather.',
   },
   {
+    qFil: 'Bukas ba ang Baguio Botanical Garden ngayon?',
+    qEn: 'Is Baguio Botanical Garden open today?',
+    aFil:
+      'Ang hardin ay bukas araw-araw — Lunes hanggang Linggo, kasama ang mga holiday — mula 6:00 AM hanggang 6:00 PM. Ang tanging eksepsiyon ay kapag isinuspinde ng lungsod ang pagbisita sa mga pampublikong parke dahil sa matinding panahon (typhoon signal o malakas na ulan ng habagat), kaya suriin muna ang anunsyo ng lungsod bago biyahe kung may bagyo.',
+    aEn:
+      'The garden is open every day — Monday to Sunday, including public holidays — from 6:00 AM to 6:00 PM. The only exceptions are days when the city suspends visits to public parks for severe weather (typhoon signal or heavy monsoon rain), so check the city advisory before travelling on stormy days.',
+  },
+  {
+    qFil: 'Ano ang mga nasa loob ng Baguio Botanical Garden? (Directory ng parke)',
+    qEn: 'What is inside the Baguio Botanical Garden? (Park directory)',
+    aFil:
+      'Ang 5-ektaryang lugar ay nahahati sa walong themed section: Chinese Garden, Japanese Garden, Korean Garden, Philippine Native Plant Garden, Cordillera Village (Igorot cultural village), Tropical Rain Garden, International Friendship Garden, at Sculpture Garden. Ang mga pasilidad — palikuran, accessible na palikuran, upuan, ticket booth at pangunahing entrance — ay malapit sa gate ng Leonard Wood Road.',
+    aEn:
+      'The 5-hectare site is divided into eight themed sections: Chinese Garden, Japanese Garden, Korean Garden, Philippine Native Plant Garden, Cordillera Village (Igorot cultural village), Tropical Rain Garden, International Friendship Garden and the Sculpture Garden. Facilities — restrooms, an accessible toilet, seating areas, the ticket booth and the main entrance — are all near the Leonard Wood Road gate.',
+  },
+  {
+    qFil: 'Ang Baguio Botanical Garden ba ay dati ring tinawag na Imelda Park?',
+    qEn: 'Is Baguio Botanical Garden the same place as Imelda Park?',
+    aFil:
+      'Oo. Ang lugar ay kilala bilang Imelda Park noong dekada 1970 at pinalitan ng pangalan bilang Baguio Botanical Garden noong 1986. Maaaring gamitin pa rin ng mga lumang mapa, guidebook at signage ng jeepney ang dating pangalan — iisang 5-ektaryang hardin sa Leonard Wood Road ang tinutukoy nito.',
+    aEn:
+      'Yes. The site was known as Imelda Park during the 1970s and was renamed Baguio Botanical Garden in 1986. Older maps, guidebooks and jeepney signage may still use the former name — it is the same 5-hectare garden on Leonard Wood Road.',
+  },
+  {
+    qFil: 'Magkano ang entrance fee at sino ang may diskwento?',
+    qEn: 'How much is the entrance fee and who gets a discount?',
+    aFil:
+      'Ang karaniwang bayad ay ₱100 para sa mga matanda at ₱50 para sa mga batang 4–12 taong gulang, estudyante at senior citizen na may valid ID; libre ang mga batang 3 taong gulang pababa. Magdala ng cash — maaaring hindi tumanggap ng card ang ticket booth. Maaaring magbago ang mga rate, kaya kumpirmahin sa gate bago pumasok.',
+    aEn:
+      'The standard rate is ₱100 for adults and ₱50 for children aged 4–12, students and senior citizens with a valid ID; children 3 years old and below enter free. Bring cash — the ticket booth may not accept cards. Rates can change, so confirm at the gate before entering.',
+  },
+  {
+    qFil: 'Paano pumunta sa Baguio Botanical Garden mula sa Burnham Park o Session Road?',
+    qEn: 'How do I get to Baguio Botanical Garden from Burnham Park or Session Road?',
+    aFil:
+      'Ang hardin ay nasa Leonard Wood Road, humigit-kumulang 2 km mula sa Burnham Park. Ang taxi o ride-hailing ay tumatagal ng 5–10 minuto; ang mga jeepney na papuntang Wright Park o The Mansion ay dumadaan sa entrance. Ang paglakad mula sa Session Road ay humigit-kumulang 20–25 minuto paakyat.',
+    aEn:
+      'The garden sits on Leonard Wood Road, about 2 km from Burnham Park. A taxi or ride-hailing trip takes 5–10 minutes; jeepneys bound for Wright Park or The Mansion pass the entrance. Walking from Session Road takes roughly 20–25 minutes uphill.',
+  },
+  {
     qFil: 'Maaari bang magdala ng pagkain at mag-picnic?',
     qEn: 'Can I bring food and have a picnic?',
     aFil:
@@ -952,6 +998,38 @@ export const FAQS: FaqItem[] = [
       'Sumakay ng intercity bus mula Cubao o Pasay papuntang Baguio (₱450–1,000, 4–6 oras). Pagdating sa Baguio terminal, sumakay ng taxi (₱100–150) o jeepney (₱13–15) papuntang Botanical Garden sa Leonard Wood Road. Ang pinakamadaling ruta ay ang mga deluxe na biyahe mula sa mga pangunahing terminal patungong Baguio.',
     aEn:
       'Take an intercity coach from Cubao or Pasay to Baguio (₱450–1,000, 4–6 hours). Upon arrival at the Baguio terminal, take a taxi (₱100–150) or jeepney (₱13–15) to the Botanical Garden on Leonard Wood Road. Deluxe services departing from the main terminals are the easiest option.',
+  },
+  {
+    qFil: 'Ano ang pinakamagandang panahon para bisitahin ang Botanical Garden?',
+    qEn: 'When is the best time to visit the Botanical Garden?',
+    aFil:
+      'Ang cool dry season (Disyembre–Pebrero) ay nagbibigay ng pinakamalamig na hangin at pinakamatingkad na flower display, ngunit ito rin ang pinakamataong panahon. Ang shoulder season (Nobyembre at huling bahagi ng Mayo) ay nag-aalok ng balanse ng magandang panahon at kaunting tao. Ang tag-ulan (Hunyo–Oktubre) ay pinakatahimik at pinakaluntian, ngunit magdala ng rain gear at suriin muna ang lagay ng kalsada sa bundok.',
+    aEn:
+      'The cool dry season (December–February) brings the coldest air and the brightest flower displays, but it is also the busiest. The shoulder season (November and late May) offers a balance of pleasant weather and fewer visitors. The rainy season (June–October) is the quietest and greenest, but bring rain gear and check mountain road conditions first.',
+  },
+  {
+    qFil: 'Kailangan bang magdala ng payong o jacket?',
+    qEn: 'Should I bring an umbrella or jacket?',
+    aFil:
+      'Oo — dahil sa altitude na mahigit 1,400 metro, maaaring bumaba ang temperatura sa 8–12°C sa madaling araw tuwing Disyembre hanggang Pebrero, at madalas ang pag-ulan sa hapon mula Hunyo hanggang Oktubre. Ang layered na damit at folding umbrella o light rain jacket ay praktikal sa halos buong taon.',
+    aEn:
+      'Yes — because of the 1,400m+ altitude, temperatures can fall to 8–12°C before dawn between December and February, and afternoon rain is common from June to October. Layered clothing plus a folding umbrella or light rain jacket is practical almost all year.',
+  },
+  {
+    qFil: 'Ang Botanical Garden ba ay accessible para sa wheelchair o stroller?',
+    qEn: 'Is the Botanical Garden accessible for wheelchairs or strollers?',
+    aFil:
+      'Ang pangunahing daanan ay sapat na lapad para sa wheelchair at stroller, at may accessible na palikuran malapit sa entrance. Gayunpaman, may mga bahaging may hagdan at slope patungo sa ilang themed garden. Mas mainam na dumating sa tuyong panahon at magtanong sa entrance tungkol sa kasalukuyang kondisyon ng mga daanan.',
+    aEn:
+      'The main paths are wide enough for wheelchairs and strollers, and an accessible restroom is located near the entrance. However, some sections have steps and slopes toward the themed gardens. Visiting in dry weather is better, and it is worth asking at the entrance about current path conditions.',
+  },
+  {
+    qFil: 'Gaano katagal dapat ang pagbisita sa Botanical Garden?',
+    qEn: 'How long should I spend at the Botanical Garden?',
+    aFil:
+      'Karaniwang 1.5–2 oras para sa isang kumpletong paglilibot sa walong themed garden. Kung kasama mo ang mga bata, maglaan ng 2–3 oras; para sa photography, 3–4 oras. Madaling pagsamahin ang pagbisita sa Wright Park at The Mansion dahil ilang minuto lang ang layo nito.',
+    aEn:
+      'Usually 1.5–2 hours for a complete loop of the eight themed gardens. With children, allow 2–3 hours; for photography, 3–4 hours. The visit combines easily with Wright Park and The Mansion, which are only minutes away.',
   },
 ];
 
@@ -1133,6 +1211,26 @@ export type HistoryPeriod = {
 
 export const HISTORY_TIMELINE: HistoryPeriod[] = [
   {
+    yearFil: 'Bago ang 1900s',
+    yearEn: 'Before the 1900s',
+    titleFil: 'Lupain ng mga Ibaloi at Kankanaey',
+    titleEn: 'Land of the Ibaloi & Kankanaey',
+    bodyFil:
+      'Bago ito naging hardin, ang lugar ay bahagi ng pine forest at watershed na nasa loob ng ancestral domain ng mga Ibaloi at Kankanaey. Ang mga pine tree ay pinapangalagaan bilang source ng kahoy, gamot, at proteksyon laban sa pagguho ng lupa sa matatarik na dalisdis.',
+    bodyEn:
+      'Before it became a garden, the site was part of the pine forest and watershed within the ancestral domain of the Ibaloi and Kankanaey peoples. The pines were managed as a source of timber, medicine, and protection against erosion on steep slopes.',
+  },
+  {
+    yearFil: '1900–1909',
+    yearEn: '1900–1909',
+    titleFil: 'Plano ni Burnham para sa Baguio',
+    titleEn: 'The Burnham Plan for Baguio',
+    bodyFil:
+      'Habang itinatayo ang Baguio bilang summer capital, ang plano ng arkitekto at urban planner na si Daniel Burnham ay naglaan ng malaking bahagi ng lungsod para sa mga parke at open space. Ang mga nursery site gaya ng lugar na ito ay ginamit upang palakihin ang mga puno at halaman para sa bagong kalsada at parke.',
+    bodyEn:
+      'As Baguio was built as a summer capital, the plan by architect and urban planner Daniel Burnham reserved large areas of the city for parks and open space. Nursery sites such as this one were used to grow the trees and plants needed for the new roads and parks.',
+  },
+  {
     yearFil: 'Maagang 1900s',
     yearEn: 'Early 1900s',
     titleFil: 'Panahon ng mga Amerikano',
@@ -1141,6 +1239,16 @@ export const HISTORY_TIMELINE: HistoryPeriod[] = [
       'Itinatag ng mga Amerikano bilang bahagi ng plano para sa Baguio bilang "Summer Capital" ng Pilipinas. Orihinal na ginamit bilang nursery para sa mga halaman at puno na gagamitin sa pagpapaganda ng bagong lungsod.',
     bodyEn:
       'Established by the Americans as part of the plan for Baguio as the "Summer Capital" of the Philippines. Originally used as a nursery for plants and trees to beautify the new city.',
+  },
+  {
+    yearFil: '1941–1945',
+    yearEn: '1941–1945',
+    titleFil: 'Panahon ng Digmaan',
+    titleEn: 'The War Years',
+    bodyFil:
+      'Sa panahon ng Ikalawang Digmaang Pandaigdig, ang Baguio ay naging sentro ng administrasyon at kalaunan ay dumanas ng matinding pinsala sa pagpapalaya ng lungsod noong 1945. Ang mga pampublikong parke at nursery ay napabayaan, at maraming koleksyon ng halaman ang nawala bago ang muling pagtatanim noong mga sumunod na dekada.',
+    bodyEn:
+      'During the Second World War, Baguio became an administrative centre and later suffered heavy damage during the liberation of the city in 1945. Public parks and nurseries were neglected, and many plant collections were lost before replanting in the following decades.',
   },
   {
     yearFil: '1950s–1960s',
@@ -1171,6 +1279,16 @@ export const HISTORY_TIMELINE: HistoryPeriod[] = [
       'Pagkatapos ng EDSA Revolution noong 1986, pinalitan ang pangalan mula sa "Imelda Park" tungo sa "Baguio Botanical Garden." Nagsimula ang mga pagsisikap na gawing showcase ng katutubong kultura ng Cordillera at biodiversity.',
     bodyEn:
       'After the 1986 EDSA Revolution, renamed from "Imelda Park" to "Baguio Botanical Garden." Efforts began to transform it into a showcase of indigenous Cordillera culture and biodiversity.',
+  },
+  {
+    yearFil: '1990',
+    yearEn: '1990',
+    titleFil: 'Lindol sa Luzon at Rehabilitasyon',
+    titleEn: 'The Luzon Earthquake & Rehabilitation',
+    bodyFil:
+      'Ang malakas na lindol noong Hulyo 1990 ay nagdulot ng malawakang pinsala sa Baguio, kabilang ang mga pampublikong gusali, kalsada, at parke. Ang mga sumunod na taon ng rehabilitasyon ay nagbukas ng pagkakataon upang muling ayusin ang mga pampublikong luntiang espasyo at palakasin ang papel ng hardin bilang evacuation-friendly na open space.',
+    bodyEn:
+      'The strong July 1990 earthquake caused widespread damage across Baguio, including public buildings, roads, and parks. The rehabilitation years that followed reopened the question of how to reorganise the city public green spaces and strengthen the garden role as an evacuation-friendly open area.',
   },
   {
     yearFil: '2000s–Kasalukuyan',
@@ -1231,6 +1349,24 @@ export const LEGENDS: Story[] = [
       'Ben Hur Villanueva\'s bronze sculptures in the Sculpture Garden are said to possess "the spirit of the highlands." According to locals, at night under a full moon, the sculptures appear to move — an illusion created by the interplay of light and shadow on bronze. It is said that this was the artist\'s way of showing that Cordillera culture is not static — it continues to breathe and move in modern times.',
     icon: '🗿',
   },
+  {
+    titleFil: 'Ang Pinagmulan ng Hamog ng Baguio',
+    titleEn: 'Where the Fog of Baguio Comes From',
+    bodyFil:
+      'Isang sikat na kuwentong bayan ang nagpapaliwanag kung bakit palaging nakabalot sa hamog ang lungsod. Ayon sa mga matatanda, ang ulap ay hininga ng kabundukan na bumababa tuwing umaga upang suriin kung maayos pa ang mga puno. Kapag nawala ang hamog nang mas maaga kaysa karaniwan, sinasabi nilang "naghihintay ang bundok" — palatandaan na dapat maghanda ang mga magsasaka sa pagbabago ng panahon.',
+    bodyEn:
+      'A popular folktale explains why the city is so often wrapped in fog. According to elders, the cloud is the breath of the mountains descending each morning to check that the trees are still well. When the fog lifts earlier than usual, they say the mountain is "waiting" — a sign for farmers to prepare for a change in the weather.',
+    icon: '🌫️',
+  },
+  {
+    titleFil: 'Ang Unang Binhi',
+    titleEn: 'The First Seed',
+    bodyFil:
+      'Isang kwento ng mga manggagawa sa nursery ang nagsasabing ang unang punong itinanim sa lugar ay isang Benguet pine na inilipat mula sa mas mataas na dalisdis. Sinasabi na hindi ito namatay kahit ilang beses na inilipat, kaya ginamit ito bilang "mother tree" para sa mga punla ng buong lungsod. Ang kwento ay paalala na ang pagtatanim ng puno ay gawaing ipinapasa mula sa isang henerasyon patungo sa susunod.',
+    bodyEn:
+      'A nursery workers story says the first tree planted here was a Benguet pine moved down from a higher slope. It is said to have survived several transplantings, and was used as a "mother tree" for seedlings across the city. The story is a reminder that tree planting is work passed from one generation to the next.',
+    icon: '🌱',
+  },
 ];
 
 // --------------- Disclaimer ---------------
@@ -1247,6 +1383,787 @@ export const DISCLAIMER_EN = [
   'Attraction information has been verified and cross-referenced with public sources from the Baguio City Tourism Office, the Department of Tourism (DOT) — Cordillera Administrative Region, and the official Baguio City website. No commercial recommendations are included.',
   'All images displayed on this website are the property of their respective original photographers. Rights and copyright remain with the image creators.',
   'The rating, review count, and quoted reviews originate from public Google Maps user reviews, synced September 2026. Copyright remains with the original authors and Google Maps; they are shown on the page only and are not included in this site\'s structured data.',
+];
+
+// --------------- Seasonal Visit Strategy ---------------
+
+export type SeasonStrategy = {
+  seasonFil: string;
+  seasonEn: string;
+  periodFil: string;
+  periodEn: string;
+  weatherFil: string;
+  weatherEn: string;
+  crowdFil: string;
+  crowdEn: string;
+  strategyFil: string;
+  strategyEn: string;
+  bringFil: string;
+  bringEn: string;
+  highlightFil: string;
+  highlightEn: string;
+  icon: string;
+};
+
+export const SEASON_STRATEGY: SeasonStrategy[] = [
+  {
+    seasonFil: 'Malamig na Tag-init (Cool Dry)',
+    seasonEn: 'Cool Dry Season',
+    periodFil: 'Disyembre – Pebrero',
+    periodEn: 'December – February',
+    weatherFil:
+      'Pinakamalamig na panahon: karaniwang 8–12°C sa madaling araw at 18–22°C sa tanghali. Mababa ang ulan, ngunit madalas ang makapal na hamog sa umaga.',
+    weatherEn:
+      'Coolest period: typically 8–12°C at dawn and 18–22°C at midday. Rainfall is low, but thick morning fog is common.',
+    crowdFil: 'Pinakamataas — Pasko, Bagong Taon, at ang Panagbenga Festival tuwing Pebrero.',
+    crowdEn: 'Highest — Christmas, New Year, and the Panagbenga Festival in February.',
+    strategyFil:
+      'Pumasok sa pagitan ng 7:00–9:00 AM para sa tahimik na hardin at malambot na liwanag. Iwasan ang 10:00 AM–4:00 PM kung ayaw ng siksikan.',
+    strategyEn:
+      'Enter between 7:00–9:00 AM for a quiet garden and soft light. Avoid 10:00 AM–4:00 PM if you want to skip the crowds.',
+    bringFil: 'Makapal na jacket, gloves, scarf, at layered na damit para sa malamig na umaga.',
+    bringEn: 'A warm jacket, gloves, scarf, and layered clothing for cold mornings.',
+    highlightFil: 'Hamog sa pine forest, mga seasonal flower display, at pinakamalinaw na tanawin.',
+    highlightEn: 'Fog drifting through the pine forest, seasonal flower displays, and the clearest views.',
+    icon: '❄️',
+  },
+  {
+    seasonFil: 'Mainit na Tag-init (Warm Dry)',
+    seasonEn: 'Warm Dry Season',
+    periodFil: 'Marso – Mayo',
+    periodEn: 'March – May',
+    weatherFil:
+      'Pinakamainit at pinakatuyo: 15–26°C, mataas ang UV index sa tanghali at kaunting ulan.',
+    weatherEn:
+      'Warmest and driest: 15–26°C, with a high UV index at midday and little rain.',
+    crowdFil: 'Katamtaman hanggang mataas — Holy Week at simula ng summer vacation.',
+    crowdEn: 'Moderate to high — Holy Week and the start of the summer holiday period.',
+    strategyFil:
+      'Maglibot bago mag-10:00 AM o pagkatapos ng 3:00 PM. Magpahinga sa mga shade area tuwing tanghali at uminom ng maraming tubig.',
+    strategyEn:
+      'Explore before 10:00 AM or after 3:00 PM. Rest in shaded areas at midday and drink plenty of water.',
+    bringFil: 'Sunscreen, sumbrero, sunglasses, at reusable na bote ng tubig.',
+    bringEn: 'Sunscreen, a hat, sunglasses, and a reusable water bottle.',
+    highlightFil: 'Mga bagong usbong at namumulaklak na halaman; pinakamataas na visibility para sa tanawin.',
+    highlightEn: 'Fresh growth and flowering plants; the highest visibility for landscape views.',
+    icon: '☀️',
+  },
+  {
+    seasonFil: 'Tag-ulan (Rainy / Typhoon)',
+    seasonEn: 'Rainy / Typhoon Season',
+    periodFil: 'Hunyo – Oktubre',
+    periodEn: 'June – October',
+    weatherFil:
+      'Mataas na halumigmig at madalas na pag-ulan sa hapon at gabi; posibleng makaapekto ang mga bagyo sa pagbiyahe.',
+    weatherEn:
+      'High humidity with frequent afternoon and evening rain; tropical storms can affect travel plans.',
+    crowdFil: 'Pinakamababa — tahimik ang hardin, lalo na sa mga karaniwang araw.',
+    crowdEn: 'Lowest — the garden is quiet, especially on weekdays.',
+    strategyFil:
+      'Suriin ang weather forecast bago umalis; planuhin ang pagbisita sa umaga, magdala ng rain gear, at iwasan ang mga madulas na daanan. Maaaring may temporary closure ang ilang mountain road.',
+    strategyEn:
+      'Check the forecast before leaving; plan your visit for the morning, bring rain gear, and avoid slippery paths. Some mountain roads may temporarily close.',
+    bringFil: 'Folding umbrella o rain jacket, non-slip na sapatos, at quick-dry na damit.',
+    bringEn: 'A folding umbrella or rain jacket, non-slip shoes, and quick-dry clothing.',
+    highlightFil:
+      'Pinakaluntot na moss, fern, at cloud forest atmosphere — pati na rin ang dramatikong ulap sa pine trees.',
+    highlightEn:
+      'The greenest moss and ferns and a true cloud-forest atmosphere — plus dramatic mist over the pines.',
+    icon: '🌧️',
+  },
+  {
+    seasonFil: 'Panahong Shoulder',
+    seasonEn: 'Shoulder Season',
+    periodFil: 'Nobyembre at huling bahagi ng Mayo',
+    periodEn: 'November and late May',
+    weatherFil:
+      'Transisyon ng panahon: karaniwang katamtaman ang temperatura, kaunting ulan, at mas kaunting tao kaysa sa peak months.',
+    weatherEn:
+      'A transitional period: generally moderate temperatures, limited rainfall, and fewer visitors than the peak months.',
+    crowdFil: 'Mababa hanggang katamtaman — mainam para sa kalmadong pagbisita.',
+    crowdEn: 'Low to moderate — ideal for a calm visit.',
+    strategyFil:
+      'Pinakamainam na balanse ng magandang panahon at kaunting tao. Subukang pumunta sa karaniwang araw para sa pinakamatahimik na karanasan.',
+    strategyEn:
+      'The best balance of pleasant weather and fewer people. Try a weekday for the quietest experience.',
+    bringFil: 'Light jacket para sa gabi at umbrella bilang precaution.',
+    bringEn: 'A light jacket for the evening plus an umbrella as a precaution.',
+    highlightFil: 'Matatag na kondisyon para sa photography at mas mababang presyo ng matutuluyan.',
+    highlightEn: 'Stable conditions for photography and lower accommodation rates.',
+    icon: '🍃',
+  },
+];
+
+// --------------- Audience-tailored routes ---------------
+
+export type AudienceRoute = {
+  titleFil: string;
+  titleEn: string;
+  summaryFil: string;
+  summaryEn: string;
+  durationFil: string;
+  durationEn: string;
+  icon: string;
+  stopsFil: string[];
+  stopsEn: string[];
+  notesFil: string[];
+  notesEn: string[];
+};
+
+export const AUDIENCE_ROUTES: AudienceRoute[] = [
+  {
+    titleFil: 'Pamilya na may mga Bata',
+    titleEn: 'Families with Children',
+    summaryFil:
+      'Isang mabagal at ligtas na ruta na may maraming lugar para magpahinga, malawak na open space, at mga elemento ng kwento na madaling maintindihan ng mga bata.',
+    summaryEn:
+      'A slow, safe route with plenty of rest spots, open spaces, and story elements that children can easily connect with.',
+    durationFil: '2–3 oras',
+    durationEn: '2–3 hours',
+    icon: '👨‍👩‍👧',
+    stopsFil: [
+      'Entrance plaza — bumili ng ticket at gamitin ang palikuran bago magsimula',
+      'Pangunahing pine path — malawak at patag, madaling lakarin',
+      'Open lawn at seating area — pahinga at meryenda',
+      'Chinese Garden — moon gate at mga hugis na palayok',
+      'Japanese Garden — tulay, pond, at malinis na linya',
+      'Cordillera Village — tradisyonal na bahay at costume photo',
+      'Souvenir area malapit sa exit — tapusin ang paglibot',
+    ],
+    stopsEn: [
+      'Entrance plaza — buy tickets and use the restrooms before starting',
+      'Main pine path — wide and mostly level, easy to walk',
+      'Open lawn and seating area — rest and snacks',
+      'Chinese Garden — moon gate and shaped planters',
+      'Japanese Garden — bridge, pond, and clean lines',
+      'Cordillera Village — traditional houses and costume photos',
+      'Souvenir area near the exit — end the loop here',
+    ],
+    notesFil: [
+      'Gamitin ang mga patag na pangunahing daanan kung may stroller',
+      'Magdala ng sariling tubig at meryenda — limitado ang benta sa loob',
+      'Iwasan ang tanghali tuwing weekend kapag pinakamaraming tao',
+      'Magdala ng barya para sa palikuran at maliit na bilihan',
+      'Magtakda ng meeting point malapit sa entrance kung mahiwalay ang grupo',
+    ],
+    notesEn: [
+      'Use the level main paths if you have a stroller',
+      'Bring your own water and snacks — sales inside are limited',
+      'Avoid midday on weekends when crowds peak',
+      'Carry small change for restrooms and small purchases',
+      'Agree on a meeting point near the entrance in case the group splits',
+    ],
+  },
+  {
+    titleFil: 'Photography at Kalikasan',
+    titleEn: 'Photography & Nature',
+    summaryFil:
+      'Ruta para sa mga mahilig sa larawan at detalye ng halaman, na nakatuon sa oras ng liwanag, texture, at mga natural na detalye.',
+    summaryEn:
+      'A route for photographers and plant enthusiasts, organised around light, texture, and fine natural detail.',
+    durationFil: '3–4 oras',
+    durationEn: '3–4 hours',
+    icon: '📷',
+    stopsFil: [
+      'Madaling araw sa pine path — mga sinag ng liwanag sa pagitan ng mga puno',
+      'Moss at fern wall — macro details pagkatapos ng ulan',
+      'Chinese Garden — moon gate bilang natural frame',
+      'Japanese Garden — reflection sa pond',
+      'Sculpture Garden — bronze textures sa diffused light',
+      'International Friendship Garden — paghahambing ng mga species',
+      'Mataas na viewpoint — malawak na tanawin ng lungsod at kabundukan',
+    ],
+    stopsEn: [
+      'Early morning on the pine path — light rays between the trunks',
+      'Moss and fern wall — macro details after rain',
+      'Chinese Garden — the moon gate as a natural frame',
+      'Japanese Garden — reflections on the pond',
+      'Sculpture Garden — bronze texture in diffused light',
+      'International Friendship Garden — comparing species',
+      'Upper viewpoint — wide views over the city and mountains',
+    ],
+    notesFil: [
+      'Pinakamagandang liwanag: 7:00–10:00 AM at hapon bago mag-5:00 PM',
+      'Maganda ang fog scenes sa umaga ng malamig na buwan',
+      'Magsuot ng sapatos na hindi madulas — madulas ang bato kapag basa',
+      'Huwag tumapak sa mga flower bed para sa komposisyon ng larawan',
+      'Ang mga drone ay karaniwang nangangailangan ng permiso — magtanong sa management',
+    ],
+    notesEn: [
+      'Best light: 7:00–10:00 AM and late afternoon before 5:00 PM',
+      'Fog scenes are excellent on cold-season mornings',
+      'Wear non-slip shoes — stone surfaces are slippery when wet',
+      'Do not step into flower beds for a composition',
+      'Drones usually require permission — ask management first',
+    ],
+  },
+  {
+    titleFil: 'Mababang Lakas at Accessible',
+    titleEn: 'Low-Mobility & Accessible',
+    summaryFil:
+      'Pinakamaikling ruta na gumagamit ng mga patag na daanan at seating area, na may kaunting pag-akyat at malapit sa mga pasilidad.',
+    summaryEn:
+      'The shortest route, using level paths and seating areas, with minimal climbing and close access to facilities.',
+    durationFil: '1–1.5 oras',
+    durationEn: '1–1.5 hours',
+    icon: '♿',
+    stopsFil: [
+      'Drop-off point malapit sa main entrance sa Leonard Wood Road',
+      'Accessible na palikuran malapit sa entrance',
+      'Patag na pangunahing daanan patungo sa open lawn',
+      'Seating area sa lilim — pahinga at tanawin',
+      'Chinese Garden sa labas ng bahagi — nasa patag na bahagi',
+      'Bumalik sa entrance sa parehong daanan',
+    ],
+    stopsEn: [
+      'Drop-off point near the main entrance on Leonard Wood Road',
+      'Accessible restroom near the entrance',
+      'Level main path toward the open lawn',
+      'Shaded seating area — rest and enjoy the view',
+      'Outer section of the Chinese Garden — on the level side',
+      'Return to the entrance along the same path',
+    ],
+    notesFil: [
+      'Ang ilang bahagi ng hardin ay may hagdan at slope — piliin ang pangunahing daanan',
+      'Mas ligtas ang pagbisita kapag tuyo ang panahon — madulas ang bato kapag basa',
+      'Magtanong sa entrance tungkol sa kondisyon ng rampa at daanan sa araw ng pagbisita',
+      'Magdala ng kasama kung kailangan ng tulong sa mga bahaging may slope',
+      'Planuhin ang pagpapahinga tuwing 15–20 minuto dahil sa altitude na 1,400m+',
+    ],
+    notesEn: [
+      'Some parts of the garden have steps and slopes — stay on the main paths',
+      'Visiting in dry weather is safer — stone is slippery when wet',
+      'Ask at the entrance about current ramp and path conditions on the day',
+      'Bring a companion if you need help on sloped sections',
+      'Plan a rest every 15–20 minutes because of the 1,400m+ altitude',
+    ],
+  },
+];
+
+// --------------- Suggested itineraries ---------------
+
+export type ItineraryStop = {
+  time: string;
+  activityFil: string;
+  activityEn: string;
+};
+
+export type Itinerary = {
+  titleFil: string;
+  titleEn: string;
+  durationFil: string;
+  durationEn: string;
+  summaryFil: string;
+  summaryEn: string;
+  icon: string;
+  stops: ItineraryStop[];
+};
+
+export const ITINERARIES: Itinerary[] = [
+  {
+    titleFil: 'Half-Day Route (Mga 3 Oras)',
+    titleEn: 'Half-Day Route (About 3 Hours)',
+    durationFil: '3 oras',
+    durationEn: '3 hours',
+    summaryFil:
+      'Tamang-tama kung limitado ang oras o kung may kasamang bata — nakatuon sa mga pangunahing themed garden at isang kalapit na parke.',
+    summaryEn:
+      'Ideal when time is limited or you are travelling with children — focused on the main themed gardens plus one nearby park.',
+    icon: '⏱️',
+    stops: [
+      { time: '07:30', activityFil: 'Pagdating sa main entrance — bumili ng ticket at basahin ang site map', activityEn: 'Arrive at the main entrance — buy tickets and read the site map' },
+      { time: '07:45', activityFil: 'Pangunahing pine path — maglakad nang dahan-dahan sa malamig na hangin', activityEn: 'Main pine path — walk slowly in the cool morning air' },
+      { time: '08:15', activityFil: 'Chinese Garden — moon gate, pavilion, at mga palayok', activityEn: 'Chinese Garden — moon gate, pavilion, and planters' },
+      { time: '09:00', activityFil: 'Japanese Garden — pond, tulay, at Japanese landscaping', activityEn: 'Japanese Garden — pond, bridge, and Japanese landscaping' },
+      { time: '09:45', activityFil: 'Cordillera Village — tradisyonal na bahay at costume experience', activityEn: 'Cordillera Village — traditional houses and the costume experience' },
+      { time: '10:30', activityFil: 'Sculpture Garden at Friendship Garden — sining at halaman mula sa ibang bansa', activityEn: 'Sculpture Garden and Friendship Garden — art and plants from other countries' },
+      { time: '11:00', activityFil: 'Tumawid papuntang Wright Park (3 minuto) para sa Pool of Pines', activityEn: 'Cross to Wright Park (3 minutes) for the Pool of Pines' },
+      { time: '12:00', activityFil: 'Tanghali sa mga kainan malapit sa Leonard Wood Road', activityEn: 'Lunch at the dining options near Leonard Wood Road' },
+    ],
+  },
+  {
+    titleFil: 'Full-Day Route (Mga 7 Oras)',
+    titleEn: 'Full-Day Route (About 7 Hours)',
+    durationFil: '7 oras',
+    durationEn: '7 hours',
+    summaryFil:
+      'Pinagsasama ang Botanical Garden at ang mga kalapit na landmark sa isang kumpletong walking at short-ride tour.',
+    summaryEn:
+      'Combines the Botanical Garden with nearby landmarks in one complete walking and short-ride tour.',
+    icon: '🗺️',
+    stops: [
+      { time: '07:30', activityFil: 'Baguio Botanical Garden — buong paglibot sa mga themed garden (2 oras)', activityEn: 'Baguio Botanical Garden — full loop of the themed gardens (2 hours)' },
+      { time: '09:30', activityFil: 'Wright Park — Pool of Pines at horseback riding area (30 minuto)', activityEn: 'Wright Park — Pool of Pines and the horseback riding area (30 minutes)' },
+      { time: '10:15', activityFil: 'The Mansion — gate area at picture-taking (30 minuto)', activityEn: 'The Mansion — gate area and photos (30 minutes)' },
+      { time: '11:00', activityFil: 'Mines View Park — observation deck at tanawin (45 minuto)', activityEn: 'Mines View Park — observation deck and views (45 minutes)' },
+      { time: '12:00', activityFil: 'Tanghali at pahinga', activityEn: 'Lunch and rest' },
+      { time: '13:30', activityFil: 'Good Shepherd — local products at pasalubong (30 minuto)', activityEn: 'Good Shepherd — local products and souvenirs (30 minutes)' },
+      { time: '14:30', activityFil: 'Museum at cathedral area ng lungsod — kultura at kasaysayan', activityEn: 'City museum and cathedral area — culture and history' },
+      { time: '16:00', activityFil: 'Session Road — coffee, pahinga, at huling pamimili', activityEn: 'Session Road — coffee, rest, and final shopping' },
+      { time: '17:30', activityFil: 'Bumalik sa matutuluyan bago dumilim', activityEn: 'Return to your accommodation before dark' },
+    ],
+  },
+];
+
+// --------------- Visitor services & surrounding facilities (type-neutral) ---------------
+
+export type VisitorService = {
+  titleFil: string;
+  titleEn: string;
+  descriptionFil: string;
+  descriptionEn: string;
+  icon: string;
+  pointsFil: string[];
+  pointsEn: string[];
+};
+
+export const VISITOR_SERVICES: VisitorService[] = [
+  {
+    titleFil: 'Palikuran, Baby Care, at Accessible Toilet',
+    titleEn: 'Restrooms, Baby Care & Accessible Toilets',
+    descriptionFil:
+      'May mga palikuran sa entrance at sa ilang pangunahing bahagi ng hardin. Isang accessible na palikuran ang malapit sa entrance. Walang dedicated na baby-changing room sa lahat ng punto — magplano nang naaayon.',
+    descriptionEn:
+      'Restrooms are available at the entrance and at several points inside the garden. An accessible restroom is located near the entrance. Dedicated baby-changing rooms are not available at every point — plan accordingly.',
+    icon: '🚻',
+    pointsFil: [
+      'Mga palikuran malapit sa entrance, Chinese Garden, at Cordillera Village',
+      'Hiwalay na pasilidad para sa kalalakihan at kababaihan',
+      'Accessible toilet malapit sa entrance',
+      'Maaaring may maliit na maintenance fee (₱5–10) sa ilang palikuran',
+      'Walang ATM sa loob ng hardin — magdala ng barya',
+    ],
+    pointsEn: [
+      'Restrooms near the entrance, the Chinese Garden, and the Cordillera Village',
+      'Separate facilities for men and women',
+      'Accessible restroom near the entrance',
+      'A small maintenance fee (₱5–10) may apply at some restrooms',
+      'No ATM inside the garden — carry small change',
+    ],
+  },
+  {
+    titleFil: 'Inuming Tubig at Pagpuno ng Bote',
+    titleEn: 'Drinking Water & Refills',
+    descriptionFil:
+      'May mga tindahan malapit sa entrance na nagbebenta ng bottled water. Limitado ang mga public refilling station sa loob ng hardin — magdala ng reusable na bote upang mabawasan ang plastic waste.',
+    descriptionEn:
+      'Shops near the entrance sell bottled water. Public refilling stations inside the garden are limited — bring a reusable bottle to reduce plastic waste.',
+    icon: '💧',
+    pointsFil: [
+      'Bumili ng inumin bago pumasok kung darating nang maaga',
+      'Magdala ng reusable na bote — limitado ang refilling point',
+      'Manatiling hydrated dahil sa altitude na mahigit 1,400 metro',
+      'Huwag uminom mula sa mga pond o ornamental water feature',
+    ],
+    pointsEn: [
+      'Buy drinks before entering if you arrive early',
+      'Bring a reusable bottle — refilling points are limited',
+      'Stay hydrated because of the 1,400m+ altitude',
+      'Do not drink from ponds or ornamental water features',
+    ],
+  },
+  {
+    titleFil: 'Upuan, Lilim, at Lugar na Pahingahan',
+    titleEn: 'Seating, Shade & Rest Areas',
+    descriptionFil:
+      'May mga bench at shaded area sa pangunahing daanan at malapit sa mga lawn. Mainam ito para sa mga matatanda, bata, at sinumang nangangailangan ng pahinga dahil sa altitude.',
+    descriptionEn:
+      'Benches and shaded areas are found along the main paths and near the lawns. They are useful for older visitors, children, and anyone needing rest because of the altitude.',
+    icon: '🪑',
+    pointsFil: [
+      'Gamitin ang mga shaded bench tuwing tanghali',
+      'Ang mga pavilion ay nagbibigay ng silungan kapag biglang umulan',
+      'Magpahinga tuwing 15–20 minuto kung hindi sanay sa altitude',
+      'Planuhin ang ruta nang paikot upang hindi maulit ang pag-akyat',
+    ],
+    pointsEn: [
+      'Use the shaded benches around midday',
+      'Pavilions provide shelter during sudden rain',
+      'Rest every 15–20 minutes if you are not used to the altitude',
+      'Plan a loop route to avoid repeating the same climb',
+    ],
+  },
+  {
+    titleFil: 'Ticket, Impormasyon, at First Aid',
+    titleEn: 'Tickets, Information & First Aid',
+    descriptionFil:
+      'Ang ticket booth at information counter ay nasa main entrance. May basic first-aid kit sa entrance area, at ang pampublikong ospital ay nasa 10 minutong lakad.',
+    descriptionEn:
+      'The ticket booth and information counter are at the main entrance. A basic first-aid kit is kept at the entrance, and the public hospital is a 10-minute walk away.',
+    icon: '🎟️',
+    pointsFil: [
+      'Bumili ng ticket sa official booth lamang',
+      'Itanong ang site map at kasalukuyang kondisyon ng mga daanan',
+      'I-report ang mga nawalang gamit sa entrance staff',
+      'Para sa emergency, pumunta sa pampublikong ospital (10 minutong lakad)',
+    ],
+    pointsEn: [
+      'Buy tickets only at the official booth',
+      'Ask for the site map and current path conditions',
+      'Report lost items to the entrance staff',
+      'For emergencies, go to the public hospital (10-minute walk)',
+    ],
+  },
+  {
+    titleFil: 'Wi-Fi, Signal, at Pagbabayad',
+    titleEn: 'Wi-Fi, Signal & Payments',
+    descriptionFil:
+      'Ang mobile signal sa Baguio ay karaniwang mabuti, ngunit maaaring humina sa mga bahaging napapalibutan ng matataas na puno. Karamihan sa maliliit na tindahan ay cash-only.',
+    descriptionEn:
+      'Mobile signal in Baguio is generally good, but it can weaken in sections surrounded by tall trees. Most small stalls are cash-only.',
+    icon: '📶',
+    pointsFil: [
+      'Huwag umasa sa public Wi-Fi sa loob ng hardin',
+      'Magdala ng sapat na cash para sa small purchases',
+      'Ang ilang entrance at stall ay tumatanggap ng e-wallet — magtanong muna',
+      'I-download ang offline map bago pumasok',
+    ],
+    pointsEn: [
+      'Do not rely on public Wi-Fi inside the garden',
+      'Carry enough cash for small purchases',
+      'Some entrances and stalls accept e-wallets — ask first',
+      'Download an offline map before you arrive',
+    ],
+  },
+  {
+    titleFil: 'Bag, Baggage, at Alagang Hayop',
+    titleEn: 'Bags, Luggage & Pets',
+    descriptionFil:
+      'Walang luggage storage sa loob ng hardin. Mas mainam na mag-iwan ng malalaking bag sa matutuluyan. Tanging assistance animal ang karaniwang pinapayagan sa mga public garden.',
+    descriptionEn:
+      'There is no luggage storage inside the garden. Leave large bags at your accommodation. Assistance animals are generally the only animals allowed in public gardens.',
+    icon: '🎒',
+    pointsFil: [
+      'Walang locker o baggage counter sa entrance',
+      'Magdala lamang ng day pack na magaan',
+      'Ang mga assistance animal ay karaniwang pinapayagan',
+      'Para sa ibang alagang hayop, magtanong muna sa management',
+    ],
+    pointsEn: [
+      'No lockers or baggage counter at the entrance',
+      'Carry only a light day pack',
+      'Assistance animals are generally allowed',
+      'Ask management first about other pets',
+    ],
+  },
+];
+
+// --------------- Additional transport details ---------------
+
+export const TRANSPORT_EXTRA: TransportMethod[] = [
+  {
+    titleFil: 'Mula sa Intercity Bus Terminal ng Baguio',
+    titleEn: 'From the Intercity Bus Terminal in Baguio',
+    descriptionFil:
+      'Karamihan ng mga bisita ay dumarating sa pamamagitan ng intercity bus. Mula sa terminal, madaling sumakay ng jeepney o taxi papuntang Botanical Garden.',
+    descriptionEn:
+      'Most visitors arrive by intercity coach. From the terminal, it is easy to take a jeepney or taxi to the Botanical Garden.',
+    icon: '🚌',
+    stepsFil: [
+      '1. Pagbaba sa Baguio bus terminal, pumunta sa jeepney loading area',
+      '2. Sumakay ng jeepney na may rutang "Mines View" o "Gibraltar"',
+      '3. Sabihin sa driver: "Botanical Garden po" — bababa sa tapat ng entrance',
+      '4. Pamasahe: humigit-kumulang ₱13–15 kada tao',
+      '5. Kung marami kayo o may bagahe, mas praktikal ang taxi (₱100–150)',
+      '6. Huling jeepney pabalik sa sentro: karaniwang bandang 8:00–9:00 PM — magtanong sa driver',
+    ],
+    stepsEn: [
+      '1. After disembarking at the Baguio bus terminal, go to the jeepney loading area',
+      '2. Board a jeepney with the "Mines View" or "Gibraltar" route',
+      '3. Tell the driver: "Botanical Garden" — you will be dropped in front of the entrance',
+      '4. Fare: approximately ₱13–15 per person',
+      '5. If you are a group or have luggage, a taxi is more practical (₱100–150)',
+      '6. Last jeepney back to the centre: usually around 8:00–9:00 PM — confirm with the driver',
+    ],
+  },
+  {
+    titleFil: 'Sariling Sasakyan at Pagmamaneho',
+    titleEn: 'Driving Your Own Vehicle',
+    descriptionFil:
+      'May paradahan sa harap ng hardin. Sa peak season, maaaring mabilis itong mapuno — mas mainam na dumating bago mag-9:00 AM.',
+    descriptionEn:
+      'Parking is available in front of the garden. In peak season it fills up quickly — arriving before 9:00 AM is better.',
+    icon: '🚗',
+    stepsFil: [
+      '1. Dalawang pangunahing ruta papuntang Baguio: Kennon Road (mas maikli, mas matarik) at Marcos Highway (mas mahaba, mas ligtas tuwing tag-ulan)',
+      '2. Kapag nasa lungsod na, sundin ang Leonard Wood Road — ang hardin ay nasa gilid nito',
+      '3. Landmark: nasa tapat ng Wright Park at malapit sa Teacher\'s Camp',
+      '4. Paradahan: ₱50 (motorsiklo) hanggang ₱80 (kotse) para sa buong araw',
+      '5. Mahigpit na ipinagbabawal ang street parking sa Leonard Wood Road',
+      '6. Mag-ingat sa makapal na fog at madulas na kalsada tuwing tag-ulan',
+    ],
+    stepsEn: [
+      '1. Two main routes into Baguio: Kennon Road (shorter, steeper) and Marcos Highway (longer, safer in the rainy season)',
+      '2. Once in the city, follow Leonard Wood Road — the garden sits alongside it',
+      '3. Landmark: opposite Wright Park and close to Teacher\'s Camp',
+      '4. Parking: ₱50 (motorcycle) to ₱80 (car) for the whole day',
+      '5. Street parking on Leonard Wood Road is strictly prohibited',
+      '6. Take care in dense fog and on slippery roads during the rainy season',
+    ],
+  },
+  {
+    titleFil: 'Chartered Van, Package Tour, at Grupo',
+    titleEn: 'Chartered Vans, Tours & Groups',
+    descriptionFil:
+      'Para sa pamilya o grupo, praktikal ang pag-arkila ng van o pagsali sa city tour na may itinerary. Karaniwang kasama rito ang Botanical Garden, Wright Park, The Mansion, at Mines View.',
+    descriptionEn:
+      'For families or groups, hiring a van or joining a city tour with a set itinerary is practical. These usually include the Botanical Garden, Wright Park, The Mansion, and Mines View.',
+    icon: '🚐',
+    stepsFil: [
+      '1. Mag-book ng city tour sa mga accredited na operator sa lungsod',
+      '2. Kumpirmahin kung kasama sa presyo ang entrance fee at parking',
+      '3. Itakda ang pick-up point — karaniwan ay sa matutuluyan o sa sentro',
+      '4. Humingi ng nakasulat na itinerary bago magbayad',
+      '5. Para sa malalaking grupo, magtanong tungkol sa group rate sa entrance',
+      '6. Magplano ng dagdag na oras para sa trapiko tuwing peak season',
+    ],
+    stepsEn: [
+      '1. Book a city tour with accredited operators in the city',
+      '2. Confirm whether entrance fees and parking are included',
+      '3. Set the pick-up point — usually your accommodation or the city centre',
+      '4. Request a written itinerary before paying',
+      '5. For large groups, ask about the group rate at the entrance',
+      '6. Allow extra time for traffic during peak season',
+    ],
+  },
+  {
+    titleFil: 'Accessible na Paglalakbay at Kasamang Matatanda',
+    titleEn: 'Accessible Travel & Older Companions',
+    descriptionFil:
+      'Ang pangunahing daanan ay sapat na lapad para sa wheelchair, ngunit may mga bahaging may hagdan at slope. Magplano ng ruta nang maaga.',
+    descriptionEn:
+      'The main paths are wide enough for wheelchairs, but some sections have steps and slopes. Plan your route in advance.',
+    icon: '♿',
+    stepsFil: [
+      '1. Magtanong sa entrance tungkol sa kasalukuyang lagay ng mga rampa at daanan',
+      '2. Gamitin ang drop-off point malapit sa main entrance upang maiwasan ang mahabang lakad',
+      '3. Piliin ang pangunahing daanan at open lawn — ito ang pinakapatag na bahagi',
+      '4. Iwasan ang pagbisita kapag umuulan — madulas ang mga bato',
+      '5. Magdala ng kasama para sa tulong sa mga bahaging may slope',
+      '6. Magpahinga tuwing 15–20 minuto dahil sa altitude',
+    ],
+    stepsEn: [
+      '1. Ask at the entrance about the current condition of ramps and paths',
+      '2. Use the drop-off point near the main entrance to avoid a long walk',
+      '3. Stay on the main path and open lawn — the flattest sections',
+      '4. Avoid visiting in rain — stone surfaces become slippery',
+      '5. Bring a companion for help on sloped sections',
+      '6. Rest every 15–20 minutes because of the altitude',
+    ],
+  },
+  {
+    titleFil: 'Pabalik na Biyahe, Gabi, at Kaligtasan',
+    titleEn: 'Return Trips, Evenings & Safety',
+    descriptionFil:
+      'Ang hardin ay karaniwang nagsasara bago mag-gabi, kaya planuhin nang maaga ang pabalik na biyahe, lalo na tuwing tag-ulan kapag limitado ang sasakyan.',
+    descriptionEn:
+      'The garden usually closes before evening, so plan your return trip early — especially in the rainy season when vehicles are limited.',
+    icon: '🌙',
+    stepsFil: [
+      '1. Kumpirmahin ang oras ng pagbabalik bago maglakad palayo',
+      '2. Para sa jeepney, hanapin ang mga rutang may karatulang "Plaza" o "Town"',
+      '3. Mas maaga ang huling biyahe ng ilang ruta tuwing tag-ulan',
+      '4. Kung gabi na, gumamit ng taxi o ride-hailing service',
+      '5. Magtakda ng meeting point kung maghihiwalay ang grupo',
+      '6. I-save ang address na "37 Leonard Wood Road" sa telepono',
+    ],
+    stepsEn: [
+      '1. Confirm the return schedule before you set off',
+      '2. For jeepneys, look for routes signed "Plaza" or "Town"',
+      '3. Some routes end earlier during the rainy season',
+      '4. If it is already dark, use a taxi or ride-hailing service',
+      '5. Agree on a meeting point if the group splits up',
+      '6. Save the address "37 Leonard Wood Road" on your phone',
+    ],
+  },
+];
+
+// --------------- Science & nature notes ---------------
+
+export type ScienceNote = {
+  titleFil: string;
+  titleEn: string;
+  bodyFil: string;
+  bodyEn: string;
+  icon: string;
+};
+
+export const SCIENCE_NOTES: ScienceNote[] = [
+  {
+    titleFil: 'Altitude at Klimang Highland',
+    titleEn: 'Altitude & Highland Climate',
+    bodyFil:
+      'Nasa humigit-kumulang 1,400–1,540 metro sa ibabaw ng dagat, ang hardin ay may tropical highland climate: karaniwang 15–23°C sa araw at maaaring bumaba sa 8–12°C sa madaling araw ng Disyembre hanggang Pebrero. Ang manipis na hangin at mataas na UV index ay nagpapaliwanag kung bakit mabilis masunog ang balat sa tanghali kahit malamig ang hangin.',
+    bodyEn:
+      'At roughly 1,400–1,540 metres above sea level, the garden has a tropical highland climate: typically 15–23°C by day and dropping to 8–12°C on December–February mornings. Thin air and a high UV index explain why skin can burn quickly at midday even when the air feels cool.',
+    icon: '🏔️',
+  },
+  {
+    titleFil: 'Pine Forest ng Benguet',
+    titleEn: 'The Benguet Pine Forest',
+    bodyFil:
+      'Ang mga pine tree sa paligid ay kadalasang Benguet pine (Pinus kesiya) — isang species na nangangailangan ng maraming liwanag at may makapal na balat na lumalaban sa sunog. Ang mga nahuhulog na karayom ay bumubuo ng acidic na layer ng lupa na pumipili kung aling halaman ang kayang tumubo sa ilalim nito.',
+    bodyEn:
+      'The surrounding pines are mostly Benguet pine (Pinus kesiya) — a light-demanding species with thick, fire-resistant bark. Falling needles form an acidic litter layer that selects which plants can grow beneath them.',
+    icon: '🌲',
+  },
+  {
+    titleFil: 'Moss, Fern, at Cloud Forest',
+    titleEn: 'Moss, Ferns & Cloud Forest',
+    bodyFil:
+      'Sa mga buwan ng tag-ulan, madalas na bumaba ang ulap sa mga puno. Ang patuloy na halumigmig ay nagbibigay-daan sa moss, fern, at epiphytic orchid na mabuhay nang direkta sa mga sanga at bato — isang maliit na halimbawa ng cloud forest ecology sa gitna ng lungsod.',
+    bodyEn:
+      'During the rainy months, cloud often sinks into the trees. Persistent humidity allows mosses, ferns, and epiphytic orchids to live directly on branches and stone — a small example of cloud-forest ecology in the middle of a city.',
+    icon: '🌿',
+  },
+  {
+    titleFil: 'Mga Ibon at Pollinator',
+    titleEn: 'Birds & Pollinators',
+    bodyFil:
+      'Ang pinaghalong pine forest, shrub, at flower bed ay sumusuporta sa mga highland bird at pollinator gaya ng bees at butterflies. Ang mga namumulaklak na halaman at pollinator ay magkasabay na aktibo — kaya mahalaga ang pangangalaga sa flower bed at pag-iwas sa pesticide.',
+    bodyEn:
+      'The mix of pine forest, shrubs, and flower beds supports highland birds and pollinators such as bees and butterflies. Flowering plants and pollinators are active on the same schedule — which is why protecting flower beds and avoiding pesticides matters.',
+    icon: '🐦',
+  },
+  {
+    titleFil: 'Lupa, Bato, at Drainage',
+    titleEn: 'Soil, Rock & Drainage',
+    bodyFil:
+      'Ang mga bundok sa palibot ng Baguio ay binubuo ng mga weathered volcanic at metamorphic rock na gumagawa ng well-drained at bahagyang acidic na lupa. Ang mabilis na drainage ay mainam para sa pine, ngunit nangangahulugan din ito na mabilis matuyo ang lupa pagkatapos ng matinding ulan.',
+    bodyEn:
+      'The mountains around Baguio are built from weathered volcanic and metamorphic rock that produces well-drained, slightly acidic soil. Fast drainage suits pines, but it also means the ground dries quickly after heavy rain.',
+    icon: '🪨',
+  },
+  {
+    titleFil: 'Phenology at Panahon ng Pamumulaklak',
+    titleEn: 'Phenology & Flowering Seasons',
+    bodyFil:
+      'Ang pamumulaklak ng maraming highland species ay nai-trigger ng haba ng araw at pagbabago ng temperatura kaysa sa dami ng ulan. Ito ang dahilan kung bakit ang mga cool-dry na buwan ay madalas na tugma sa pinakamatingkad na flower display sa mga pampublikong hardin ng lungsod.',
+    bodyEn:
+      'Flowering in many highland species is triggered by day length and temperature change rather than rainfall alone. That is why the cool-dry months often coincide with the brightest flower displays in the city public gardens.',
+    icon: '🌸',
+  },
+  {
+    titleFil: 'Native Species at Introduced Collections',
+    titleEn: 'Native Species & Introduced Collections',
+    bodyFil:
+      'Ang mga themed at friendship garden ay nagpapakita ng mga halaman mula sa iba\'t ibang klima. Ipinapakita nito ang pagkakaiba-iba ng horticulture, ngunit ipinapaalala rin nito ang kahalagahan ng pagprotekta sa mga native species at pag-iwas sa pagpapalaganap ng invasive na halaman sa labas ng hardin.',
+    bodyEn:
+      'The themed and friendship gardens display plants from many climates. This showcases horticultural variety, but it also highlights why protecting native species and preventing the spread of invasive plants outside the garden matters.',
+    icon: '🌏',
+  },
+  {
+    titleFil: 'Microclimate sa Loob ng Lungsod',
+    titleEn: 'Urban Microclimate',
+    bodyFil:
+      'Kahit nasa loob ng lungsod, ang mga matataas na puno at lupa ay nagpapababa ng temperatura kumpara sa mga sementadong kalsada sa labas. Ang epektong ito ay isang lokal na halimbawa ng kung paano binabawasan ng green space ang urban heat island effect.',
+    bodyEn:
+      'Even within the city, tall trees and soil keep temperatures lower than the paved roads outside. This is a local example of how green space reduces the urban heat island effect.',
+    icon: '🌡️',
+  },
+];
+
+// --------------- Visitor responsibility ---------------
+
+export type Responsibility = {
+  titleFil: string;
+  titleEn: string;
+  bodyFil: string;
+  bodyEn: string;
+  icon: string;
+};
+
+export const VISITOR_RESPONSIBILITY: Responsibility[] = [
+  {
+    titleFil: 'Huwag pumitas o maglipat ng halaman',
+    titleEn: 'Do not pick or move plants',
+    bodyFil:
+      'Ang bawat halaman ay bahagi ng isang managed collection. Ang pagpitas ng bulaklak o pagkuha ng buto ay nagpapabawas sa display para sa susunod na bisita at nakakaabala sa pollinator.',
+    bodyEn:
+      'Every plant is part of a managed collection. Picking flowers or taking seeds reduces the display for the next visitor and disrupts pollinators.',
+    icon: '🌺',
+  },
+  {
+    titleFil: 'Manatili sa mga daanan',
+    titleEn: 'Stay on the paths',
+    bodyFil:
+      'Ang pagtapak sa labas ng daanan ay sumisira sa root zone at nagpapa-compact ng lupa, na nagpapahirap sa pagtubo ng mga puno at ground cover.',
+    bodyEn:
+      'Stepping off the path damages root zones and compacts the soil, making it harder for trees and ground cover to grow.',
+    icon: '🚶',
+  },
+  {
+    titleFil: 'Dalhin ang sariling basura',
+    titleEn: 'Carry out your own waste',
+    bodyFil:
+      'Limitado ang mga basurahan. Ang pag-uwi ng sariling basura ay pumipigil sa pagpasok ng plastic sa drainage at sa mga watershed ng lungsod.',
+    bodyEn:
+      'Bins are limited. Taking your own waste home prevents plastic from entering drains and the city watersheds.',
+    icon: '🗑️',
+  },
+  {
+    titleFil: 'Huwag magpakain ng mga hayop',
+    titleEn: 'Do not feed wildlife',
+    bodyFil:
+      'Ang pagpapakain ay nagbabago sa natural na pag-uugali ng mga ibon at hayop at maaaring magdulot ng dependency sa pagkain ng tao.',
+    bodyEn:
+      'Feeding changes the natural behaviour of birds and animals and can create dependency on human food.',
+    icon: '🦜',
+  },
+  {
+    titleFil: 'Iwasan ang apoy sa pine area',
+    titleEn: 'Avoid fire in pine areas',
+    bodyFil:
+      'Ang pine litter ay madaling magliyab, lalo na sa mga buwan ng tag-init. Sundin ang mga designated smoking area at huwag mag-iwan ng siga.',
+    bodyEn:
+      'Pine litter ignites easily, especially in the warm dry months. Use designated smoking areas and never leave flames unattended.',
+    icon: '🔥',
+  },
+  {
+    titleFil: 'Igalang ang mga cultural display',
+    titleEn: 'Respect cultural displays',
+    bodyFil:
+      'Ang mga Igorot house, sculpture, at costume ay bahagi ng living culture ng Cordillera. Huwag umakyat sa mga istruktura at humingi ng pahintulot bago kumuha ng larawan ng mga tao.',
+    bodyEn:
+      'Igorot houses, sculptures, and costumes are part of the living culture of the Cordillera. Do not climb structures and ask permission before photographing people.',
+    icon: '🗿',
+  },
+  {
+    titleFil: 'Panatilihin ang tahimik na kapaligiran',
+    titleEn: 'Keep noise levels low',
+    bodyFil:
+      'Ang hardin ay isang pahingahan para sa mga ibon at bisita. Ang malakas na musika at sigaw ay nakakabawas sa karanasan ng lahat.',
+    bodyEn:
+      'The garden is a refuge for birds and visitors alike. Loud music and shouting reduce the experience for everyone.',
+    icon: '🤫',
+  },
+  {
+    titleFil: 'Etiquette sa photography at drone',
+    titleEn: 'Photography & drone etiquette',
+    bodyFil:
+      'Huwag ilipat ang mga signage o halaman para sa larawan. Ang mga drone at malalaking tripod ay maaaring mangailangan ng permiso — magtanong sa management bago gamitin.',
+    bodyEn:
+      'Do not move signs or plants for a photo. Drones and large tripods may require permission — ask management before use.',
+    icon: '📸',
+  },
+  {
+    titleFil: 'Suportahan nang patas ang lokal na komunidad',
+    titleEn: 'Support the local community fairly',
+    bodyFil:
+      'Kung bibili ng crafts o kakain sa labas, piliin ang mga lokal na nagbebenta at itrato ang mga cultural item bilang bahagi ng tradisyon, hindi bilang costume lamang.',
+    bodyEn:
+      'When buying crafts or eating nearby, favour local vendors and treat cultural items as part of a tradition rather than a costume.',
+    icon: '🤝',
+  },
+  {
+    titleFil: 'Maging handa sa pagbabago ng panahon',
+    titleEn: 'Be prepared for weather changes',
+    bodyFil:
+      'Sa panahon ng thunderstorm, iwasan ang mga isolated na matataas na puno at bukas na lugar. Ang lagay ng panahon sa bundok ay maaaring magbago sa loob ng ilang minuto.',
+    bodyEn:
+      'During thunderstorms, avoid isolated tall trees and open ground. Mountain weather can change within minutes.',
+    icon: '⛈️',
+  },
 ];
 
 

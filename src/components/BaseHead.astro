@@ -30,7 +30,13 @@ const resolvedOgImageAlt = ogImageAlt ?? `${ENTITY.fullName} in ${ENTITY.city}, 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 {canonical && <link rel="canonical" href={canonical} />}
-{noindex && <meta name="robots" content="noindex,nofollow" />}
+{
+  noindex ? (
+    <meta name="robots" content="noindex, follow" />
+  ) : (
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  )
+}
 
 <meta name="author" content={ENTITY.fullName} />
 <meta name="geo.region" content="PH-BEN" />

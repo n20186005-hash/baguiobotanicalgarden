@@ -1,0 +1,68 @@
+---
+import { AUDIENCE_ROUTES, ENTITY } from '../../consts';
+
+export interface Props {
+  lang: 'tl' | 'en';
+}
+
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+
+const t = {
+  badge: isEn ? '🧭 Routes' : '🧭 Mga Ruta',
+  title: isEn ? 'Routes by Visitor Type' : 'Mga Ruta ayon sa Uri ng Bisita',
+  subtitle: isEn
+    ? `Three tested ways to walk ${ENTITY.fullName} depending on who you are travelling with and how much energy you want to spend.`
+    : `Tatlong nasubok na paraan ng paglilibot sa ${ENTITY.fullName} depende sa kasama at sa lakas na nais mong gamitin.`,
+  duration: isEn ? 'Duration' : 'Tagal',
+  stops: isEn ? 'Route' : 'Ruta',
+  notes: isEn ? 'Practical notes' : 'Praktikal na paalala',
+};
+---
+
+<section id="routes" class="section-padding bg-white">
+  <div class="container-page">
+    <div class="text-center mb-10">
+      <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">{t.badge}</span>
+      <h2 class="section-heading">{t.title}</h2>
+      <p class="section-subheading mx-auto">{t.subtitle}</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      {AUDIENCE_ROUTES.map((route) => (
+        <article class="card card-hover p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl" aria-hidden="true">{route.icon}</span>
+            <div>
+              <h3 class="text-base font-bold text-pine-950">{isEn ? route.titleEn : route.titleFil}</h3>
+              <p class="text-xs text-cold-500">
+                {t.duration}: {isEn ? route.durationEn : route.durationFil}
+              </p>
+            </div>
+          </div>
+          <p class="text-sm text-cold-600 leading-relaxed">{isEn ? route.summaryEn : route.summaryFil}</p>
+
+          <h4 class="mt-5 text-xs font-bold uppercase tracking-wide text-pine-700">{t.stops}</h4>
+          <ol class="mt-2 space-y-2">
+            {(isEn ? route.stopsEn : route.stopsFil).map((stop) => (
+              <li class="flex gap-2 text-xs text-cold-600 leading-relaxed">
+                <span class="text-pine-500 font-bold">•</span>
+                <span>{stop}</span>
+              </li>
+            ))}
+          </ol>
+
+          <h4 class="mt-5 text-xs font-bold uppercase tracking-wide text-pine-700">{t.notes}</h4>
+          <ul class="mt-2 space-y-2">
+            {(isEn ? route.notesEn : route.notesFil).map((note) => (
+              <li class="flex gap-2 text-xs text-cold-600 leading-relaxed">
+                <span class="text-rose-sand-500 font-bold">✓</span>
+                <span>{note}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

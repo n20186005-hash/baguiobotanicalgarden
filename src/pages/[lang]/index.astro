@@ -7,6 +7,13 @@ import {
 } from '../../consts';
 import { ui, getLangFromUrl, type Lang } from '../../i18n/ui';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import WeatherWidget from '../../components/WeatherWidget.astro';
+import SeasonStrategySection from '../../components/sections/SeasonStrategySection.astro';
+import AudienceRoutesSection from '../../components/sections/AudienceRoutesSection.astro';
+import ItinerariesSection from '../../components/sections/ItinerariesSection.astro';
+import VisitorServicesSection from '../../components/sections/VisitorServicesSection.astro';
+import TransportExtraSection from '../../components/sections/TransportExtraSection.astro';
+import ScienceSection from '../../components/sections/ScienceSection.astro';
 
 export function getStaticPaths() {
   return [
@@ -261,6 +268,9 @@ const breadcrumbItems = [
     </div>
   </section>
 
+  <!-- ======= WEATHER & FORECAST ======= -->
+  <WeatherWidget lang={currentLang} />
+
   <!-- ======= HISTORY & LEGENDS SECTION ======= -->
   <section id="history" class="section-padding bg-white">
     <div class="container-page">
@@ -327,6 +337,15 @@ const breadcrumbItems = [
       </div>
     </div>
   </section>
+
+  <!-- ======= SEASONAL STRATEGY ======= -->
+  <SeasonStrategySection lang={currentLang} />
+
+  <!-- ======= ROUTES BY VISITOR TYPE ======= -->
+  <AudienceRoutesSection lang={currentLang} />
+
+  <!-- ======= SUGGESTED ITINERARIES ======= -->
+  <ItinerariesSection lang={currentLang} />
 
   <!-- ======= ATTRACTIONS SECTION ======= -->
   <section id="attractions" class="section-padding bg-cold-50">
@@ -515,6 +534,9 @@ const breadcrumbItems = [
     </div>
   </section>
 
+  <!-- ======= VISITOR SERVICES & FACILITIES ======= -->
+  <VisitorServicesSection lang={currentLang} />
+
   <!-- ======= TRANSPORTATION SECTION ======= -->
   <section id="transport" class="section-padding bg-cold-50">
     <div class="container-page">
@@ -558,6 +580,9 @@ const breadcrumbItems = [
       </div>
     </div>
   </section>
+
+  <!-- ======= DETAILED TRANSPORT GUIDE ======= -->
+  <TransportExtraSection lang={currentLang} />
 
   <!-- ======= NEARBY LANDMARKS ======= -->
   <section id="nearby" class="section-padding bg-white">
@@ -756,6 +781,9 @@ const breadcrumbItems = [
       </div>
     </div>
   </section>
+
+  <!-- ======= SCIENCE & RESPONSIBILITY ======= -->
+  <ScienceSection lang={currentLang} />
 
   <!-- ======= FAQ SECTION ======= -->
   <section id="faq" class="section-padding bg-white">

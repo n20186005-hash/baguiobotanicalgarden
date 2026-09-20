@@ -1,0 +1,63 @@
+---
+import { ITINERARIES, ENTITY } from '../../consts';
+
+export interface Props {
+  lang: 'tl' | 'en';
+}
+
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+
+const t = {
+  badge: isEn ? '🗺️ Itineraries' : '🗺️ Mga Itinerary',
+  title: isEn ? 'Suggested Itineraries' : 'Mga Rekomendadong Itinerary',
+  subtitle: isEn
+    ? `Half-day and full-day plans that start at ${ENTITY.fullName} and connect naturally to the surrounding landmarks.`
+    : `Half-day at full-day na plano na nagsisimula sa ${ENTITY.fullName} at natural na kumokonekta sa mga kalapit na landmark.`,
+  timeline: isEn ? 'Timeline' : 'Timeline',
+  tip: isEn
+    ? 'Times are flexible: allow extra minutes for ticketing, photos, and the steep sections between the themed gardens.'
+    : 'Maluwag ang mga oras: maglaan ng dagdag na minuto para sa ticket, larawan, at mga bahaging matarik sa pagitan ng mga themed garden.',
+};
+---
+
+<section id="itineraries" class="section-padding bg-cold-50">
+  <div class="container-page">
+    <div class="text-center mb-10">
+      <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">{t.badge}</span>
+      <h2 class="section-heading">{t.title}</h2>
+      <p class="section-subheading mx-auto">{t.subtitle}</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      {ITINERARIES.map((plan) => (
+        <article class="card card-hover p-6">
+          <div class="flex items-center justify-between gap-3 mb-2">
+            <h3 class="text-base font-bold text-pine-950">
+              <span class="mr-1" aria-hidden="true">{plan.icon}</span>
+              {isEn ? plan.titleEn : plan.titleFil}
+            </h3>
+            <span class="badge bg-white text-pine-700 border border-pine-200 text-[10px]">
+              {isEn ? plan.durationEn : plan.durationFil}
+            </span>
+          </div>
+          <p class="text-sm text-cold-600 leading-relaxed">{isEn ? plan.summaryEn : plan.summaryFil}</p>
+
+          <ol class="mt-5 relative border-l border-pine-200 pl-5 space-y-4">
+            {plan.stops.map((stop) => (
+              <li class="relative">
+                <span class="absolute -left-[26px] top-1 h-2.5 w-2.5 rounded-full bg-pine-500 ring-4 ring-white" aria-hidden="true"></span>
+                <p class="text-xs font-bold text-pine-700">{stop.time}</p>
+                <p class="mt-0.5 text-xs text-cold-600 leading-relaxed">
+                  {isEn ? stop.activityEn : stop.activityFil}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </div>
+
+    <p class="mt-6 text-xs text-cold-500 text-center max-w-3xl mx-auto">{t.tip}</p>
+  </div>
+</section>

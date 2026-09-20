@@ -1,0 +1,80 @@
+---
+import { SEASON_STRATEGY, ENTITY } from '../../consts';
+
+export interface Props {
+  lang: 'tl' | 'en';
+}
+
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+
+const t = {
+  badge: isEn ? '📅 Strategy' : '📅 Strategy',
+  title: isEn ? 'Seasonal Visit Strategy' : 'Strategy sa Pagbisita ayon sa Season',
+  subtitle: isEn
+    ? `Mountain weather in ${ENTITY.city} changes sharply between the cool dry months and the rainy season. Use this table to match your visit to the conditions you prefer.`
+    : `Mabilis na nagbabago ang panahon sa bundok ng ${ENTITY.city} sa pagitan ng malamig na dry months at tag-ulan. Gamitin ang talahanayang ito upang itugma ang pagbisita sa kondisyong gusto mo.`,
+  colSeason: isEn ? 'Season' : 'Season',
+  colWeather: isEn ? 'Weather & crowd' : 'Panahon at dami ng tao',
+  colStrategy: isEn ? 'Recommended strategy' : 'Rekomendadong strategy',
+  colBring: isEn ? 'What to bring' : 'Ano ang dadalhin',
+  colHighlight: isEn ? 'What to look for' : 'Ano ang mapapansin',
+  note: isEn
+    ? 'Figures are general climate patterns for the highlands, not a daily forecast — check the weather module above before you travel.'
+    : 'Ang mga bilang ay pangkalahatang climate pattern ng kabundukan, hindi daily forecast — tingnan ang weather module sa itaas bago magbiyahe.',
+};
+---
+
+<section id="season" class="section-padding bg-cold-50">
+  <div class="container-page">
+    <div class="text-center mb-10">
+      <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">{t.badge}</span>
+      <h2 class="section-heading">{t.title}</h2>
+      <p class="section-subheading mx-auto">{t.subtitle}</p>
+    </div>
+
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[900px] text-left border-collapse">
+          <thead class="bg-pine-800 text-white">
+            <tr class="text-xs uppercase tracking-wide">
+              <th class="px-4 py-3 font-semibold">{t.colSeason}</th>
+              <th class="px-4 py-3 font-semibold">{t.colWeather}</th>
+              <th class="px-4 py-3 font-semibold">{t.colStrategy}</th>
+              <th class="px-4 py-3 font-semibold">{t.colBring}</th>
+              <th class="px-4 py-3 font-semibold">{t.colHighlight}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {SEASON_STRATEGY.map((season) => (
+              <tr class="border-b border-cold-100 align-top hover:bg-cold-50/60 transition-colors">
+                <td class="px-4 py-4">
+                  <p class="text-sm font-bold text-pine-950">
+                    <span class="mr-1" aria-hidden="true">{season.icon}</span>
+                    {isEn ? season.seasonEn : season.seasonFil}
+                  </p>
+                  <p class="mt-1 text-xs text-cold-500">{isEn ? season.periodEn : season.periodFil}</p>
+                </td>
+                <td class="px-4 py-4 text-xs text-cold-600 leading-relaxed">
+                  <p>{isEn ? season.weatherEn : season.weatherFil}</p>
+                  <p class="mt-2 text-cold-500">{isEn ? season.crowdEn : season.crowdFil}</p>
+                </td>
+                <td class="px-4 py-4 text-xs text-cold-600 leading-relaxed">
+                  {isEn ? season.strategyEn : season.strategyFil}
+                </td>
+                <td class="px-4 py-4 text-xs text-cold-600 leading-relaxed">
+                  {isEn ? season.bringEn : season.bringFil}
+                </td>
+                <td class="px-4 py-4 text-xs text-cold-600 leading-relaxed">
+                  {isEn ? season.highlightEn : season.highlightFil}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="mt-4 text-xs text-cold-500 text-center">{t.note}</p>
+  </div>
+</section>

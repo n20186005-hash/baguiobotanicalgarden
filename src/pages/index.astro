@@ -7,12 +7,12 @@ const lang = (() => {
   catch { return 'tl'; }
 })();
 
-const title = lang === 'en'
-  ? `Baguio Botanical Garden — Complete Visitor Guide`
-  : `Baguio Botanical Garden — Kumpletong Gabay sa Bisita`;
+const title = lang === 'en' ? SITE.titleEn : SITE.titleFil;
 const description = lang === 'en' ? SITE.descriptionEn : SITE.descriptionFil;
-const ogImage = `${SITE.siteUrl}/og-default.svg`;
+const ogImage = `${SITE.siteUrl}${SITE.heroImage}`;
 const siteUrl = SITE.siteUrl;
+/** Language entry point that this stub consolidates into (also the x-default). */
+const targetUrl = `${siteUrl}/tl/`;
 ---
 
 <!DOCTYPE html>
@@ -27,7 +27,11 @@ const siteUrl = SITE.siteUrl;
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={siteUrl} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href={`${siteUrl}/`} />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={targetUrl} />
+    <link rel="alternate" hreflang="tl" href={`${siteUrl}/tl/`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <link rel="alternate" hreflang="x-default" href={targetUrl} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#0e2017" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

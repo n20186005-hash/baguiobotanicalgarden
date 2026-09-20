@@ -1,0 +1,72 @@
+---
+import { SCIENCE_NOTES, VISITOR_RESPONSIBILITY, ENTITY } from '../../consts';
+
+export interface Props {
+  lang: 'tl' | 'en';
+}
+
+const { lang } = Astro.props;
+const isEn = lang === 'en';
+
+const t = {
+  badge: isEn ? '🔬 Science' : '🔬 Agham',
+  title: isEn ? 'Science & Nature Notes' : 'Mga Tala sa Agham at Kalikasan',
+  subtitle: isEn
+    ? `Why ${ENTITY.fullName} looks and feels the way it does: altitude, pine forest ecology, cloud forest moisture, and the urban microclimate of ${ENTITY.city}.`
+    : `Kung bakit ganito ang anyo at pakiramdam ng ${ENTITY.fullName}: altitude, ecology ng pine forest, halumigmig ng cloud forest, at urban microclimate ng ${ENTITY.city}.`,
+  respBadge: isEn ? '🤝 Responsibility' : '🤝 Responsibilidad',
+  respTitle: isEn ? 'Visitor Responsibility' : 'Responsibilidad ng Bisita',
+  respSubtitle: isEn
+    ? 'A public garden is a shared resource. These practices keep the collection healthy and the experience pleasant for everyone.'
+    : 'Ang isang pampublikong hardin ay shared resource. Ang mga gawaing ito ay nagpapanatili sa koleksyon at sa karanasan ng lahat.',
+  disclaimer: isEn
+    ? 'Figures are general references for the highlands, not measurements taken on site. For research, consult the relevant scientific literature.'
+    : 'Ang mga bilang ay pangkalahatang sanggunian para sa kabundukan, hindi sukat na kinuha sa mismong lugar. Para sa pananaliksik, sumangguni sa mga kaugnay na siyentipikong literatura.',
+};
+---
+
+<section id="science" class="section-padding bg-cold-50">
+  <div class="container-page">
+    <div class="text-center mb-10">
+      <span class="badge bg-pine-50 text-pine-700 border border-pine-200 mb-4">{t.badge}</span>
+      <h2 class="section-heading">{t.title}</h2>
+      <p class="section-subheading mx-auto">{t.subtitle}</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {SCIENCE_NOTES.map((note) => (
+        <article class="card card-hover p-5">
+          <span class="text-2xl" aria-hidden="true">{note.icon}</span>
+          <h3 class="mt-2 text-sm font-bold text-pine-950 leading-tight">
+            {isEn ? note.titleEn : note.titleFil}
+          </h3>
+          <p class="mt-2 text-xs text-cold-600 leading-relaxed">{isEn ? note.bodyEn : note.bodyFil}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-14">
+      <div class="text-center mb-8">
+        <span class="badge bg-rose-sand-50 text-rose-sand-700 border border-rose-sand-200 mb-4">{t.respBadge}</span>
+        <h3 class="section-heading">{t.respTitle}</h3>
+        <p class="section-subheading mx-auto">{t.respSubtitle}</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {VISITOR_RESPONSIBILITY.map((item) => (
+          <article class="card p-4 text-center">
+            <span class="text-2xl" aria-hidden="true">{item.icon}</span>
+            <h4 class="mt-2 text-xs font-bold text-pine-950 leading-tight">
+              {isEn ? item.titleEn : item.titleFil}
+            </h4>
+            <p class="mt-1.5 text-[11px] text-cold-600 leading-relaxed">
+              {isEn ? item.bodyEn : item.bodyFil}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <p class="mt-8 text-xs text-cold-500 text-center max-w-3xl mx-auto">{t.disclaimer}</p>
+  </div>
+</section>

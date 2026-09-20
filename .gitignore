@@ -1,27 +1,63 @@
-# build output
-dist/
-
-# cloudflare
-.wrangler/
-# generated types
-.astro/
-
-# dependencies
+# Dependencies
 node_modules/
+.pnpm-store/
 
-# logs
+# Build output (uploaded to Cloudflare Workers from dist/ only)
+dist/
+dist-static/
+.astro/
+.output/
+.wrangler/
+.mf/
+*.wrangler/
+_worker.js
+
+# Cloudflare local / deploy artifacts
+.wrangler/
+.mf/
+wrangler.toml.bak
+*.dev.vars
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Caches
+.cache/
+.temp/
+tmp/
+.npm/
+.eslintcache
+.stylelintcache
+.tsbuildinfo
+*.tsbuildinfo
+
+# Editors & OS
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & reports
+logs/
+*.log
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+coverage/
+*.lcov
 
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
-.DS_Store
-
-# jetbrains setting folder
-.idea/
+# Local scratch & temporary scripts
+scripts/tmp/
+scripts/*.local.mjs
+screenshots/
+*.local.*
